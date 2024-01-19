@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react'
-import styles from './AddPet.module.css'
-import api from '../../../utils/api'
+import React, { useState, useEffect } from 'react'
+import * as S from './styles'
+import api from '../../utils/api'
 import { useParams } from 'react-router-dom'
-import useFlashMessage from '../../../hooks/useFlashMessage'
-import { PetForm } from '../../PetForm'
+import useFlashMessage from '../../hooks/useFlashMessage'
+import { PetForm } from '../../components/PetForm'
+import { IPet } from '../../interfaces/IPet'
 
-const EditPet = () => {
-  const [pet, setPet] = useState({})
+export const EditPet = () => {
+  const [pet, setPet] = useState<IPet | undefined>()
   const [token] = useState(localStorage.getItem('token') || '')
   const { id } = useParams()
   const { setFlashMessage } = useFlashMessage()
@@ -21,7 +22,7 @@ const EditPet = () => {
     })
   }, [token, id])
 
-  const updatePet = async (pet) => {
+  const updatePet = async (pet: any) => {
     let msgType = "success"
 
     const formData = new FormData()
@@ -52,14 +53,12 @@ const EditPet = () => {
   }
 
   return (
-    <section className={styles.addpet_header}>
+    <S.Section>
       <div>
-        <h1>Editando o Pet: {pet.name}</h1>
+        <S.Header>Editando o Pet: {pet?.name}</S.Header>
         <p>Depois da edição os dados ficarão atualizados no sistema.</p>
       </div>
-      {pet.name && <PetForm btnText="Atualizar" handleSubmit={updatePet} petData={pet} />}
-    </section>
+      {pet?.name && <PetForm btnText="Atualizar" handleSubmit={updatePet} petData={pet} />}
+    </S.Section>
   )
 }
-
-export default EditPet

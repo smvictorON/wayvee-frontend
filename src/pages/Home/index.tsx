@@ -12,6 +12,8 @@ export const Home = () => {
     }).catch((err) => console.log(err))
   }, [])
 
+  console.log(pets)
+
   return (
     <section>
       <S.Header>

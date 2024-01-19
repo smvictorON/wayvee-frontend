@@ -1,16 +1,8 @@
 import styled from "styled-components";
 import "../../styles/variables.css"
+import { Link } from 'react-router-dom'
 
-export const ProfileHeader = styled.div`
-  text-align: center;
-  margin-bottom: 1em;
-`
-
-export const ProfileHeaderTitle = styled.h1`
-  color: var(--blue);
-`
-
-export const FormContainer = styled.form`
+export const FormContainer = styled.section`
   max-width: 500px;
   margin: 2rem auto;
   background-color: var(--light-gray);
@@ -33,28 +25,17 @@ export const SubmitButton = styled.input`
   transition: 0.2s;
   margin: 2rem auto;
 
-  &:hover{
-    background-color: var(--light-blue-2);
+  &:hover {
+    background-color: var(--light-blue);
   }
 `
 
-export const Paragraph = styled.p`
+export const FormContainerParagraph = styled.p`
   margin-top: 1em;
 `
 
-export const Link = styled.a`
+export const FormContainerParagraphLink = styled(Link)`
   color: var(--blue);
   font-weight: bold;
 `
 
-export const PreviewContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 1em;
-`
-export const Image = styled.img`
-  width: 100px;
-  height: 100px;
-  margin-left: 1em;
-}
-`

@@ -6,5 +6,5 @@ export const Container = styled.main`
   padding: 2em 6em;
   margin: 0 auto;
   height: 90vh;
-  background-color: #f3f3f3;
+  background-color: var(--light-gray);
 `

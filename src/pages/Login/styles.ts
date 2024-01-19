@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import "../../styles/variables.css"
 
-export const FormContainer = styled.form`
+export const LoginContainer = styled.section`
   max-width: 500px;
   margin: 2rem auto;
   background-color: var(--light-gray);
@@ -10,7 +10,13 @@ export const FormContainer = styled.form`
   padding: 2rem;
 `
 
-export const SubmitButton = styled.input`
+export const LoginTitle = styled.h1`
+  color: var(--blue);
+  margin-bottom: 1em;
+  font-size: 2.1em;
+  `
+
+export const LoginSubmit = styled.input`
   border-radius: 5px;
   background-color: var(--light-blue);
   color: white;
@@ -24,29 +30,7 @@ export const SubmitButton = styled.input`
   transition: 0.2s;
   margin: 2rem auto;
 
-  &:hover{
+  &:hover {
     background-color: var(--light-blue-2);
   }
-`
-
-export const Paragraph = styled.p`
-  margin-top: 1em;
-`
-
-export const Link = styled.a`
-  color: var(--blue);
-  font-weight: bold;
-`
-
-export const PreviewContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 1em;
-`
-export const Image = styled.img`
-  // width: 100px;
-  height: 100px;
-  margin-left: 1em;
-  border-radius: 5px;
-}
 `

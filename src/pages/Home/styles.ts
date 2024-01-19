@@ -8,6 +8,7 @@ export const Header = styled.div`
 
 export const HeaderTitle = styled.h1`
   margin-bottom: .3em;
+  color: var(--blue);
 `
 
 export const PetContainer = styled.div`
@@ -30,10 +31,11 @@ export const PetCardImage = styled.div`
   height: 225px;
   width: 100%;
   margin-bottom: 1.2em;
+  border-radius: 5px
 `
 
 export const Subtitle = styled.h3`
-  color: #0097FE;
+  color: var(--blue);
   margin-bottom: 1em;
   font-size: 1.6em;
   padding: 8px;
@@ -41,8 +43,8 @@ export const Subtitle = styled.h3`
 
 export const LinkRouter = styled(Link)`
   text-decoration: none;
-  background-color: #ffd400;
-  color: #0097FE;
+  background-color: var(--light-blue);
+  color: var(--white);
   font-weight: bold;
   cursor: pointer;
   transition: 0.2s;
@@ -50,9 +52,8 @@ export const LinkRouter = styled(Link)`
   border-radius: 5px;
   font-size: 1.1em;
 
-  :hover{
-    background-color: #e7c30d;
-    color: white;
+  &:hover{
+    background-color: var(--light-blue-2);
   }
 `
 
@@ -61,7 +62,7 @@ export const Paragraph = styled.p`
 `
 
 export const AdoptedText = styled.p`
-  color: #25b456;
+  color: var(--blue);
   font-weight: bold;
   padding: 15px;
 `

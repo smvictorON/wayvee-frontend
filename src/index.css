@@ -4,14 +4,3 @@
   font-family: 'Poppins', sans-serif;
   box-sizing: border-box;
 }
-
-h1 {
-  color: #0097FE;
-  margin-bottom: 1em;
-  font-size: 2.1em;
-}
-
-.bold{
-  font-weight: bold;
-  color: #0097FE;
-}

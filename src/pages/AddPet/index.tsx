@@ -1,16 +1,27 @@
-import { useState } from 'react'
-import styles from './AddPet.module.css'
-import api from '../../../utils/api'
-import { useNavigate } from 'react-router-dom'
-import useFlashMessage from '../../../hooks/useFlashMessage'
-import { PetForm } from '../../PetForm'
+import React, { useState } from "react"
+import * as S from "./styles"
+import api from "../../utils/api"
+import { useNavigate } from "react-router-dom"
+import useFlashMessage from "../../hooks/useFlashMessage"
+import { PetForm } from "../../components/PetForm"
+import { IPet } from "../../interfaces/IPet"
 
-function AddPet() {
+export const AddPet = () => {
   const [token] = useState(localStorage.getItem('token') || '')
   const { setFlashMessage } = useFlashMessage()
   const navigate = useNavigate()
+  const voidPet: IPet = {
+    _id: '',
+    name: '',
+    age: '',
+    weight: '',
+    color: '',
+    images: [],
+    available: false,
+    adopter: ''
+  }
 
-  const registerPet = async (pet) => {
+  const registerPet = async (pet: any) => {
     let msgType = "success"
 
     const formData = new FormData()
@@ -44,13 +55,12 @@ function AddPet() {
   }
 
   return (
-    <section className={styles.addpet_header}>
+    <S.Section>
       <div>
-        <h1>Cadastre um Pet</h1>
+        <S.Header>Cadastre um Pet</S.Header>
         <p>Depois ele ficará disponível para adoção!</p>
       </div>
-      <PetForm btnText="Cadastrar Pet" handleSubmit={registerPet} />
-    </section>
+      <PetForm btnText="Cadastrar Pet" handleSubmit={registerPet} petData={voidPet}/>
+    </S.Section>
   )
 }
-export default AddPet

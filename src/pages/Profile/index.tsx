@@ -3,7 +3,7 @@ import * as S from './styles'
 import api from '../../utils/api'
 import { Input } from '../../components/Input'
 import useFlashMessage from '../../hooks/useFlashMessage'
-import { RoundedImage } from '../../components/RoundedImage'
+import { SquareImage } from '../../components/SquareImage'
 import { IUser } from '../../interfaces/IUser'
 
 export const Profile = () => {
@@ -77,9 +77,9 @@ export const Profile = () => {
   return (
     <section>
       <S.ProfileHeader>
-        <h1>Perfil</h1>
+        <S.ProfileHeaderTitle>Perfil</S.ProfileHeaderTitle>
         {(user?.image || preview) && (
-          <RoundedImage
+          <SquareImage
             src={preview
               ? URL.createObjectURL(preview)
               : `${process.env.REACT_APP_API}/images/users/${user?.image}`}

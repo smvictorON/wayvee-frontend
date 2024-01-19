@@ -1,24 +1,24 @@
-import { Input } from "../../Input"
-import styles from '../../form/Form.module.css'
-import { Link } from 'react-router-dom'
-import { useContext, useState } from "react"
-import { Context } from '../../../context/UserContext'
+import React, { ChangeEvent, useContext, useState } from "react"
+import * as S from './styles'
+import { Input } from "../../components/Input"
+import { Context } from '../../context/UserContext'
 
-function Register() {
+export const Register = () => {
   const [user, setUser] = useState({})
   const { register } = useContext(Context)
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if(user)
     setUser({ ...user, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
     register(user)
   }
 
   return (
-    <section className={styles.form_container}>
+    <S.FormContainer>
       <h1>Registrar</h1>
 
       <form onSubmit={handleSubmit}>
@@ -62,13 +62,13 @@ function Register() {
           handleOnChange={handleChange}
         />
 
-        <input type="submit" value="Cadastrar" />
+        <S.SubmitButton type="submit" value="Cadastrar" />
       </form>
 
-      <p>
-        Já tem conta? <Link to="/login">Clique aqui.</Link>
-      </p>
-    </section>
+      <S.FormContainerParagraph>
+        Já tem conta? <S.FormContainerParagraphLink to="/login">Clique aqui.</S.FormContainerParagraphLink>
+      </S.FormContainerParagraph>
+    </S.FormContainer>
   )
 }
 export default Register
