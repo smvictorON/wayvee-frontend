@@ -17,8 +17,8 @@ export const Home = () => {
   return (
     <section>
       <S.Header>
-        <S.HeaderTitle>Adote um Pet</S.HeaderTitle>
-        <S.Paragraph>Veja os detalhes de cada um e conheça o tutor deles!</S.Paragraph>
+        <S.HeaderTitle>Home</S.HeaderTitle>
+        <S.Paragraph>Veja as principais informações do sistema!</S.Paragraph>
       </S.Header>
 
       <S.PetContainer>
@@ -39,7 +39,7 @@ export const Home = () => {
             </S.PetCard>
           ))
         )}
-        {pets.length === 0 && (<p>Não há pets cadastrados ou disponíveis para a adoção no momento!</p>)}
+        {pets.length === 0 && (<p>Não há informações disponíveis no momento!</p>)}
       </S.PetContainer>
     </section>
   )

@@ -3,25 +3,22 @@ import * as S from "./styles"
 import api from "../../utils/api"
 import { useNavigate } from "react-router-dom"
 import useFlashMessage from "../../hooks/useFlashMessage"
-import { PetForm } from "../../components/PetForm"
-import { IPet } from "../../interfaces/IPet"
+import { StudentForm } from "../../components/FormStudent"
+import IStudent from "../../interfaces/IStudent"
 
-export const AddPet = () => {
+export const AddStudent = () => {
   const [token] = useState(localStorage.getItem('token') || '')
   const { setFlashMessage } = useFlashMessage()
   const navigate = useNavigate()
-  const voidPet: IPet = {
+  const voidStudent: IStudent = {
     _id: '',
     name: '',
-    age: '',
-    weight: '',
-    color: '',
+    phone: '',
+    cpf: '',
     images: [],
-    available: false,
-    adopter: ''
   }
 
-  const registerPet = async (pet: any) => {
+  const registerStudent = async (pet: any) => {
     let msgType = "success"
 
     const formData = new FormData()
@@ -57,10 +54,10 @@ export const AddPet = () => {
   return (
     <S.Section>
       <div>
-        <S.Header>Cadastre um Pet</S.Header>
-        <p>Depois ele ficará disponível para adoção!</p>
+        <S.Header>Cadastre um Aluno</S.Header>
+        <p>Depois ele ficará disponível para edição!</p>
       </div>
-      <PetForm btnText="Cadastrar Pet" handleSubmit={registerPet} petData={voidPet}/>
+      <StudentForm btnText="Cadastrar" handleSubmit={registerStudent} studentData={voidStudent}/>
     </S.Section>
   )
 }

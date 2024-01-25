@@ -2,6 +2,7 @@ import api from '../utils/api'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useFlashMessage from './useFlashMessage'
+import { IUser } from '../interfaces/IUser'
 
 export default function useAuth() {
   const [authenticated, setAuthenticated] = useState(false)
@@ -17,7 +18,7 @@ export default function useAuth() {
     }
   }, [])
 
-  const register = async (user) => {
+  const register = async (user: IUser) => {
     let msgText = "Cadastro realizado com sucesso!"
     let msgType = "success"
 
@@ -27,7 +28,7 @@ export default function useAuth() {
       })
 
       await authUser(data)
-    } catch (err) {
+    } catch (err: any) {
       msgText = err.response.data.message
       msgType = "error"
     }
@@ -35,7 +36,7 @@ export default function useAuth() {
     setFlashMessage(msgText, msgType)
   }
 
-  const authUser = async (data) => {
+  const authUser = async (data: any) => {
     setAuthenticated(true)
     localStorage.setItem('token', JSON.stringify(data.token))
     navigate('/')
@@ -46,12 +47,12 @@ export default function useAuth() {
     let msgType = "success"
     setAuthenticated(false)
     localStorage.removeItem('token')
-    api.defaults.headers.Authorization = undefined
+    delete api.defaults.headers.Authorization
     navigate('/login')
     setFlashMessage(msgText, msgType)
   }
 
-  const login = async (user) => {
+  const login = async (user: IUser) => {
     let msgText = "Login realizado com sucesso!"
     let msgType = "success"
 
@@ -61,7 +62,7 @@ export default function useAuth() {
       })
 
       await authUser(data)
-    } catch (err) {
+    } catch (err: any) {
       msgText = err.response.data.message
       msgType = "error"
     }

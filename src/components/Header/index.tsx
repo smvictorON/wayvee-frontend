@@ -23,7 +23,7 @@ export const Header = () => {
               <Link to="/pet/myadoptions">Minha Adoções</Link>
             </S.ListItem>
             <S.ListItem>
-              <Link to="/pet/mypets">Meus Pets</Link>
+              <Link to="/pet/mypets">Alunos</Link>
             </S.ListItem>
             <S.ListItem>
               <Link to="/user/profile">Perfil</Link>

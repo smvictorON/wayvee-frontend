@@ -10,23 +10,33 @@ export const FormContainer = styled.form`
   padding: 2rem;
 `
 
-export const SubmitButton = styled.input`
+export const SubmitButton = styled.div`
   border-radius: 5px;
   background-color: var(--light-blue);
   color: white;
-  border: none;
   min-width: 100px;
-  min-height: 2.5em;
+  padding: 0.6rem;
   width: 100%;
   cursor: pointer;
-  font-size: 1.1em;
-  font-weight: bold;
   transition: 0.2s;
   margin: 2rem auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 
   &:hover{
     background-color: var(--light-blue-2);
   }
+`
+
+export const SubmitInput = styled.input`
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
 `
 
 export const Paragraph = styled.p`

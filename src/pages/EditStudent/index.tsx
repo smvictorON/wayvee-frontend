@@ -3,41 +3,41 @@ import * as S from './styles'
 import api from '../../utils/api'
 import { useParams } from 'react-router-dom'
 import useFlashMessage from '../../hooks/useFlashMessage'
-import { PetForm } from '../../components/PetForm'
-import { IPet } from '../../interfaces/IPet'
+import { StudentForm } from '../../components/FormStudent'
+import IStudent from '../../interfaces/IStudent'
 
-export const EditPet = () => {
-  const [pet, setPet] = useState<IPet | undefined>()
+export const EditStudent = () => {
+  const [student, setStudent] = useState<IStudent | undefined>()
   const [token] = useState(localStorage.getItem('token') || '')
   const { id } = useParams()
   const { setFlashMessage } = useFlashMessage()
 
   useEffect(() => {
-    api.get(`/pets/${id}`, {
+    api.get(`/students/${id}`, {
       headers: {
         Authorization: `Bearer ${JSON.parse(token)}`
       }
     }).then((res) => {
-      setPet(res.data.pet)
+      setStudent(res.data.student)
     })
   }, [token, id])
 
-  const updatePet = async (pet: any) => {
+  const updateStudent = async (student: any) => {
     let msgType = "success"
 
     const formData = new FormData()
 
-    await Object.keys(pet).forEach((key) => {
+    await Object.keys(student).forEach((key) => {
       if (key === 'images') {
-        for (let i = 0; i < pet[key].length; i++) {
-          formData.append('images', pet[key][i])
+        for (let i = 0; i < student[key].length; i++) {
+          formData.append('images', student[key][i])
         }
       } else {
-        formData.append(key, pet[key])
+        formData.append(key, student[key])
       }
     })
 
-    const data = await api.patch(`/pets/${pet._id}`, formData, {
+    const data = await api.patch(`/students/${student._id}`, formData, {
       headers: {
         Authorization: `Bearer ${JSON.parse(token)}`,
         'Content-Type': 'multipart/form-data'
@@ -55,10 +55,10 @@ export const EditPet = () => {
   return (
     <S.Section>
       <div>
-        <S.Header>Editando o Pet: {pet?.name}</S.Header>
+        <S.Header>Editando o Aluno: {student?.name}</S.Header>
         <p>Depois da edição os dados ficarão atualizados no sistema.</p>
       </div>
-      {pet?.name && <PetForm btnText="Atualizar" handleSubmit={updatePet} petData={pet} />}
+      {student?.name && <StudentForm btnText="Atualizar" handleSubmit={updateStudent} studentData={student} />}
     </S.Section>
   )
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import * as S from './styles'
-import bus from '../../utils/bus.js'
+import bus from '../../utils/bus'
 
 export const Message = () => {
   const [visibility, setVisibility] = useState(false)

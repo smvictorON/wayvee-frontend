@@ -59,8 +59,8 @@ export const MyPets = () => {
   return (
     <section>
       <S.PetListHeader>
-        <S.PetListHeaderTitle>Meus Pets</S.PetListHeaderTitle>
-        <S.PetListHeaderLink to='/pet/add'>Cadastrar Pet</S.PetListHeaderLink>
+        <S.PetListHeaderTitle>Meus Alunos</S.PetListHeaderTitle>
+        <S.PetListHeaderLink to='/student/add'>Cadastrar Aluno</S.PetListHeaderLink>
       </S.PetListHeader>
 
       <S.PetListContainer>
@@ -85,7 +85,7 @@ export const MyPets = () => {
             </S.Actions>
           </S.PetListRow>
         ))}
-        {pets?.length === 0 && (<p>Não há pets cadastrados!</p>)}
+        {pets?.length === 0 && (<p>Não há alunos cadastrados!</p>)}
       </S.PetListContainer>
     </section>
   )

@@ -1,21 +1,22 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { Home } from './pages/Home';
 import { Profile } from './pages/Profile';
-import { AddPet } from './pages/AddPet';
-import { EditPet } from './pages/EditPet';
+import { AddStudent } from './pages/AddStudent';
+import { EditStudent } from './pages/EditStudent';
 import { MyPets } from './pages/MyPets';
 import { MyAdoptions } from './pages/MyAdoptions';
 import { PetDetails } from './pages/PetDetails';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 
-import { Message } from './components/Message'
+import { Message } from './components/Message';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { Container } from './components/Container';
 
-import { UserProvider } from './context/UserContext'
+import { UserProvider } from './context/UserContext';
 
 function App() {
   return (
@@ -29,8 +30,8 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/user/profile" element={<Profile />} />
             <Route path="/pet/mypets" element={<MyPets />} />
-            <Route path="/pet/add" element={<AddPet />} />
-            <Route path="/pet/edit/:id" element={<EditPet />} />
+            <Route path="/student/add" element={<AddStudent />} />
+            <Route path="/student/edit/:id" element={<EditStudent />} />
             <Route path="/pet/myadoptions" element={<MyAdoptions />} />
             <Route path="/pet/:id" element={<PetDetails />} />
             <Route path="/" element={<Home />} />
