@@ -70,22 +70,49 @@ export const StudentForm = ({
         placeholder="Digite o nome"
         handleOnChange={handleChange}
         value={student.name || ""}
+        required={true}
       />
       <Input
-        text="Idade"
+        text="Telefone"
         type="text"
-        name="age"
-        placeholder="Digite a idade"
+        name="phone"
+        placeholder="Digite o telefone"
         handleOnChange={handleChange}
         value={student.phone || ""}
+        required={true}
       />
       <Input
-        text="Peso"
-        type="number"
-        name="weight"
-        placeholder="Digite o peso"
+        text="CPF"
+        type="text"
+        name="cpf"
+        placeholder="Digite o cpf"
         handleOnChange={handleChange}
         value={student.cpf || ""}
+        required={true}
+      />
+      <Input
+        text="Email"
+        type="email"
+        name="email"
+        placeholder="Digite o email"
+        handleOnChange={handleChange}
+        value={student.email || ""}
+      />
+      <Input
+        text="Data de Nascimento"
+        type="date"
+        name="birthdate"
+        placeholder="Digite a data de nascimento"
+        handleOnChange={handleChange}
+        value={student.birthdate?.toString() || ""}
+      />
+      <Input
+        text="RG"
+        type="text"
+        name="rg"
+        placeholder="Digite o rg"
+        handleOnChange={handleChange}
+        value={student.rg || ""}
       />
       {/* <Select
         name="color"

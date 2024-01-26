@@ -5,7 +5,7 @@ import { Home } from './pages/Home';
 import { Profile } from './pages/Profile';
 import { AddStudent } from './pages/AddStudent';
 import { EditStudent } from './pages/EditStudent';
-import { MyPets } from './pages/MyPets';
+import { Students } from './pages/Students';
 import { MyAdoptions } from './pages/MyAdoptions';
 import { PetDetails } from './pages/PetDetails';
 import { Login } from './pages/Login';
@@ -29,7 +29,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/user/profile" element={<Profile />} />
-            <Route path="/pet/mypets" element={<MyPets />} />
+            <Route path="/students" element={<Students />} />
             <Route path="/student/add" element={<AddStudent />} />
             <Route path="/student/edit/:id" element={<EditStudent />} />
             <Route path="/pet/myadoptions" element={<MyAdoptions />} />

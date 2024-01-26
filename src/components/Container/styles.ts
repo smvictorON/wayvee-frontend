@@ -7,4 +7,5 @@ export const Container = styled.main`
   margin: 0 auto;
   height: 90vh;
   background-color: var(--light-gray);
+  overflow: scroll;
 `

@@ -18,22 +18,22 @@ export const AddStudent = () => {
     images: [],
   }
 
-  const registerStudent = async (pet: any) => {
+  const registerStudent = async (student: any) => {
     let msgType = "success"
 
     const formData = new FormData()
 
-    await Object.keys(pet).forEach((key) => {
+    await Object.keys(student).forEach((key) => {
       if (key === 'images') {
-        for (let i = 0; i < pet[key].length; i++) {
-          formData.append('images', pet[key][i])
+        for (let i = 0; i < student[key].length; i++) {
+          formData.append('images', student[key][i])
         }
       } else {
-        formData.append(key, pet[key])
+        formData.append(key, student[key])
       }
     })
 
-    const data = await api.post('/pets/create', formData, {
+    const data = await api.post('/students/create', formData, {
       headers: {
         Authorization: `Bearer ${JSON.parse(token)}`,
         'Content-Type': 'multipart/form-data'
@@ -48,7 +48,7 @@ export const AddStudent = () => {
     setFlashMessage(data.message, msgType)
 
     if (msgType !== 'error')
-      navigate('/pet/mypets')
+      navigate('/students')
   }
 
   return (

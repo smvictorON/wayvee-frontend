@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import * as S from './styles'
 import api from '../../utils/api'
-import { IPet } from '../../interfaces/IPet'
+// import { IPet } from '../../interfaces/IPet'
 
 export const Home = () => {
-  const [pets, setPets] = useState<IPet[]>([])
+  // const [pets, setPets] = useState<IPet[]>([])
 
-  useEffect(() => {
-    api.get('/pets').then((res) => {
-      setPets(res.data.pets)
-    }).catch((err) => console.log(err))
-  }, [])
-
-  console.log(pets)
+  // useEffect(() => {
+  //   api.get('/pets').then((res) => {
+  //     setPets(res.data.pets)
+  //   }).catch((err) => console.log(err))
+  // }, [])
 
   return (
     <section>
@@ -21,7 +19,7 @@ export const Home = () => {
         <S.Paragraph>Veja as principais informações do sistema!</S.Paragraph>
       </S.Header>
 
-      <S.PetContainer>
+      {/* <S.PetContainer>
         {pets.length > 0 && (
           pets.map((pet, index) => (
             <S.PetCard key={index}>
@@ -40,7 +38,7 @@ export const Home = () => {
           ))
         )}
         {pets.length === 0 && (<p>Não há informações disponíveis no momento!</p>)}
-      </S.PetContainer>
+      </S.PetContainer> */}
     </section>
   )
 }

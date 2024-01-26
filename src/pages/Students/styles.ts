@@ -2,19 +2,21 @@ import styled from "styled-components";
 import "../../styles/variables.css"
 import { Link } from 'react-router-dom'
 
-export const PetListHeader = styled.div`
+export const ListHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2em;
 `
 
-export const PetListHeaderTitle = styled.h1`
+export const ListHeaderTitle = styled.h1`
   margin: 0;
-  color: var(--blue)
+  color: var(--blue);
+  display: flex;
+  align-items: center;
 `
 
-export const PetListHeaderLink = styled(Link)`
+export const ListHeaderLink = styled(Link)`
   text-decoration: none;
   background-color: var(--blue);
   color: white;
@@ -24,6 +26,10 @@ export const PetListHeaderLink = styled(Link)`
   padding: 0.5em 0.8em;
   border: 2px solid var(--blue);
   border-radius: 5px;
+  display: flex;
+  flow-direction: row;
+  align-items: center;
+  justify-content: center;
 
   &:hover{
     background-color: transparent;
@@ -31,12 +37,12 @@ export const PetListHeaderLink = styled(Link)`
   }
 `
 
-export const PetListContainer = styled.div`
+export const ListContainer = styled.div`
   display: flex;
   flex-direction: column
 `
 
-export const PetListRow = styled.div`
+export const ListRow = styled.div`
   border-bottom: 1px solid var(--blue);
   padding: 0.5em;
   margin: 0.5em;
@@ -44,16 +50,20 @@ export const PetListRow = styled.div`
   align-items: center;
 `
 
-export const PetListRowImg = styled.img`
+export const ListRowImg = styled.img`
   margin-right: 1em;
 `
 
-export const PetListRowSpan = styled.span`
+export const ListRowSpan = styled.span`
   min-width: 100px;
 `
 
 export const Actions = styled.div`
-  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  width: -webkit-fill-available;
 `
 
 export const ActionsButton = styled.button`
@@ -64,10 +74,14 @@ export const ActionsButton = styled.button`
   cursor: pointer;
   transition: 0.2s;
   padding: 7px 12px;
-  border: 2px solid var(--blue);
+  border: 1px solid var(--blue);
   border-radius: 5px;
   font-size: 12px;
   margin-left: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100px;
 
   &:hover{
     background-color: var(--blue);
@@ -83,24 +97,17 @@ export const ActionsLink = styled(Link)`
   cursor: pointer;
   transition: 0.2s;
   padding: 7px 12px;
-  border: 2px solid var(--blue);
+  border: 1px solid var(--blue);
   border-radius: 5px;
   font-size: 12px;
   margin-left: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100px;
 
   &:hover{
     background-color: var(--blue);
     color: white;
-  }
-`
-
-
-export const ActionsConcludeButton = styled.button`
-  color: #25b456;
-  border-color: #25b456;
-
-  &:hover{
-    color: white;
-    background-color: #25b456;
   }
 `

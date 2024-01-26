@@ -48,3 +48,7 @@ export const StyledFileButton = styled.label`
     background-color: var(--blue-2);
   }
 `
+
+export const Required = styled.span`
+  color: red;
+`
