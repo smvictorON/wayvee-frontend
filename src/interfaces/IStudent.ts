@@ -1,23 +1,17 @@
-interface Address {
-  street?: string;
-  city?: string;
-  state?: string;
-  zipCode?: string;
-}
+import IAddress from './IAddress'
 
-interface IStudent {
+export default interface IStudent {
   _id?: string;
   name: string;
   phone: string;
   cpf: string;
-  address?: Address;
+  address?: IAddress;
   email?: string;
   rg?: string;
   birthdate?: Date;
   images?: File[];
-  exams?: string[];
+  exams?: File[];
   createdAt?: Date;
   updatedAt?: Date;
 }
 
-export default IStudent;

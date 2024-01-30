@@ -1,9 +1,13 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import * as S from './styles'
 import { Input } from '../Input'
+import { InputMask } from '../InputMask'
 import { Select } from '../Select'
 import IStudent from '../../interfaces/IStudent'
 import SaveIcon from '@mui/icons-material/Save';
+import { States, Cities } from '../../interfaces/IAddress'
+import moment from 'moment';
+
 
 interface StudentFormProps {
   handleSubmit: (event: any) => void;
@@ -18,7 +22,19 @@ export const StudentForm = ({
 }: StudentFormProps) => {
   const [student, setStudent] = useState(studentData || {})
   const [preview, setPreview] = useState<File[]>([])
-  // const options = ["Branco", "Caramelo", "Cinza", "Marrom", "Mesclado", "Preto"]
+  const states: string[] = Object.values(States);
+  const cities = Cities
+
+  // useEffect(() => {
+  //   if (studentData?.birthdate) {
+  //     const formattedBirthdate = moment(studentData.birthdate).format('YYYY-MM-DD');
+
+  //     setStudent({
+  //       ...student,
+  //       birthdate: formattedBirthdate,
+  //     });
+  //   }
+  // }, [])
 
   const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
@@ -30,20 +46,46 @@ export const StudentForm = ({
   }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setStudent({ ...student, [e.target.name]: e.target.value })
+    const { name, value } = e.target;
+
+    if (name.startsWith('address.')) {
+      const addressField = name.split('.')[1];
+      setStudent({
+        ...student,
+        address: {
+          ...student.address,
+          [addressField]: value,
+        },
+      });
+    } else {
+      setStudent({ ...student, [name]: value });
+    }
   }
 
-  // const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
-  //   setStudent({ ...student, nameOfYourInterfaceField: e.target.options[e.target.selectedIndex].text })
-  // }
+  const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+    const name = e.target.name;
 
-  const submit = (e: ChangeEvent<HTMLFormElement>) => {
+    if (name.startsWith('address.')) {
+      const addressField = name.split('.')[1];
+      setStudent({
+        ...student,
+        address: {
+          ...student.address,
+          [addressField]: e.target.options[e.target.selectedIndex].text as string,
+        },
+      });
+    } else {
+      setStudent({ ...student, [name]: e.target.options[e.target.selectedIndex].text as string });
+    }
+  }
+
+  const submit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     handleSubmit(student)
   }
 
   return (
-    <S.FormContainer onSubmit={submit}>
+    <S.FormContainer>
       <S.PreviewContainer>
         {preview.length > 0 ?
           preview.map((image, index) => (
@@ -72,7 +114,7 @@ export const StudentForm = ({
         value={student.name || ""}
         required={true}
       />
-      <Input
+      <InputMask
         text="Telefone"
         type="text"
         name="phone"
@@ -80,8 +122,9 @@ export const StudentForm = ({
         handleOnChange={handleChange}
         value={student.phone || ""}
         required={true}
+        mask="(99)99999-9999"
       />
-      <Input
+      <InputMask
         text="CPF"
         type="text"
         name="cpf"
@@ -89,6 +132,7 @@ export const StudentForm = ({
         handleOnChange={handleChange}
         value={student.cpf || ""}
         required={true}
+        mask="999.999.999-99"
       />
       <Input
         text="Email"
@@ -104,25 +148,50 @@ export const StudentForm = ({
         name="birthdate"
         placeholder="Digite a data de nascimento"
         handleOnChange={handleChange}
-        value={student.birthdate?.toString() || ""}
+        value={student.birthdate ? new Date(student.birthdate).toISOString().split('T')[0] : ""}
       />
-      <Input
+      <InputMask
         text="RG"
         type="text"
         name="rg"
         placeholder="Digite o rg"
         handleOnChange={handleChange}
         value={student.rg || ""}
+        mask="99.999.999-*"
       />
-      {/* <Select
-        name="color"
-        text="Selecione a cor"
-        options={options}
+      <Input
+        text="Rua"
+        type="text"
+        name="address.street"
+        placeholder="Nome da rua"
+        handleOnChange={handleChange}
+        value={student?.address?.street || ""}
+      />
+      <InputMask
+        text="CEP"
+        type="text"
+        name="address.zipCode"
+        placeholder="Digite o CEP"
+        handleOnChange={handleChange}
+        value={student?.address?.zipCode || ""}
+        mask="99999-999"
+      />
+      <Select
+        name="address.city"
+        text="Cidade"
+        options={cities}
         handleOnChange={handleSelect}
-        value={student.color || ""}
-      /> */}
-      <S.SubmitButton>
-        <S.SubmitInput type="submit" value={btnText}/>&nbsp;
+        value={student.address?.city || ""}
+      />
+      <Select
+        name="address.state"
+        text="Estado (UF)"
+        options={states}
+        handleOnChange={handleSelect}
+        value={student.address?.state || ""}
+      />
+      <S.SubmitButton onClick={submit}>
+        {btnText}&nbsp;
         <SaveIcon/>
       </S.SubmitButton>
     </S.FormContainer>

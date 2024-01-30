@@ -10,7 +10,7 @@ export const FormContainer = styled.form`
   padding: 2rem;
 `
 
-export const SubmitButton = styled.div`
+export const SubmitButton = styled.button`
   border-radius: 5px;
   background-color: var(--light-blue);
   color: white;
@@ -24,19 +24,13 @@ export const SubmitButton = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  border: none;
+  font-size: 1.1em;
+  font-weight: bold;
 
   &:hover{
     background-color: var(--light-blue-2);
   }
-`
-
-export const SubmitInput = styled.input`
-  background-color: transparent;
-  color: white;
-  border: none;
-  font-size: 1.1em;
-  font-weight: bold;
-  cursor: pointer;
 `
 
 export const Paragraph = styled.p`
@@ -55,7 +49,7 @@ export const PreviewContainer = styled.div`
 `
 export const Image = styled.img`
   // width: 100px;
-  height: 100px;
+  height: 200px;
   margin-left: 1em;
   border-radius: 5px;
 }

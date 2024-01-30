@@ -32,6 +32,8 @@ export const EditStudent = () => {
         for (let i = 0; i < student[key].length; i++) {
           formData.append('images', student[key][i])
         }
+      } else if (key === 'address') {
+        formData.append('address', JSON.stringify(student[key]));
       } else {
         formData.append(key, student[key])
       }

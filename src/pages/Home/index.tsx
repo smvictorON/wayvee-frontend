@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import * as S from './styles'
-import api from '../../utils/api'
+// import api from '../../utils/api'
 // import { IPet } from '../../interfaces/IPet'
 
 export const Home = () => {

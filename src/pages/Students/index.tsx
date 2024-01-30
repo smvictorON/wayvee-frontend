@@ -8,6 +8,7 @@ import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import GroupsIcon from '@mui/icons-material/Groups';
+import NoPicture from '../../assets/no-picture.png'
 
 export const Students = () => {
   const [students, setStudents] = useState<IStudent[] | undefined>()
@@ -62,7 +63,11 @@ export const Students = () => {
         {students && students.length > 0 && students.map((student) => (
           <S.ListRow key={student._id}>
             <SquareImage
-              src={`${process.env.REACT_APP_API}/images/students/${student.images ? student.images[0] || "" : ""}`}
+              src={
+                student.images && student.images.length > 0
+                  ? `${process.env.REACT_APP_API}/images/students/${student.images[0]}`
+                  : NoPicture
+              }
               alt={student.name}
               width="px75"
             />

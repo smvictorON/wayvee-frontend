@@ -1,23 +1,16 @@
-interface Address {
-  street?: string;
-  city?: string;
-  state?: string;
-  zipCode?: string;
-}
+import IAddress from './IAddress'
 
-interface ITeacher {
+export default interface ITeacher {
   _id?: string;
   name: string;
   phone: string;
   cpf: string;
-  address?: Address;
+  address?: IAddress;
   email?: string;
   rg?: string;
   birthdate?: Date;
-  images?: string[];
-  certificates?: string[];
+  images?: File[];
+  certificates?: File[];
   createdAt?: Date;
   updatedAt?: Date;
 }
-
-export default ITeacher;
