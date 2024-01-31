@@ -4,6 +4,10 @@ import Logo from '../../assets/logo-with-no-bg.png'
 import * as S from './styles'
 import { Context } from '../../context/UserContext'
 import { useContext } from 'react'
+import LogoutIcon from '@mui/icons-material/Logout';
+import LoginIcon from '@mui/icons-material/Login';
+import PortraitIcon from '@mui/icons-material/Portrait';
+import GroupsIcon from '@mui/icons-material/Groups';
 
 export const Header = () => {
   const { authenticated, logout }: { authenticated: boolean; logout: () => void } = useContext(Context)
@@ -11,7 +15,9 @@ export const Header = () => {
   return (
     <S.Navbar>
       <S.NavbarLogo>
-        <S.ImgLogo src={Logo} alt="Wayvee" />
+        <Link to="/">
+          <S.ImgLogo src={Logo} alt="Wayvee" />
+        </Link>
       </S.NavbarLogo>
       <S.List>
         {/* <li>
@@ -20,22 +26,29 @@ export const Header = () => {
         {authenticated ?
           <>
             <S.ListItem>
-              <Link to="/pet/myadoptions">Minha Adoções</Link>
+              <Link to="/students">
+                <span>Alunos&nbsp;&nbsp;</span>
+                <GroupsIcon/>
+              </Link>
             </S.ListItem>
             <S.ListItem>
-              <Link to="/students">Alunos</Link>
-            </S.ListItem>
-            <S.ListItem>
-              <Link to="/user/profile">Perfil</Link>
+              <Link to="/user/profile">
+                <span>Perfil&nbsp;&nbsp;</span>
+                <PortraitIcon/>
+              </Link>
             </S.ListItem>
             <S.ListItem onClick={logout}>
-              Sair
+              <span>Sair&nbsp;&nbsp;</span>
+              <LogoutIcon/>
             </S.ListItem>
           </>
           :
           <>
             <S.ListItem>
-              <Link to="/login">Entrar</Link>
+              <Link to="/login">
+                <span>Entrar&nbsp;&nbsp;</span>
+              </Link>
+              <LoginIcon/>
             </S.ListItem>
           </>
         }

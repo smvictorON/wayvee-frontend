@@ -3,6 +3,8 @@ import * as S from "./styles"
 import { Input } from "../../components/Input"
 import { Context } from "../../context/UserContext"
 import { IUser } from "../../interfaces/IUser"
+import LoginIcon from '@mui/icons-material/Login';
+import PublicIcon from '@mui/icons-material/Public';
 
 export const Login = () => {
   const [user, setUser] = useState<IUser | undefined>(undefined);
@@ -20,16 +22,21 @@ export const Login = () => {
     });
   };
 
-  const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     login(user)
   }
 
   return (
     <S.LoginContainer>
-      <S.LoginTitle>Login</S.LoginTitle>
+      <S.LoginHeader>
+        <S.LoginHeaderTitle>
+          Login&nbsp;
+          <PublicIcon/>
+        </S.LoginHeaderTitle>
+      </S.LoginHeader>
 
-      <form onSubmit={handleSubmit}>
+      <form>
         <Input
           text="Email"
           type="text"
@@ -46,8 +53,11 @@ export const Login = () => {
           handleOnChange={handleChange}
         />
 
-        <S.LoginSubmit type="submit" value="Entrar" />
-      </form>
+        <S.SubmitButton onClick={handleSubmit}>
+          Entrar&nbsp;
+          <LoginIcon/>
+        </S.SubmitButton>
+        </form>
       {/* <p>
         Não tem conta? <Link to="/register">Clique aqui.</Link>
       </p> */}

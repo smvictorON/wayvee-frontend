@@ -54,7 +54,7 @@ export const Students = () => {
         </S.ListHeaderTitle>
 
         <S.ListHeaderLink to='/student/add'>
-          Cadastrar Aluno
+          <span>Cadastrar Aluno</span>
           <AddIcon/>
         </S.ListHeaderLink>
       </S.ListHeader>
@@ -71,14 +71,14 @@ export const Students = () => {
               alt={student.name}
               width="px75"
             />
-            <strong>{student.name}</strong>
+            <S.ListRowSpan>{student.name}</S.ListRowSpan>
             <S.Actions>
               <S.ActionsLink to={`/student/edit/${student._id}`}>
-                Editar
+                <span>Editar</span>
                 <EditIcon fontSize={'small'}/>
               </S.ActionsLink>
               <S.ActionsButton onClick={() => removeStudent(student._id || "")}>
-                Excluir
+                <span>Excluir</span>
                 <DeleteIcon fontSize={'small'}/>
               </S.ActionsButton>
             </S.Actions>

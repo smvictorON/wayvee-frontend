@@ -1,11 +1,37 @@
-import styled from "styled-components";
+import styled, { css, CSSObject } from "styled-components";
 import "../../styles/variables.css"
 
+const breakpoints = {
+  small: "576px",
+  medium: "768px",
+  large: "992px",
+  extraLarge: "1200px",
+} as const;
+
+type Breakpoints = keyof typeof breakpoints;
+
+const media = (Object.keys(breakpoints) as Breakpoints[]).reduce(
+  (acc, label) => {
+    acc[label] = (styles: CSSObject) => css`
+      @media (max-width: ${breakpoints[label]}) {
+        ${css(styles)}
+      }
+    `;
+
+    return acc;
+  },
+  {} as Record<Breakpoints, (styles: CSSObject) => ReturnType<typeof css>>
+);
+
 export const Container = styled.main`
-  min-height: 60vh;
-  padding: 2em 6em;
+  min-height: 90vh;
+  padding: 2rem 6rem;
   margin: 0 auto;
-  height: 90vh;
   background-color: var(--light-gray);
   overflow: scroll;
+  scroll-behavior: smooth;
+
+  ${media.small({
+    padding: "1rem"
+  })}
 `

@@ -1,19 +1,38 @@
-import styled, { css } from "styled-components";
+import styled, { css, CSSObject } from "styled-components";
 import "../../styles/variables.css"
 
+const breakpoints = {
+  small: "576px",
+  medium: "768px",
+  large: "992px",
+  extraLarge: "1200px",
+} as const;
+
+type Breakpoints = keyof typeof breakpoints;
+
+const media = (Object.keys(breakpoints) as Breakpoints[]).reduce(
+  (acc, label) => {
+    acc[label] = (styles: CSSObject) => css`
+      @media (max-width: ${breakpoints[label]}) {
+        ${css(styles)}
+      }
+    `;
+
+    return acc;
+  },
+  {} as Record<Breakpoints, (styles: CSSObject) => ReturnType<typeof css>>
+);
 interface FormControlProps {
   type: string;
 }
 
 export const FormControl = styled.div<FormControlProps>`
-  min-width: 40%;
+  width: 100%;
   padding: 0.6rem;
-  border: 1px solid black;
-  margin: 0.5em auto 0;
-  border-radius: 5px;
+  border: 1px solid;
+  margin: 0em auto;
   text-align: center;
   position: absolute;
-  left: 30%;
 
   ${(props) =>
     props.type === "success" &&
@@ -30,4 +49,8 @@ export const FormControl = styled.div<FormControlProps>`
       background-color: #f8d7da;
       border-color: #f5c6cb;
     `}
+
+  ${media.small({
+    padding: "0.1rem"
+  })}
 `

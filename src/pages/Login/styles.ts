@@ -1,5 +1,27 @@
-import styled from "styled-components";
+import styled, { css, CSSObject } from "styled-components";
 import "../../styles/variables.css"
+
+const breakpoints = {
+  small: "576px",
+  medium: "768px",
+  large: "992px",
+  extraLarge: "1200px",
+} as const;
+
+type Breakpoints = keyof typeof breakpoints;
+
+const media = (Object.keys(breakpoints) as Breakpoints[]).reduce(
+  (acc, label) => {
+    acc[label] = (styles: CSSObject) => css`
+      @media (max-width: ${breakpoints[label]}) {
+        ${css(styles)}
+      }
+    `;
+
+    return acc;
+  },
+  {} as Record<Breakpoints, (styles: CSSObject) => ReturnType<typeof css>>
+);
 
 export const LoginContainer = styled.section`
   max-width: 500px;
@@ -10,27 +32,39 @@ export const LoginContainer = styled.section`
   padding: 2rem;
 `
 
-export const LoginTitle = styled.h1`
-  color: var(--blue);
-  margin-bottom: 1em;
-  font-size: 2.1em;
-  `
+export const LoginHeader = styled.h1`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2em;
+`
 
-export const LoginSubmit = styled.input`
+export const LoginHeaderTitle = styled.h1`
+  margin: 0;
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+`
+
+export const SubmitButton = styled.button`
   border-radius: 5px;
   background-color: var(--light-blue);
   color: white;
-  border: none;
   min-width: 100px;
-  min-height: 2.5em;
+  padding: 0.6rem;
   width: 100%;
   cursor: pointer;
-  font-size: 1.1em;
-  font-weight: bold;
   transition: 0.2s;
   margin: 2rem auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  font-size: 1.1em;
+  font-weight: bold;
 
-  &:hover {
+  &:hover{
     background-color: var(--light-blue-2);
   }
 `

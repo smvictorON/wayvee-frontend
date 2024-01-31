@@ -6,8 +6,6 @@ import { Select } from '../Select'
 import IStudent from '../../interfaces/IStudent'
 import SaveIcon from '@mui/icons-material/Save';
 import { States, Cities } from '../../interfaces/IAddress'
-import moment from 'moment';
-
 
 interface StudentFormProps {
   handleSubmit: (event: any) => void;

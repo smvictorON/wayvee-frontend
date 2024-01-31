@@ -18,7 +18,7 @@ import { Container } from './components/Container';
 
 import { UserProvider } from './context/UserContext';
 
-function App() {
+export default function App() {
   return (
     <Router>
       <UserProvider>
@@ -43,4 +43,3 @@ function App() {
   );
 }
 
-export default App;

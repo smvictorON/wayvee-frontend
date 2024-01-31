@@ -3,7 +3,7 @@ import "../../styles/variables.css"
 
 export const Footer = styled.footer`
   display: flex;
-  height: 4vh;
+  height: 2.5rem;
   align-items: center;
   justify-content: center;
 `

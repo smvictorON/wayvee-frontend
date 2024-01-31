@@ -2,12 +2,17 @@ import styled from "styled-components";
 import "../../styles/variables.css"
 
 export const ProfileHeader = styled.div`
-  text-align: center;
-  margin-bottom: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2em;
 `
 
 export const ProfileHeaderTitle = styled.h1`
+  margin: 0;
   color: var(--blue);
+  display: flex;
+  align-items: center;
 `
 
 export const FormContainer = styled.form`
@@ -19,19 +24,23 @@ export const FormContainer = styled.form`
   padding: 2rem;
 `
 
-export const SubmitButton = styled.input`
+export const SubmitButton = styled.button`
   border-radius: 5px;
   background-color: var(--light-blue);
   color: white;
-  border: none;
   min-width: 100px;
-  min-height: 2.5em;
+  padding: 0.6rem;
   width: 100%;
   cursor: pointer;
-  font-size: 1.1em;
-  font-weight: bold;
   transition: 0.2s;
   margin: 2rem auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  font-size: 1.1em;
+  font-weight: bold;
 
   &:hover{
     background-color: var(--light-blue-2);

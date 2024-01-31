@@ -5,6 +5,8 @@ import { Input } from '../../components/Input'
 import useFlashMessage from '../../hooks/useFlashMessage'
 import { SquareImage } from '../../components/SquareImage'
 import { IUser } from '../../interfaces/IUser'
+import SaveIcon from '@mui/icons-material/Save';
+import PortraitIcon from '@mui/icons-material/Portrait';
 
 export const Profile = () => {
   const [user, setUser] = useState<IUser | undefined>()
@@ -42,7 +44,7 @@ export const Profile = () => {
       setUser({ ...user, [name]: value })
   }
 
-  const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     let msgType = "success"
 
@@ -77,7 +79,10 @@ export const Profile = () => {
   return (
     <section>
       <S.ProfileHeader>
-        <S.ProfileHeaderTitle>Perfil</S.ProfileHeaderTitle>
+        <S.ProfileHeaderTitle>
+          Perfil&nbsp;&nbsp;
+          <PortraitIcon/>
+        </S.ProfileHeaderTitle>
         {(user?.image || preview) && (
           <SquareImage
             src={preview
@@ -87,7 +92,7 @@ export const Profile = () => {
         )}
       </S.ProfileHeader>
 
-      <S.FormContainer onSubmit={handleSubmit}>
+      <S.FormContainer>
         <Input
           text="Imagem"
           type="file"
@@ -133,7 +138,10 @@ export const Profile = () => {
           handleOnChange={handleChange}
           placeholder="Confirme sua Senha"
         />
-        <S.SubmitButton type="submit" value="Editar" />
+        <S.SubmitButton onClick={handleSubmit}>
+          Editar&nbsp;
+          <SaveIcon/>
+        </S.SubmitButton>
       </S.FormContainer>
     </section>
   )
