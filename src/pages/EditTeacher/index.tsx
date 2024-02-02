@@ -3,46 +3,46 @@ import * as S from './styles'
 import api from '../../utils/api'
 import { useParams } from 'react-router-dom'
 import useFlashMessage from '../../hooks/useFlashMessage'
-import { StudentForm } from '../../components/FormStudent'
-import IStudent from '../../interfaces/IStudent'
+import { TeacherForm } from '../../components/FormTeacher'
+import ITeacher from '../../interfaces/ITeacher'
 
-export const EditStudent = () => {
-  const [student, setStudent] = useState<IStudent | undefined>()
+export const EditTeacher = () => {
+  const [teacher, setTeacher] = useState<ITeacher | undefined>()
   const [token] = useState(localStorage.getItem('token') || '')
   const { id } = useParams()
   const { setFlashMessage } = useFlashMessage()
 
   useEffect(() => {
-    api.get(`/students/${id}`, {
+    api.get(`/teachers/${id}`, {
       headers: {
         Authorization: `Bearer ${JSON.parse(token)}`
       }
     }).then((res) => {
-      setStudent(res.data.student)
+      setTeacher(res.data.teacher)
     })
   }, [token, id])
 
-  const updateStudent = async (student: any) => {
+  const updateTeacher = async (teacher: any) => {
     let msgType = "success"
 
-    if(!student.address)
-      student.address = {}
+    if(!teacher.address)
+      teacher.address = {}
 
     const formData = new FormData()
 
-    await Object.keys(student).forEach((key) => {
+    await Object.keys(teacher).forEach((key) => {
       if (key === 'images') {
-        for (let i = 0; i < student[key].length; i++) {
-          formData.append('images', student[key][i])
+        for (let i = 0; i < teacher[key].length; i++) {
+          formData.append('images', teacher[key][i])
         }
       } else if (key === 'address') {
-        formData.append('address', JSON.stringify(student[key]));
+        formData.append('address', JSON.stringify(teacher[key]));
       } else {
-        formData.append(key, student[key])
+        formData.append(key, teacher[key])
       }
     })
 
-    const data = await api.patch(`/students/${student._id}`, formData, {
+    const data = await api.patch(`/teachers/${teacher._id}`, formData, {
       headers: {
         Authorization: `Bearer ${JSON.parse(token)}`,
         'Content-Type': 'multipart/form-data'
@@ -60,10 +60,10 @@ export const EditStudent = () => {
   return (
     <S.Section>
       <div>
-        <S.Header>Editando o Aluno: {student?.name}</S.Header>
+        <S.Header>Editando o Professor: {teacher?.name}</S.Header>
         <p>Depois da edição os dados ficarão atualizados no sistema.</p>
       </div>
-      {student?.name && <StudentForm btnText="Atualizar" handleSubmit={updateStudent} studentData={student} />}
+      {teacher?.name && <TeacherForm btnText="Atualizar" handleSubmit={updateTeacher} teacherData={teacher} />}
     </S.Section>
   )
 }

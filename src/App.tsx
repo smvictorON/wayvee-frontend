@@ -3,9 +3,17 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { Home } from './pages/Home';
 import { Profile } from './pages/Profile';
+
+//students
+import { Students } from './pages/Students';
 import { AddStudent } from './pages/AddStudent';
 import { EditStudent } from './pages/EditStudent';
-import { Students } from './pages/Students';
+
+//teachers
+import { Teachers } from './pages/Teachers';
+import { AddTeacher } from './pages/AddTeacher';
+import { EditTeacher } from './pages/EditTeacher';
+
 import { MyAdoptions } from './pages/MyAdoptions';
 import { PetDetails } from './pages/PetDetails';
 import { Login } from './pages/Login';
@@ -32,6 +40,9 @@ export default function App() {
             <Route path="/students" element={<Students />} />
             <Route path="/student/add" element={<AddStudent />} />
             <Route path="/student/edit/:id" element={<EditStudent />} />
+            <Route path="/teachers" element={<Teachers />} />
+            <Route path="/teacher/add" element={<AddTeacher />} />
+            <Route path="/teacher/edit/:id" element={<EditTeacher />} />
             <Route path="/pet/myadoptions" element={<MyAdoptions />} />
             <Route path="/pet/:id" element={<PetDetails />} />
             <Route path="/" element={<Home />} />

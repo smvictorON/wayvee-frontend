@@ -8,6 +8,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
 import PortraitIcon from '@mui/icons-material/Portrait';
 import GroupsIcon from '@mui/icons-material/Groups';
+import SchoolIcon from '@mui/icons-material/School';
 
 export const Header = () => {
   const { authenticated, logout }: { authenticated: boolean; logout: () => void } = useContext(Context)
@@ -32,6 +33,12 @@ export const Header = () => {
               </Link>
             </S.ListItem>
             <S.ListItem>
+              <Link to="/teachers">
+                <span>Professores&nbsp;&nbsp;</span>
+                <SchoolIcon/>
+              </Link>
+            </S.ListItem>
+            <S.ListItem>
               <Link to="/user/profile">
                 <span>Perfil&nbsp;&nbsp;</span>
                 <PortraitIcon/>
@@ -47,8 +54,8 @@ export const Header = () => {
             <S.ListItem>
               <Link to="/login">
                 <span>Entrar&nbsp;&nbsp;</span>
+                <LoginIcon/>
               </Link>
-              <LoginIcon/>
             </S.ListItem>
           </>
         }

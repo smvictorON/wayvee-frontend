@@ -3,14 +3,14 @@ import * as S from "./styles"
 import api from "../../utils/api"
 import { useNavigate } from "react-router-dom"
 import useFlashMessage from "../../hooks/useFlashMessage"
-import { StudentForm } from "../../components/FormStudent"
-import IStudent from "../../interfaces/IStudent"
+import { TeacherForm } from "../../components/FormTeacher"
+import ITeacher from "../../interfaces/ITeacher"
 
-export const AddStudent = () => {
+export const AddTeacher = () => {
   const [token] = useState(localStorage.getItem('token') || '')
   const { setFlashMessage } = useFlashMessage()
   const navigate = useNavigate()
-  const voidStudent: IStudent = {
+  const voidTeacher: ITeacher = {
     _id: '',
     name: '',
     phone: '',
@@ -18,27 +18,27 @@ export const AddStudent = () => {
     images: [],
   }
 
-  const registerStudent = async (student: any) => {
+  const registerTeacher = async (teacher: any) => {
     let msgType = "success"
 
-    if(!student.address)
-      student.address = {}
+    if(!teacher.address)
+      teacher.address = {}
 
     const formData = new FormData()
 
-    await Object.keys(student).forEach((key) => {
+    await Object.keys(teacher).forEach((key) => {
       if (key === 'images') {
-        for (let i = 0; i < student[key].length; i++) {
-          formData.append('images', student[key][i])
+        for (let i = 0; i < teacher[key].length; i++) {
+          formData.append('images', teacher[key][i])
         }
       } else if (key === 'address') {
-        formData.append('address', JSON.stringify(student[key]));
+        formData.append('address', JSON.stringify(teacher[key]));
       } else {
-        formData.append(key, student[key])
+        formData.append(key, teacher[key])
       }
     })
 
-    const data = await api.post('/students/create', formData, {
+    const data = await api.post('/teachers/create', formData, {
       headers: {
         Authorization: `Bearer ${JSON.parse(token)}`,
         'Content-Type': 'multipart/form-data'
@@ -53,16 +53,16 @@ export const AddStudent = () => {
     setFlashMessage(data.message, msgType)
 
     if (msgType !== 'error')
-      navigate('/students')
+      navigate('/teachers')
   }
 
   return (
     <S.Section>
       <div>
-        <S.Header>Cadastre um Aluno</S.Header>
+        <S.Header>Cadastre um Professor</S.Header>
         <p>Depois ele ficará disponível para edição!</p>
       </div>
-      <StudentForm btnText="Cadastrar" handleSubmit={registerStudent} studentData={voidStudent}/>
+      <TeacherForm btnText="Cadastrar" handleSubmit={registerTeacher} teacherData={voidTeacher}/>
     </S.Section>
   )
 }

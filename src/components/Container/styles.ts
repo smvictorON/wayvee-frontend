@@ -25,7 +25,7 @@ const media = (Object.keys(breakpoints) as Breakpoints[]).reduce(
 
 export const Container = styled.main`
   min-height: 90vh;
-  padding: 2rem 6rem;
+  padding: 3rem 6rem;
   margin: 0 auto;
   background-color: var(--light-gray);
   overflow: scroll;
