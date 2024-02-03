@@ -1,23 +1,23 @@
 import React from 'react'
 import * as S from './styles'
 
-interface SelectProps {
+interface MultiSelectProps {
   text: string;
   name: string;
   options: string[];
   handleOnChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  value: string | undefined;
+  value: string[] | undefined;
   required?: boolean | undefined;
 }
 
-export const Select = ({
+export const MultiSelect = ({
 	text,
 	name,
 	options,
 	handleOnChange,
 	value,
   required
-}:SelectProps) => {
+}:MultiSelectProps) => {
 	return (
 		<S.FormControl>
 			<S.Label htmlFor={name}>
@@ -27,13 +27,13 @@ export const Select = ({
 			</S.Label>
 			<S.Select
 				name={name}
-				value={value || ''}
+				value={value || []}
 				onChange={handleOnChange}
 				id={name}
+				multiple={true}
 			>
-				<option>Selecione uma opção</option>
 				{options.map((opt) => (
-					<option value={opt} key={opt}>{opt}</option>
+					<option value={opt} key={opt} selected={value?.includes(opt)}>{opt}</option>
 				))}
 			</S.Select>
 		</S.FormControl>

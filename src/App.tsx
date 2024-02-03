@@ -14,8 +14,11 @@ import { Teachers } from './pages/Teachers';
 import { AddTeacher } from './pages/AddTeacher';
 import { EditTeacher } from './pages/EditTeacher';
 
-import { MyAdoptions } from './pages/MyAdoptions';
-import { PetDetails } from './pages/PetDetails';
+//lessons
+import { Lessons } from './pages/Lessons';
+import { AddLesson } from './pages/AddLesson';
+import { EditLesson } from './pages/EditLesson';
+
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 
@@ -43,8 +46,9 @@ export default function App() {
             <Route path="/teachers" element={<Teachers />} />
             <Route path="/teacher/add" element={<AddTeacher />} />
             <Route path="/teacher/edit/:id" element={<EditTeacher />} />
-            <Route path="/pet/myadoptions" element={<MyAdoptions />} />
-            <Route path="/pet/:id" element={<PetDetails />} />
+            <Route path="/lessons" element={<Lessons />} />
+            <Route path="/lesson/add" element={<AddLesson />} />
+            <Route path="/lesson/edit/:id" element={<EditLesson />} />
             <Route path="/" element={<Home />} />
           </Routes>
         </Container>

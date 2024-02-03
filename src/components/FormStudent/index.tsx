@@ -144,7 +144,6 @@ export const StudentForm = ({
         text="Data de Nascimento"
         type="date"
         name="birthdate"
-        placeholder="Digite a data de nascimento"
         handleOnChange={handleChange}
         value={student.birthdate ? new Date(student.birthdate).toISOString().split('T')[0] : ""}
       />
