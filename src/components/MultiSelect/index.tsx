@@ -4,7 +4,7 @@ import * as S from './styles'
 interface MultiSelectProps {
   text: string;
   name: string;
-  options: string[];
+  options: any[];
   handleOnChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   value: string[] | undefined;
   required?: boolean | undefined;
@@ -33,7 +33,7 @@ export const MultiSelect = ({
 				multiple={true}
 			>
 				{options.map((opt) => (
-					<option value={opt} key={opt} selected={value?.includes(opt)}>{opt}</option>
+					<option value={opt._id} key={opt._id}>{opt.name}</option>
 				))}
 			</S.Select>
 		</S.FormControl>

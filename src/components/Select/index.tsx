@@ -4,7 +4,7 @@ import * as S from './styles'
 interface SelectProps {
   text: string;
   name: string;
-  options: string[];
+  options: any[];
   handleOnChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   value: string | undefined;
   required?: boolean | undefined;
@@ -33,7 +33,7 @@ export const Select = ({
 			>
 				<option>Selecione uma opção</option>
 				{options.map((opt) => (
-					<option value={opt} key={opt}>{opt}</option>
+					<option value={opt._id || opt} key={opt._id || opt}>{opt.name || opt}</option>
 				))}
 			</S.Select>
 		</S.FormControl>

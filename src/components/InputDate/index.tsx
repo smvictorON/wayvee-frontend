@@ -1,25 +1,23 @@
 import React from 'react'
 import * as S from './styles'
 
-interface InputProps {
-  type: string;
+interface InputDateProps {
   text: string;
   name: string;
-  placeholder?: string;
   handleOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string | undefined;
   required?: boolean
 }
 
-export const Input = ({
-  type,
+export const InputDate = ({
   text,
   name,
-  placeholder,
   handleOnChange,
   value,
   required
-}: InputProps) => {
+}: InputDateProps) => {
+  const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' });
+
   return (
     <S.FormControl>
       <S.Label htmlFor={name}>
@@ -28,12 +26,12 @@ export const Input = ({
         :
       </S.Label>
         <S.Input
-          type={type}
+          type='date'
           name={name}
           id={name}
-          placeholder={placeholder}
           onChange={handleOnChange}
-          value={value}>
+          value={value}
+          min={today}>
         </S.Input>
     </S.FormControl>
   )

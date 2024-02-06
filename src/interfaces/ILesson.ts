@@ -5,7 +5,7 @@ export default interface ILesson {
   hour_end: string;
   teacher: string;
   students: Array<string>;
-  class?: string;
+  classroom?: string;
   subject?: string;
   observation?: string;
   status: 'Active' | 'Cancelled' | 'Done';

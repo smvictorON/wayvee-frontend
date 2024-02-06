@@ -18,6 +18,7 @@ export const Select = styled.select`
   border: 0;
   border-radius: 5px;
   width: 100%;
+  max-height: 200px
 `
 
 export const Required = styled.span`

@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import * as S from './styles'
 import { Input } from '../Input'
+import { InputFile } from '../InputFile'
 import { InputMask } from '../InputMask'
 import { Select } from '../Select'
 import ITeacher from '../../interfaces/ITeacher'
@@ -96,9 +97,8 @@ export const TeacherForm = ({
           ))
         }
       </S.PreviewContainer>
-      <Input
+      <InputFile
         text="Imagens"
-        type="file"
         name="images"
         handleOnChange={onFileChange}
         multiple={false}

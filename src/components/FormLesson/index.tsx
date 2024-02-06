@@ -1,12 +1,11 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import * as S from './styles'
 import { Input } from '../Input'
-import { InputMask } from '../InputMask'
+import { InputDate } from '../InputDate'
 import { Select } from '../Select'
 import { MultiSelect } from '../MultiSelect'
 import ILesson from '../../interfaces/ILesson'
 import SaveIcon from '@mui/icons-material/Save';
-import { States, Cities } from '../../interfaces/IAddress'
 
 interface LessonFormProps {
   handleSubmit: (event: any) => void;
@@ -20,19 +19,19 @@ export const LessonForm = ({
   btnText
 }: LessonFormProps) => {
   const [lesson, setLesson] = useState(lessonData || {})
-  const [selectedStudents, setSelectedStudents] = useState<string[]>(lesson.students || []);
 
   const teachers = [
-    "teacher1",
-    "teacher2",
-    "teacher3",
-    "teacher4",
+    {name: "teacher1", _id: "631a3081850dd040caafb7b2"},
+    {name: "teacher2", _id: "631a3081850dd040caafb7b3"},
+    {name: "teacher3", _id: "631a3081850dd040caafb7b4"},
+    {name: "teacher4", _id: "631a3081850dd040caafb7b5"},
   ]
+
   const students = [
-    "student1",
-    "student2",
-    "student3",
-    "student4",
+    {name: "student1", _id: "631a3081850dd040caafb7b2"},
+    {name: "student2", _id: "631a3081850dd040caafb7b3"},
+    {name: "student3", _id: "631a3081850dd040caafb7b4"},
+    {name: "student4", _id: "631a3081850dd040caafb7b5"},
   ]
 
   // useEffect(() => {
@@ -53,7 +52,8 @@ export const LessonForm = ({
 
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const name = e.target.name;
-    setLesson({ ...lesson, [name]: e.target.options[e.target.selectedIndex].text as string });
+    const value = e.target.options[e.target.selectedIndex].value as string;
+    setLesson({ ...lesson, [name]: value });
   }
 
   const handleMultiSelect = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -69,9 +69,8 @@ export const LessonForm = ({
 
   return (
     <S.FormContainer>
-      <Input
+      <InputDate
         text="Data de Nascimento"
-        type="date"
         name="date"
         handleOnChange={handleChange}
         value={lesson.date ? new Date(lesson.date).toISOString().split('T')[0] : ""}
@@ -112,10 +111,10 @@ export const LessonForm = ({
       <Input
         text="Classe"
         type="text"
-        name="class"
+        name="classroom"
         placeholder="Digite a classe"
         handleOnChange={handleChange}
-        value={lesson.class || ""}
+        value={lesson.classroom || ""}
       />
       <Input
         text="Assunto"
