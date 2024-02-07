@@ -57,7 +57,7 @@ export const ListItem = styled.li`
   font-weight: bold;
   cursor: pointer;
   transition: 0.2s;
-  padding: 0.5em 0.8em;
+  // padding: 0.5em 0.8em;
   border-radius: 5px;
   margin: 0 5px;
   border: 1px solid;
@@ -77,9 +77,11 @@ export const ListItem = styled.li`
     color:var(--blue);
     text-decoration: none;
     display: flex;
+    padding: 0.5em 0.8em;
   }
 
   span{
+    margin-right: 0.2rem;
     ${media.small({
       display: "none"
     })}

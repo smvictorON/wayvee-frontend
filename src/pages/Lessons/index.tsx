@@ -62,7 +62,7 @@ export const Lessons = () => {
       <S.ListContainer>
         {lessons && lessons.length > 0 && lessons.map((lesson) => (
           <S.ListRow key={lesson._id}>
-            <S.ListRowSpan>{lesson.teacher}</S.ListRowSpan>
+            <S.ListRowSpan>{lesson.teacher?.name}</S.ListRowSpan>
             <S.Actions>
               <S.ActionsLink to={`/lesson/edit/${lesson._id}`}>
                 <span>Editar</span>

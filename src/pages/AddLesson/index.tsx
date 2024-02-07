@@ -5,17 +5,24 @@ import { useNavigate } from "react-router-dom"
 import useFlashMessage from "../../hooks/useFlashMessage"
 import { LessonForm } from "../../components/FormLesson"
 import ILesson from "../../interfaces/ILesson"
+import ITeacher from "../../interfaces/ITeacher"
 
 export const AddLesson = () => {
   const [token] = useState(localStorage.getItem('token') || '')
   const { setFlashMessage } = useFlashMessage()
   const navigate = useNavigate()
+  const voidTeacher: ITeacher = {
+    _id: '',
+    name: '',
+    phone: '',
+    cpf: '',
+  }
   const voidLesson: ILesson = {
     _id: '',
     date: '',
     hour_start: '',
     hour_end: '',
-    teacher: '',
+    teacher: voidTeacher,
     students: [''],
     status: 'Active'
   }

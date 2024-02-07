@@ -17,7 +17,7 @@ export const Header = () => {
   return (
     <S.Navbar>
       <S.NavbarLogo>
-        <Link to="/">
+        <Link to={authenticated ? "/" : "/login"}>
           <S.ImgLogo src={Logo} alt="Wayvee" />
         </Link>
       </S.NavbarLogo>
@@ -29,41 +29,43 @@ export const Header = () => {
           <>
             <S.ListItem>
               <Link to="/students">
-                <span>Alunos&nbsp;&nbsp;</span>
+                <span>Alunos</span>
                 <GroupsIcon/>
               </Link>
             </S.ListItem>
             <S.ListItem>
               <Link to="/teachers">
-                <span>Professores&nbsp;&nbsp;</span>
+                <span>Professores</span>
                 <SchoolIcon/>
               </Link>
             </S.ListItem>
             <S.ListItem>
               <Link to="/lessons">
-                <span>Aulas&nbsp;&nbsp;</span>
+                <span>Aulas</span>
                 <CastForEducationIcon/>
               </Link>
             </S.ListItem>
             <S.ListItem>
               <Link to="/user/profile">
-                <span>Perfil&nbsp;&nbsp;</span>
+                <span>Perfil</span>
                 <PortraitIcon/>
               </Link>
             </S.ListItem>
             <S.ListItem onClick={logout}>
-              <span>Sair&nbsp;&nbsp;</span>
-              <LogoutIcon/>
+              <Link to="/user/profile">
+                <span>Sair</span>
+                <LogoutIcon/>
+              </Link>
             </S.ListItem>
           </>
           :
           <>
-            <S.ListItem>
+            {/* <S.ListItem>
               <Link to="/login">
-                <span>Entrar&nbsp;&nbsp;</span>
+                <span>Entrar</span>
                 <LoginIcon/>
               </Link>
-            </S.ListItem>
+            </S.ListItem> */}
           </>
         }
       </S.List>

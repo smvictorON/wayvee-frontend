@@ -1,11 +1,15 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import * as S from './styles'
 import { Input } from '../Input'
 import { InputDate } from '../InputDate'
+import { InputHour } from '../InputHour'
 import { Select } from '../Select'
 import { MultiSelect } from '../MultiSelect'
 import ILesson from '../../interfaces/ILesson'
 import SaveIcon from '@mui/icons-material/Save';
+import api from '../../utils/api'
+import ITeacher from '../../interfaces/ITeacher'
+import IStudent from '../../interfaces/IStudent'
 
 interface LessonFormProps {
   handleSubmit: (event: any) => void;
@@ -19,31 +23,27 @@ export const LessonForm = ({
   btnText
 }: LessonFormProps) => {
   const [lesson, setLesson] = useState(lessonData || {})
+  const [teachers, setTeachers] = useState<ITeacher[]>([])
+  const [students, setStudents] = useState<IStudent[]>([])
+  const [token] = useState(localStorage.getItem('token') || '')
 
-  const teachers = [
-    {name: "teacher1", _id: "631a3081850dd040caafb7b2"},
-    {name: "teacher2", _id: "631a3081850dd040caafb7b3"},
-    {name: "teacher3", _id: "631a3081850dd040caafb7b4"},
-    {name: "teacher4", _id: "631a3081850dd040caafb7b5"},
-  ]
+  useEffect(() => {
+    api.get(`/teachers`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(token)}`
+      }
+    }).then((res) => {
+      setTeachers(res.data.teachers)
+    })
 
-  const students = [
-    {name: "student1", _id: "631a3081850dd040caafb7b2"},
-    {name: "student2", _id: "631a3081850dd040caafb7b3"},
-    {name: "student3", _id: "631a3081850dd040caafb7b4"},
-    {name: "student4", _id: "631a3081850dd040caafb7b5"},
-  ]
-
-  // useEffect(() => {
-  //   if (lessonData?.birthdate) {
-  //     const formattedBirthdate = moment(lessonData.birthdate).format('YYYY-MM-DD');
-
-  //     setLesson({
-  //       ...lesson,
-  //       birthdate: formattedBirthdate,
-  //     });
-  //   }
-  // }, [])
+    api.get(`/students`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(token)}`
+      }
+    }).then((res) => {
+      setStudents(res.data.students)
+    })
+  }, [token])
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -62,31 +62,30 @@ export const LessonForm = ({
     setLesson({ ...lesson, [name]: selectedOptions });
   }
 
-  const submit = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     handleSubmit(lesson)
   }
 
   return (
-    <S.FormContainer>
+    <S.FormContainer onSubmit={submit}>
       <InputDate
         text="Data de Nascimento"
         name="date"
         handleOnChange={handleChange}
         value={lesson.date ? new Date(lesson.date).toISOString().split('T')[0] : ""}
         required={true}
+        todayIsMin
       />
-      <Input
+      <InputHour
         text="Inicio"
-        type="time"
         name="hour_start"
         handleOnChange={handleChange}
         value={lesson.hour_start}
         required={true}
       />
-      <Input
+      <InputHour
         text="Fim"
-        type="time"
         name="hour_end"
         handleOnChange={handleChange}
         value={lesson.hour_end}
@@ -97,7 +96,7 @@ export const LessonForm = ({
         name="teacher"
         options={teachers}
         handleOnChange={handleSelect}
-        value={lesson.teacher}
+        value={lesson.teacher._id}
         required={true}
       />
       <MultiSelect
@@ -132,7 +131,7 @@ export const LessonForm = ({
         handleOnChange={handleChange}
         value={lesson.observation || ""}
       />
-      <S.SubmitButton onClick={submit}>
+      <S.SubmitButton>
         {btnText}&nbsp;
         <SaveIcon/>
       </S.SubmitButton>

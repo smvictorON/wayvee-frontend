@@ -7,7 +7,7 @@ interface SelectProps {
   options: any[];
   handleOnChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   value: string | undefined;
-  required?: boolean | undefined;
+  required?: boolean;
 }
 
 export const Select = ({
@@ -30,6 +30,7 @@ export const Select = ({
 				value={value || ''}
 				onChange={handleOnChange}
 				id={name}
+				required={true}
 			>
 				<option>Selecione uma opção</option>
 				{options.map((opt) => (

@@ -31,6 +31,7 @@ export const MultiSelect = ({
 				onChange={handleOnChange}
 				id={name}
 				multiple={true}
+				required={required}
 			>
 				{options.map((opt) => (
 					<option value={opt._id} key={opt._id}>{opt.name}</option>

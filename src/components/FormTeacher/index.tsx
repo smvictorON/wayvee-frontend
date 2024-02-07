@@ -2,6 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import * as S from './styles'
 import { Input } from '../Input'
 import { InputFile } from '../InputFile'
+import { InputDate } from '../InputDate'
 import { InputMask } from '../InputMask'
 import { Select } from '../Select'
 import ITeacher from '../../interfaces/ITeacher'
@@ -140,9 +141,8 @@ export const TeacherForm = ({
         handleOnChange={handleChange}
         value={teacher.email || ""}
       />
-      <Input
+      <InputDate
         text="Data de Nascimento"
-        type="date"
         name="birthdate"
         handleOnChange={handleChange}
         value={teacher.birthdate ? new Date(teacher.birthdate).toISOString().split('T')[0] : ""}

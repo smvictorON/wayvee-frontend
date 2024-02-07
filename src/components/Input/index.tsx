@@ -31,6 +31,7 @@ export const Input = ({
           type={type}
           name={name}
           id={name}
+          required={required}
           placeholder={placeholder}
           onChange={handleOnChange}
           value={value}>

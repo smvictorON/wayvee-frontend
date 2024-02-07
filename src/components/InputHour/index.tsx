@@ -1,27 +1,21 @@
 import React from 'react'
 import * as S from './styles'
 
-interface InputDateProps {
+interface InputHourProps {
   text: string;
   name: string;
   handleOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string | undefined;
   required?: boolean
-  todayIsMin?: boolean
-  todayIsMax?: boolean
 }
 
-export const InputDate = ({
+export const InputHour = ({
   text,
   name,
   handleOnChange,
   value,
   required,
-  todayIsMin,
-  todayIsMax
-}: InputDateProps) => {
-  const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' });
-
+}: InputHourProps) => {
   return (
     <S.FormControl>
       <S.Label htmlFor={name}>
@@ -30,14 +24,13 @@ export const InputDate = ({
         :
       </S.Label>
         <S.Input
-          type='date'
+          type='time'
           name={name}
           id={name}
+          required={required}
           onChange={handleOnChange}
           value={value}
-          required={required}
-          min={todayIsMin ? today : ""}
-          max={todayIsMax ? today : ""}>
+        >
         </S.Input>
     </S.FormControl>
   )
