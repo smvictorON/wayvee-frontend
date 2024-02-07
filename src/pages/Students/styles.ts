@@ -29,7 +29,7 @@ export const ListHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2em;
+  margin-bottom: 2rem;
 `
 
 export const ListHeaderTitle = styled.h1`
@@ -46,7 +46,7 @@ export const ListHeaderLink = styled(Link)`
   font-weight: bold;
   cursor: pointer;
   transition: 0.2s;
-  padding: 0.5em 0.8em;
+  padding: 0.5rem 0.8rem;
   border: 2px solid var(--blue);
   border-radius: 5px;
   display: flex;
@@ -73,48 +73,49 @@ export const ListContainer = styled.div`
 
 export const ListRow = styled.div`
   border-bottom: 1px solid var(--blue);
-  padding: 0.5em;
-  margin: 0.5em;
+  padding: 0.5rem;
+  margin: 0.5rem;
   display: flex;
   align-items: center;
 `
 
 export const ListRowImg = styled.img`
-  margin-right: 1em;
+  margin-right: 1rem;
 `
 
 export const ListRowSpan = styled.span`
-  flex: 2;
+  flex: 3;
 `
 
 export const Actions = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-end;
   justify-content: flex-end;
   width: -webkit-fill-available;
-  flex: 2;
+  flex: 1;
 `
 
 export const ActionsButton = styled.button`
   text-decoration: none;
   background-color: transparent;
-  color: var(--blue);
+  color: var(--red);
   font-weight: bold;
   cursor: pointer;
   transition: 0.2s;
   padding: 7px 12px;
-  border: 1px solid var(--blue);
+  border: 1px solid var(--red);
   border-radius: 5px;
   font-size: 12px;
-  margin-left: 1em;
+  margin-left: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   width: 100px;
+  margin: 0.1rem;
 
   &:hover{
-    background-color: var(--blue);
+    background-color: var(--red);
     color: white;
   }
 
@@ -140,11 +141,12 @@ export const ActionsLink = styled(Link)`
   border: 1px solid var(--blue);
   border-radius: 5px;
   font-size: 12px;
-  margin-left: 1em;
+  margin-left: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   width: 100px;
+  margin: 0.1rem;
 
   &:hover{
     background-color: var(--blue);

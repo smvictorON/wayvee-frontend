@@ -1,7 +1,7 @@
 import IAddress from './IAddress'
 
 export default interface ITeacher {
-  _id?: string;
+  _id: string;
   name: string;
   phone: string;
   cpf: string;

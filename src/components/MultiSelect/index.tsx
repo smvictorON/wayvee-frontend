@@ -6,7 +6,7 @@ interface MultiSelectProps {
   name: string;
   options: any[];
   handleOnChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  value: string[] | undefined;
+  value: any;
   required?: boolean | undefined;
 }
 

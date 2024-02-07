@@ -39,7 +39,7 @@ export const NavbarLogo = styled.div`
 
 export const ImgLogo = styled.img`
 	width: 190px;
-	margin-right: 0.8em;
+	margin-right: 0.8rem;
 
   ${media.small({
     width: "120px"
@@ -57,7 +57,7 @@ export const ListItem = styled.li`
   font-weight: bold;
   cursor: pointer;
   transition: 0.2s;
-  // padding: 0.5em 0.8em;
+  // padding: 0.5rem 0.8rem;
   border-radius: 5px;
   margin: 0 5px;
   border: 1px solid;
@@ -77,7 +77,7 @@ export const ListItem = styled.li`
     color:var(--blue);
     text-decoration: none;
     display: flex;
-    padding: 0.5em 0.8em;
+    padding: 0.5rem 0.8rem;
   }
 
   span{

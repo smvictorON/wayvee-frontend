@@ -3,11 +3,11 @@ import "../../styles/variables.css"
 import { Link } from 'react-router-dom'
 
 export const Header = styled.div`
-  margin-bottom: 2em;
+  margin-bottom: 2rem;
 `
 
 export const HeaderTitle = styled.h1`
-  margin-bottom: .3em;
+  margin-bottom: 0.3rem;
   color: var(--blue);
 `
 
@@ -30,14 +30,14 @@ export const PetCardImage = styled.div`
   background-position: center;
   height: 225px;
   width: 100%;
-  margin-bottom: 1.2em;
+  margin-bottom: 1.2rem;
   border-radius: 5px
 `
 
 export const Subtitle = styled.h3`
   color: var(--blue);
-  margin-bottom: 1em;
-  font-size: 1.6em;
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
   padding: 8px;
 `
 
@@ -50,7 +50,7 @@ export const LinkRouter = styled(Link)`
   transition: 0.2s;
   padding: 15px;
   border-radius: 5px;
-  font-size: 1.1em;
+  font-size: 1.1rem;
 
   &:hover{
     background-color: var(--light-blue-2);
@@ -58,7 +58,7 @@ export const LinkRouter = styled(Link)`
 `
 
 export const Paragraph = styled.p`
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 `
 
 export const AdoptedText = styled.p`

@@ -25,7 +25,7 @@ export const SubmitButton = styled.button`
   align-items: center;
   justify-content: center;
   border: none;
-  font-size: 1.1em;
+  font-size: 1.1rem;
   font-weight: bold;
 
   &:hover{
@@ -48,7 +48,7 @@ export const SubmitInput = styled.input`
   align-items: center;
   justify-content: center;
   border: none;
-  font-size: 1.1em;
+  font-size: 1.1rem;
   font-weight: bold;
 
   &:hover{
@@ -57,7 +57,7 @@ export const SubmitInput = styled.input`
 `
 
 export const Paragraph = styled.p`
-  margin-top: 1em;
+  margin-top: 1rem;
 `
 
 export const Link = styled.a`
@@ -68,10 +68,10 @@ export const Link = styled.a`
 export const PreviewContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin: 1em;
+  margin: 1rem;
 `
 export const Image = styled.img`
   height: 200px;
-  margin-left: 1em;
+  margin-left: 1rem;
   border-radius: 5px;
 `

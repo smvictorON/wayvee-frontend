@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { SquareImage } from '../../components/SquareImage'
 import useFlashMessage from '../../hooks/useFlashMessage'
 import api from '../../utils/api'
 import * as S from './styles'
@@ -8,7 +7,10 @@ import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import GroupsIcon from '@mui/icons-material/Groups';
-import NoPicture from '../../assets/no-picture.png'
+import SchoolIcon from '@mui/icons-material/School';
+import CastForEducationIcon from '@mui/icons-material/CastForEducation';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import AlarmIcon from '@mui/icons-material/Alarm';
 
 export const Lessons = () => {
   const [lessons, setLessons] = useState<ILesson[] | undefined>()
@@ -50,7 +52,7 @@ export const Lessons = () => {
       <S.ListHeader>
         <S.ListHeaderTitle>
           Aulas&nbsp;&nbsp;
-          <GroupsIcon/>
+          <CastForEducationIcon/>
         </S.ListHeaderTitle>
 
         <S.ListHeaderLink to='/lesson/add'>
@@ -62,7 +64,26 @@ export const Lessons = () => {
       <S.ListContainer>
         {lessons && lessons.length > 0 && lessons.map((lesson) => (
           <S.ListRow key={lesson._id}>
-            <S.ListRowSpan>{lesson.teacher?.name}</S.ListRowSpan>
+            <S.Data>
+              <S.DataInfo>
+                <div>
+                  <SchoolIcon fontSize={'small'}/>
+                  <span>{typeof lesson.teacher === 'object' ? lesson.teacher.name : ""}</span>
+                </div>
+                <div>
+                  <GroupsIcon fontSize={'small'}/>
+                  <span>{lesson.students.length} aluno(s)</span>
+                </div>
+              </S.DataInfo>
+              <S.DataDate>
+                <CalendarTodayIcon fontSize={'small'}/>
+                <span>{new Date(lesson.date.substring(0, 10)).toLocaleDateString('pt-BR')}</span>
+              </S.DataDate>
+              <S.DataDate>
+                <AlarmIcon fontSize={'small'}/>
+                <span>{lesson.hour_start} - {lesson.hour_end}</span>
+              </S.DataDate>
+            </S.Data>
             <S.Actions>
               <S.ActionsLink to={`/lesson/edit/${lesson._id}`}>
                 <span>Editar</span>

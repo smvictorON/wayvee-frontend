@@ -70,7 +70,7 @@ export const LessonForm = ({
   return (
     <S.FormContainer onSubmit={submit}>
       <InputDate
-        text="Data de Nascimento"
+        text="Data da Aula"
         name="date"
         handleOnChange={handleChange}
         value={lesson.date ? new Date(lesson.date).toISOString().split('T')[0] : ""}
@@ -92,15 +92,15 @@ export const LessonForm = ({
         required={true}
       />
       <Select
-        text="Teacher"
+        text="Professor"
         name="teacher"
         options={teachers}
         handleOnChange={handleSelect}
-        value={lesson.teacher._id}
+        value={lesson.teacher}
         required={true}
       />
       <MultiSelect
-        text="Students"
+        text="Alunos"
         name="students"
         options={students}
         handleOnChange={handleMultiSelect}

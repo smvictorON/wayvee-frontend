@@ -36,7 +36,7 @@ export const LoginHeader = styled.h1`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 2em;
+  margin-bottom: 2rem;
 `
 
 export const LoginHeaderTitle = styled.h1`
@@ -61,7 +61,7 @@ export const SubmitButton = styled.button`
   align-items: center;
   justify-content: center;
   border: none;
-  font-size: 1.1em;
+  font-size: 1.1rem;
   font-weight: bold;
 
   &:hover{

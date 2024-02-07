@@ -17,10 +17,10 @@ export const SubmitButton = styled.input`
   color: white;
   border: none;
   min-width: 100px;
-  min-height: 2.5em;
+  min-height: 2.5rem;
   width: 100%;
   cursor: pointer;
-  font-size: 1.1em;
+  font-size: 1.1rem;
   font-weight: bold;
   transition: 0.2s;
   margin: 2rem auto;
@@ -31,7 +31,7 @@ export const SubmitButton = styled.input`
 `
 
 export const FormContainerParagraph = styled.p`
-  margin-top: 1em;
+  margin-top: 1rem;
 `
 
 export const FormContainerParagraphLink = styled(Link)`
