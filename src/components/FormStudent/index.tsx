@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useState } from 'react'
 import * as S from './styles'
 import { Input } from '../Input'
 import { InputFile } from '../InputFile'
@@ -24,17 +24,6 @@ export const StudentForm = ({
   const [preview, setPreview] = useState<File[]>([])
   const states: string[] = Object.values(States);
   const cities = Cities
-
-  // useEffect(() => {
-  //   if (studentData?.birthdate) {
-  //     const formattedBirthdate = moment(studentData.birthdate).format('YYYY-MM-DD');
-
-  //     setStudent({
-  //       ...student,
-  //       birthdate: formattedBirthdate,
-  //     });
-  //   }
-  // }, [])
 
   const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
@@ -79,13 +68,13 @@ export const StudentForm = ({
     }
   }
 
-  const submit = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     handleSubmit(student)
   }
 
   return (
-    <S.FormContainer>
+    <S.FormContainer onSubmit={submit}>
       <S.PreviewContainer>
         {preview.length > 0 ?
           preview.map((image, index) => (
@@ -187,7 +176,7 @@ export const StudentForm = ({
         handleOnChange={handleSelect}
         value={student.address?.state || ""}
       />
-      <S.SubmitButton onClick={submit}>
+      <S.SubmitButton>
         {btnText}&nbsp;
         <SaveIcon/>
       </S.SubmitButton>
