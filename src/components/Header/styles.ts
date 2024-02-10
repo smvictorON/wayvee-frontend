@@ -41,7 +41,7 @@ export const ImgLogo = styled.img`
 	width: 190px;
 	margin-right: 0.8rem;
 
-  ${media.small({
+  ${media.medium({
     width: "120px"
   })}
 `
@@ -82,7 +82,7 @@ export const ListItem = styled.li`
 
   span{
     margin-right: 0.2rem;
-    ${media.small({
+    ${media.medium({
       display: "none"
     })}
   }

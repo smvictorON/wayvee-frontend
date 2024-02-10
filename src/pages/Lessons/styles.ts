@@ -60,7 +60,7 @@ export const ListHeaderLink = styled(Link)`
   }
 
   span{
-    ${media.small({
+    ${media.medium({
       display: "none"
     })}
   }
@@ -146,12 +146,12 @@ export const ActionsButton = styled.button`
   }
 
   span{
-    ${media.small({
+    ${media.medium({
       display: "none"
     })}
   }
 
-  ${media.small({
+  ${media.medium({
     width: "auto"
   })}
 `
@@ -180,12 +180,12 @@ export const ActionsLink = styled(Link)`
   }
 
   span{
-    ${media.small({
+    ${media.medium({
       display: "none"
     })}
   }
 
-  ${media.small({
+  ${media.medium({
     width: "auto"
   })}
 `

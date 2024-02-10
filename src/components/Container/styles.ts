@@ -31,7 +31,7 @@ export const Container = styled.main`
   overflow: scroll;
   scroll-behavior: smooth;
 
-  ${media.small({
+  ${media.medium({
     padding: "1rem"
   })}
 `

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, ChangeEvent } from 'react'
 import { SquareImage } from '../../components/SquareImage'
 import useFlashMessage from '../../hooks/useFlashMessage'
 import api from '../../utils/api'
@@ -9,6 +9,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import GroupsIcon from '@mui/icons-material/Groups';
 import NoPicture from '../../assets/no-picture.png'
+import { InputFilter } from '../../components/InputFilter'
 
 export const Teachers = () => {
   const [teachers, setTeachers] = useState<ITeacher[] | undefined>()
@@ -45,13 +46,36 @@ export const Teachers = () => {
     setFlashMessage(data.message, msgType)
   }
 
+  const handleFilter = async (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+
+    api.get('/teachers', {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(token)}`
+      }
+    }).then((res) => {
+      if (value.trim() === '') {
+        setTeachers(res.data.teachers)
+      } else {
+        const filteredTeachers = res.data.teachers?.filter((teacher: ITeacher) => teacher.name.toLowerCase().includes(value.toLowerCase()));
+        setTeachers(filteredTeachers);
+      }
+    })
+  }
+
   return (
     <section>
       <S.ListHeader>
         <S.ListHeaderTitle>
-          Professores&nbsp;&nbsp;
+          Professores&nbsp;({teachers?.length})&nbsp;
           <GroupsIcon/>
         </S.ListHeaderTitle>
+
+        <InputFilter
+          name='search'
+          placeholder='Buscar por nome'
+          handleOnChange={handleFilter}
+        />
 
         <S.ListHeaderLink to='/teacher/add'>
           <span>Cadastrar Professor</span>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, ChangeEvent } from 'react'
 import useFlashMessage from '../../hooks/useFlashMessage'
 import api from '../../utils/api'
 import * as S from './styles'
@@ -11,6 +11,7 @@ import SchoolIcon from '@mui/icons-material/School';
 import CastForEducationIcon from '@mui/icons-material/CastForEducation';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import AlarmIcon from '@mui/icons-material/Alarm';
+import { InputFilter } from '../../components/InputFilter'
 
 export const Lessons = () => {
   const [lessons, setLessons] = useState<ILesson[] | undefined>()
@@ -47,13 +48,41 @@ export const Lessons = () => {
     setFlashMessage(data.message, msgType)
   }
 
+  const handleFilter = async (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+
+    api.get('/lessons', {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(token)}`
+      }
+    }).then((res) => {
+      if (value.trim() === '') {
+        setLessons(res.data.lessons)
+      } else {
+        const filteredLessons = res.data.lessons?.filter((lesson: ILesson) => {
+          if (typeof lesson.teacher !== 'string') {
+            return lesson.teacher.name.toLowerCase().includes(value.toLowerCase())
+          }
+          return false
+        });
+        setLessons(filteredLessons);
+      }
+    })
+  }
+
   return (
     <section>
       <S.ListHeader>
         <S.ListHeaderTitle>
-          Aulas&nbsp;&nbsp;
+          Aulas&nbsp;({lessons?.length})&nbsp;
           <CastForEducationIcon/>
         </S.ListHeaderTitle>
+
+        <InputFilter
+          name='search'
+          placeholder='Buscar por professor'
+          handleOnChange={handleFilter}
+        />
 
         <S.ListHeaderLink to='/lesson/add'>
           <span>Cadastrar Aula</span>
@@ -90,7 +119,7 @@ export const Lessons = () => {
                 <EditIcon fontSize={'small'}/>
               </S.ActionsLink>
               <S.ActionsButton onClick={() => removeLesson(lesson._id || "")}>
-                <span>Excluir</span>
+                <span>Cancelar</span>
                 <DeleteIcon fontSize={'small'}/>
               </S.ActionsButton>
             </S.Actions>

@@ -50,7 +50,7 @@ export const FormControl = styled.div<FormControlProps>`
       border-color: #f5c6cb;
     `}
 
-  ${media.small({
+  ${media.medium({
     padding: "0.1rem"
   })}
 `

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, ChangeEvent } from 'react'
 import { SquareImage } from '../../components/SquareImage'
 import useFlashMessage from '../../hooks/useFlashMessage'
 import api from '../../utils/api'
@@ -9,6 +9,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import GroupsIcon from '@mui/icons-material/Groups';
 import NoPicture from '../../assets/no-picture.png'
+import { InputFilter } from '../../components/InputFilter'
 
 export const Students = () => {
   const [students, setStudents] = useState<IStudent[] | undefined>()
@@ -45,13 +46,36 @@ export const Students = () => {
     setFlashMessage(data.message, msgType)
   }
 
+  const handleFilter = async (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+
+    api.get('/students', {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(token)}`
+      }
+    }).then((res) => {
+      if (value.trim() === '') {
+        setStudents(res.data.students)
+      } else {
+        const filteredStudents = res.data.students?.filter((student: IStudent) => student.name.toLowerCase().includes(value.toLowerCase()));
+        setStudents(filteredStudents);
+      }
+    })
+  }
+
   return (
     <section>
       <S.ListHeader>
         <S.ListHeaderTitle>
-          Alunos&nbsp;&nbsp;
+          Alunos&nbsp;({students?.length})&nbsp;
           <GroupsIcon/>
         </S.ListHeaderTitle>
+
+        <InputFilter
+          name='search'
+          placeholder='Buscar por nome'
+          handleOnChange={handleFilter}
+        />
 
         <S.ListHeaderLink to='/student/add'>
           <span>Cadastrar Aluno</span>
