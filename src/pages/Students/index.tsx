@@ -10,6 +10,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import GroupsIcon from '@mui/icons-material/Groups';
 import NoPicture from '../../assets/no-picture.png'
 import { InputFilter } from '../../components/InputFilter'
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 export const Students = () => {
   const [students, setStudents] = useState<IStudent[] | undefined>()
@@ -68,7 +69,7 @@ export const Students = () => {
       <S.ListHeader>
         <S.ListHeaderTitle>
           Alunos&nbsp;({students?.length})&nbsp;
-          <GroupsIcon/>
+          <GroupsIcon fontSize='small'/>
         </S.ListHeaderTitle>
 
         <InputFilter
@@ -79,7 +80,7 @@ export const Students = () => {
 
         <S.ListHeaderLink to='/student/add'>
           <span>Cadastrar Aluno</span>
-          <AddIcon/>
+          <AddIcon fontSize='small'/>
         </S.ListHeaderLink>
       </S.ListHeader>
 
@@ -105,6 +106,10 @@ export const Students = () => {
                 <span>Excluir</span>
                 <DeleteIcon fontSize={'small'}/>
               </S.ActionsButton>
+              <S.ActionsLink to={`/payment/${student._id}`} color={"green"}>
+                <span>Pagamento</span>
+                <AttachMoneyIcon fontSize={'small'}/>
+              </S.ActionsLink>
             </S.Actions>
           </S.ListRow>
         ))}

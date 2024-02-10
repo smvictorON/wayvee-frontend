@@ -11,17 +11,17 @@ import api from '../../utils/api'
 import ITeacher from '../../interfaces/ITeacher'
 import IStudent from '../../interfaces/IStudent'
 
-interface LessonFormProps {
+interface FormLessonProps {
   handleSubmit: (event: any) => void;
   lessonData: ILesson;
   btnText: string
 }
 
-export const LessonForm = ({
+export const FormLesson = ({
   handleSubmit,
   lessonData,
   btnText
-}: LessonFormProps) => {
+}: FormLessonProps) => {
   const [lesson, setLesson] = useState(lessonData || {})
   const [teachers, setTeachers] = useState<ITeacher[]>([])
   const [students, setStudents] = useState<IStudent[]>([])

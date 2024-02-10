@@ -3,7 +3,7 @@ import * as S from "./styles"
 import api from "../../utils/api"
 import { useNavigate } from "react-router-dom"
 import useFlashMessage from "../../hooks/useFlashMessage"
-import { LessonForm } from "../../components/FormLesson"
+import { FormLesson } from "../../components/FormLesson"
 import ILesson from "../../interfaces/ILesson"
 import ITeacher from "../../interfaces/ITeacher"
 
@@ -71,7 +71,7 @@ export const AddLesson = () => {
         <S.Header>Agende uma Aula</S.Header>
         <p>Depois ela ficará disponível para edição!</p>
       </div>
-      <LessonForm btnText="Agendar" handleSubmit={registerLesson} lessonData={voidLesson}/>
+      <FormLesson btnText="Agendar" handleSubmit={registerLesson} lessonData={voidLesson}/>
     </S.Section>
   )
 }

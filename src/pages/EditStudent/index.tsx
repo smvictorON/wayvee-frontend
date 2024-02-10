@@ -3,7 +3,7 @@ import * as S from './styles'
 import api from '../../utils/api'
 import { useParams } from 'react-router-dom'
 import useFlashMessage from '../../hooks/useFlashMessage'
-import { StudentForm } from '../../components/FormStudent'
+import { FormStudent } from '../../components/FormStudent'
 import IStudent from '../../interfaces/IStudent'
 
 export const EditStudent = () => {
@@ -63,7 +63,7 @@ export const EditStudent = () => {
         <S.Header>Editando o Aluno: {student?.name}</S.Header>
         <p>Depois da edição os dados ficarão atualizados no sistema.</p>
       </div>
-      {student?.name && <StudentForm btnText="Atualizar" handleSubmit={updateStudent} studentData={student} />}
+      {student?.name && <FormStudent btnText="Atualizar" handleSubmit={updateStudent} studentData={student} />}
     </S.Section>
   )
 }

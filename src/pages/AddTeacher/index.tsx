@@ -3,7 +3,7 @@ import * as S from "./styles"
 import api from "../../utils/api"
 import { useNavigate } from "react-router-dom"
 import useFlashMessage from "../../hooks/useFlashMessage"
-import { TeacherForm } from "../../components/FormTeacher"
+import { FormTeacher } from "../../components/FormTeacher"
 import ITeacher from "../../interfaces/ITeacher"
 
 export const AddTeacher = () => {
@@ -62,7 +62,7 @@ export const AddTeacher = () => {
         <S.Header>Cadastre um Professor</S.Header>
         <p>Depois ele ficará disponível para edição!</p>
       </div>
-      <TeacherForm btnText="Cadastrar" handleSubmit={registerTeacher} teacherData={voidTeacher}/>
+      <FormTeacher btnText="Cadastrar" handleSubmit={registerTeacher} teacherData={voidTeacher}/>
     </S.Section>
   )
 }

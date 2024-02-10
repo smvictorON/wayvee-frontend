@@ -19,8 +19,13 @@ import { Lessons } from './pages/Lessons';
 import { AddLesson } from './pages/AddLesson';
 import { EditLesson } from './pages/EditLesson';
 
+//login
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
+
+//payment
+import { AddPayment } from './pages/AddPayment';
+import { Payments } from './pages/Payments';
 
 import { Message } from './components/Message';
 import { Header } from './components/Header';
@@ -49,6 +54,8 @@ export default function App() {
             <Route path="/lessons" element={<Lessons />} />
             <Route path="/lesson/add" element={<AddLesson />} />
             <Route path="/lesson/edit/:id" element={<EditLesson />} />
+            <Route path="/payment/:id" element={<AddPayment />} />
+            <Route path="/payments" element={<Payments />} />
             <Route path="/" element={<Home />} />
           </Routes>
         </Container>

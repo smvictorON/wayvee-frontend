@@ -25,7 +25,7 @@ export const InputFilter = ({
         onChange={handleOnChange}
         value={value}>
       </S.Input>
-      <SearchIcon/>
+      <SearchIcon fontSize='small'/>
     </S.FormControl>
   )
 }

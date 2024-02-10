@@ -32,7 +32,7 @@ export const ListHeader = styled.div`
   margin-bottom: 2rem;
 `
 
-export const ListHeaderTitle = styled.h1`
+export const ListHeaderTitle = styled.h3`
   margin: 0;
   color: var(--blue);
   display: flex;
@@ -53,6 +53,7 @@ export const ListHeaderLink = styled(Link)`
   flow-direction: row;
   align-items: center;
   justify-content: center;
+  font-size: 14px;
 
   &:hover{
     background-color: transparent;
@@ -73,8 +74,8 @@ export const ListContainer = styled.div`
 
 export const ListRow = styled.div`
   border-bottom: 1px solid var(--blue);
-  padding: 0.5rem;
-  margin: 0.5rem;
+  padding: 0.2rem;
+  margin: 0.3rem;
   display: flex;
   align-items: center;
 `
@@ -118,8 +119,8 @@ export const Actions = styled.div`
   flex-direction: column;
   align-items: flex-end;
   justify-content: flex-end;
-  width: -webkit-fill-available;
-  flex: 2;
+  flex-wrap: wrap-reverse;
+  max-height: 100px;
 `
 
 export const ActionsButton = styled.button`
@@ -156,15 +157,15 @@ export const ActionsButton = styled.button`
   })}
 `
 
-export const ActionsLink = styled(Link)`
+export const ActionsLink = styled(Link)<{ color?: string }>`
   text-decoration: none;
   background-color: transparent;
-  color: var(--blue);
+  color: ${({ color }) => color ? `var(--${color})` : 'var(--blue)'};
   font-weight: bold;
   cursor: pointer;
   transition: 0.2s;
   padding: 7px 12px;
-  border: 1px solid var(--blue);
+  border: 1px solid ${({ color }) => color ? `var(--${color})` : 'var(--blue)'};
   border-radius: 5px;
   font-size: 12px;
   margin-left: 1rem;
@@ -175,7 +176,7 @@ export const ActionsLink = styled(Link)`
   margin: 0.1rem;
 
   &:hover{
-    background-color: var(--blue);
+    background-color: ${({ color }) => color ? `var(--${color})` : 'var(--blue)'};
     color: white;
   }
 

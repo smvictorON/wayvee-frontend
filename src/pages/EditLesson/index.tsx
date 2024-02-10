@@ -3,7 +3,7 @@ import * as S from './styles'
 import api from '../../utils/api'
 import { useParams } from 'react-router-dom'
 import useFlashMessage from '../../hooks/useFlashMessage'
-import { LessonForm } from '../../components/FormLesson'
+import { FormLesson } from '../../components/FormLesson'
 import ILesson from '../../interfaces/ILesson'
 
 export const EditLesson = () => {
@@ -63,7 +63,7 @@ export const EditLesson = () => {
         <S.Header>Editando a Aula</S.Header>
         <p>Depois da edição os dados ficarão atualizados no sistema.</p>
       </div>
-      {lesson?._id && <LessonForm btnText="Atualizar" handleSubmit={updateLesson} lessonData={lesson} />}
+      {lesson?._id && <FormLesson btnText="Atualizar" handleSubmit={updateLesson} lessonData={lesson} />}
     </S.Section>
   )
 }

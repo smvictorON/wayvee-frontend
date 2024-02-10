@@ -12,6 +12,7 @@ import CastForEducationIcon from '@mui/icons-material/CastForEducation';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import AlarmIcon from '@mui/icons-material/Alarm';
 import { InputFilter } from '../../components/InputFilter'
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 export const Lessons = () => {
   const [lessons, setLessons] = useState<ILesson[] | undefined>()
@@ -75,7 +76,7 @@ export const Lessons = () => {
       <S.ListHeader>
         <S.ListHeaderTitle>
           Aulas&nbsp;({lessons?.length})&nbsp;
-          <CastForEducationIcon/>
+          <CastForEducationIcon fontSize='small'/>
         </S.ListHeaderTitle>
 
         <InputFilter
@@ -86,7 +87,7 @@ export const Lessons = () => {
 
         <S.ListHeaderLink to='/lesson/add'>
           <span>Cadastrar Aula</span>
-          <AddIcon/>
+          <AddIcon fontSize='small'/>
         </S.ListHeaderLink>
       </S.ListHeader>
 

@@ -9,17 +9,17 @@ import IStudent from '../../interfaces/IStudent'
 import SaveIcon from '@mui/icons-material/Save';
 import { States, Cities } from '../../interfaces/IAddress'
 
-interface StudentFormProps {
+interface FormStudentProps {
   handleSubmit: (event: any) => void;
   studentData: IStudent;
   btnText: string
 }
 
-export const StudentForm = ({
+export const FormStudent = ({
   handleSubmit,
   studentData,
   btnText
-}: StudentFormProps) => {
+}: FormStudentProps) => {
   const [student, setStudent] = useState(studentData || {})
   const [preview, setPreview] = useState<File[]>([])
   const states: string[] = Object.values(States);
