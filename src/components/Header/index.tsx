@@ -10,6 +10,8 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import SchoolIcon from '@mui/icons-material/School';
 import CastForEducationIcon from '@mui/icons-material/CastForEducation';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import PersonIcon from '@mui/icons-material/Person';
+import BusinessIcon from '@mui/icons-material/Business';
 
 export const Header = () => {
   const { authenticated, logout }: { authenticated: boolean; logout: () => void } = useContext(Context)
@@ -24,6 +26,18 @@ export const Header = () => {
       <S.List>
         {authenticated ?
           <>
+            <S.ListItem>
+              <Link to="/companies">
+                <span>Empresas</span>
+                <BusinessIcon fontSize='small'/>
+              </Link>
+            </S.ListItem>
+            <S.ListItem>
+              <Link to="/users">
+                <span>Usuários</span>
+                <PersonIcon fontSize='small'/>
+              </Link>
+            </S.ListItem>
             <S.ListItem>
               <Link to="/payments">
                 <span>Contas</span>

@@ -19,6 +19,16 @@ import { Lessons } from './pages/Lessons';
 import { AddLesson } from './pages/AddLesson';
 import { EditLesson } from './pages/EditLesson';
 
+//users
+import { Users } from './pages/Users';
+import { AddUser } from './pages/AddUser';
+import { EditUser } from './pages/EditUser';
+
+//companies
+import { Companies } from './pages/Companies';
+import { AddCompany } from './pages/AddCompany';
+import { EditCompany } from './pages/EditCompany';
+
 //login
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
@@ -48,6 +58,12 @@ export default function App() {
             <Route path="/students" element={<Students />} />
             <Route path="/student/add" element={<AddStudent />} />
             <Route path="/student/edit/:id" element={<EditStudent />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/user/add" element={<AddUser />} />
+            <Route path="/user/edit/:id" element={<EditUser />} />
+            <Route path="/companies" element={<Companies />} />
+            <Route path="/company/add" element={<AddCompany />} />
+            <Route path="/company/edit/:id" element={<EditCompany />} />
             <Route path="/teachers" element={<Teachers />} />
             <Route path="/teacher/add" element={<AddTeacher />} />
             <Route path="/teacher/edit/:id" element={<EditTeacher />} />

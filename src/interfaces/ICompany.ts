@@ -1,8 +1,8 @@
-export default interface IUser {
+export default interface ICompany {
   _id: string
   name: string
   email: string,
   phone: string,
-  password: string
+  cnpj: string
   image?: File[]
 }
