@@ -24,27 +24,15 @@ export const AddLesson = () => {
     hour_end: '',
     teacher: voidTeacher,
     students: [''],
-    status: 'Active'
   }
 
   const registerLesson = async (lesson: any) => {
     let msgType = "success"
 
-    if(!lesson.address)
-      lesson.address = {}
-
     const formData = new FormData()
 
     await Object.keys(lesson).forEach((key) => {
-      if (key === 'images') {
-        for (let i = 0; i < lesson[key].length; i++) {
-          formData.append('images', lesson[key][i])
-        }
-      } else if (key === 'address') {
-        formData.append('address', JSON.stringify(lesson[key]));
-      } else {
-        formData.append(key, lesson[key])
-      }
+      formData.append(key, lesson[key])
     })
 
     const data = await api.post('/lessons/create', formData, {

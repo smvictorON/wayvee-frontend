@@ -2,7 +2,7 @@ import api from '../utils/api'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useFlashMessage from './useFlashMessage'
-import { IUser } from '../interfaces/IUser'
+import IUser from '../interfaces/IUser'
 
 export default function useAuth() {
   const [authenticated, setAuthenticated] = useState(false)

@@ -11,7 +11,6 @@ export default interface ILesson {
   classroom?: string;
   subject?: string;
   observation?: string;
-  status: 'Active' | 'Cancelled' | 'Done';
   createdAt?: Date;
   updatedAt?: Date;
 }

@@ -2,7 +2,7 @@ import React, { useState, useContext, ChangeEvent } from "react"
 import * as S from "./styles"
 import { Input } from "../../components/Input"
 import { Context } from "../../context/UserContext"
-import { IUser } from "../../interfaces/IUser"
+import IUser from "../../interfaces/IUser"
 import LoginIcon from '@mui/icons-material/Login';
 import PublicIcon from '@mui/icons-material/Public';
 

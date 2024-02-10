@@ -5,7 +5,6 @@ import * as S from './styles'
 import { Context } from '../../context/UserContext'
 import { useContext } from 'react'
 import LogoutIcon from '@mui/icons-material/Logout';
-import LoginIcon from '@mui/icons-material/Login';
 import PortraitIcon from '@mui/icons-material/Portrait';
 import GroupsIcon from '@mui/icons-material/Groups';
 import SchoolIcon from '@mui/icons-material/School';

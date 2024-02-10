@@ -1,14 +1,20 @@
 import styled from "styled-components";
 import "../../styles/variables.css"
 
-export const ProfileHeader = styled.div`
+export const Section = styled.section`
+  text-align: center;
+  margin-bottom: 1.2rem;
+`
+
+export const Header = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 2rem;
+  flex-direction: column;
 `
 
-export const ProfileHeaderTitle = styled.h1`
+export const HeaderTitle = styled.h1`
   margin: 0;
   color: var(--blue);
   display: flex;

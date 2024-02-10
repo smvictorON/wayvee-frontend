@@ -2,9 +2,10 @@ import React, { useState, useEffect, ChangeEvent } from 'react'
 import * as S from './styles'
 import api from '../../utils/api'
 import { Input } from '../../components/Input'
+import { InputFile } from '../../components/InputFile'
 import useFlashMessage from '../../hooks/useFlashMessage'
 import { SquareImage } from '../../components/SquareImage'
-import { IUser } from '../../interfaces/IUser'
+import IUser from '../../interfaces/IUser'
 import SaveIcon from '@mui/icons-material/Save';
 import PortraitIcon from '@mui/icons-material/Portrait';
 
@@ -77,12 +78,17 @@ export const Profile = () => {
   }
 
   return (
-    <section>
-      <S.ProfileHeader>
-        <S.ProfileHeaderTitle>
+    <S.Section>
+      <S.Header>
+        <S.HeaderTitle>
           Perfil&nbsp;&nbsp;
           <PortraitIcon/>
-        </S.ProfileHeaderTitle>
+        </S.HeaderTitle>
+        <p>As mudanças ficarão disponíveis logo após a edição!</p>
+      </S.Header>
+
+      <S.FormContainer>
+        <S.PreviewContainer>
         {(user?.image || preview) && (
           <SquareImage
             src={preview
@@ -90,14 +96,12 @@ export const Profile = () => {
               : `${process.env.REACT_APP_API}/images/users/${user?.image}`}
             alt={user?.name} />
         )}
-      </S.ProfileHeader>
-
-      <S.FormContainer>
-        <Input
+        </S.PreviewContainer>
+        <InputFile
           text="Imagem"
-          type="file"
           name="image"
           handleOnChange={onFileChange}
+          multiple={false}
         />
         <Input
           text="Email"
@@ -143,6 +147,6 @@ export const Profile = () => {
           <SaveIcon/>
         </S.SubmitButton>
       </S.FormContainer>
-    </section>
+    </S.Section>
   )
 }

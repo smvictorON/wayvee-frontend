@@ -4,11 +4,20 @@ export default interface IPayment {
   payer: string;
   receiver: string;
   value: number;
-  type: 'Receipt' | 'Payment';
-  method: 'Cash' | 'Card' | 'Pix';
-  status: 'Pendent' | 'Cancelled' | 'Done';
+  type: string;
+  method: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
 
+export const PaymentTypes: string[] = [
+  "Receipt",
+  "Payment",
+]
 
+export const PaymentMethods: string[] = [
+  "Cash",
+  "Card",
+  "Pix",
+  "Check",
+]
