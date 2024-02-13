@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useState, useEffect } from 'react'
 import * as S from './styles'
 import { Input } from '../Input'
 import { InputFile } from '../InputFile'
@@ -6,6 +6,8 @@ import { InputMask } from '../InputMask'
 import { Select } from '../Select'
 import IUser from '../../interfaces/IUser'
 import SaveIcon from '@mui/icons-material/Save';
+import api from '../../utils/api'
+import ICompany from '../../interfaces/ICompany'
 
 interface FormUserProps {
   handleSubmit: (event: any) => void;
@@ -19,16 +21,19 @@ export const FormUser = ({
   btnText
 }: FormUserProps) => {
   const [user, setUser] = useState(userData || {})
-  const [preview, setPreview] = useState<File[]>([])
+  const [companies, setCompanies] = useState<ICompany[]>([])
+  const [token] = useState(localStorage.getItem('token') || '')
 
-  const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files
+  useEffect(() => {
+    api.get(`/companies`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(token)}`
+      }
+    }).then((res) => {
+      setCompanies(res.data.companies)
+    })
+  }, [token])
 
-    if(files && files.length){
-      setPreview(Array.from(files))
-      setUser({ ...user, image: [...Array.from(files)] })
-    }
-  }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -37,7 +42,8 @@ export const FormUser = ({
 
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const name = e.target.name;
-    setUser({ ...user, [name]: e.target.options[e.target.selectedIndex].text as string });
+    const value = e.target.options[e.target.selectedIndex].value as string;
+    setUser({ ...user, [name]: value });
   }
 
   const submit = (e: FormEvent<HTMLFormElement>) => {
@@ -47,24 +53,6 @@ export const FormUser = ({
 
   return (
     <S.FormContainer onSubmit={submit}>
-      <S.PreviewContainer>
-        {preview.length > 0 ?
-          preview.map((image, index) => (
-            <S.Image src={URL.createObjectURL(image)} alt={user.name} key={`${user.name}+${index}`} />
-          ))
-          :
-          user.image &&
-          user.image.map((image, index) => (
-            <S.Image src={`${process.env.REACT_APP_API}/images/users/${image}`} alt={user.name} key={`${user.name}+${index}`} />
-          ))
-        }
-      </S.PreviewContainer>
-      <InputFile
-        text="Imagens"
-        name="images"
-        handleOnChange={onFileChange}
-        multiple={false}
-      />
       <Input
         text="Nome"
         type="text"
@@ -91,6 +79,30 @@ export const FormUser = ({
         placeholder="Digite o email"
         handleOnChange={handleChange}
         value={user.email || ""}
+      />
+      <Select
+        text="Empresa"
+        name="company"
+        options={companies}
+        handleOnChange={handleSelect}
+        value={user.company}
+        required={true}
+      />
+      <Input
+        text="Senha"
+        type="password"
+        name="password"
+        placeholder="Digite a sua senha"
+        handleOnChange={handleChange}
+        required={true}
+      />
+      <Input
+        text="Confirmação de senha"
+        type="password"
+        name="confirmpassword"
+        placeholder="Confirme a sua senha"
+        handleOnChange={handleChange}
+        required={true}
       />
       <S.SubmitButton>
         {btnText}&nbsp;

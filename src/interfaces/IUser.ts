@@ -4,5 +4,6 @@ export default interface IUser {
   email: string,
   phone: string,
   password: string
+  company: string
   image?: File[]
 }

@@ -16,6 +16,7 @@ export const AddUser = () => {
     phone: '',
     email: '',
     password: '',
+    company: '',
     image: [],
   }
 
@@ -60,7 +61,7 @@ export const AddUser = () => {
   return (
     <S.Section>
       <div>
-        <S.Header>Cadastre um Aluno</S.Header>
+        <S.Header>Cadastre um Usuário</S.Header>
         <p>Depois ele ficará disponível para edição!</p>
       </div>
       <FormUser btnText="Cadastrar" handleSubmit={registerUser} userData={voidUser}/>

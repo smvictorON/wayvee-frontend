@@ -6,6 +6,7 @@ import { InputMask } from '../InputMask'
 import { Select } from '../Select'
 import ICompany from '../../interfaces/ICompany'
 import SaveIcon from '@mui/icons-material/Save';
+import { States, Cities } from '../../interfaces/IAddress'
 
 interface FormCompanyProps {
   handleSubmit: (event: any) => void;
@@ -20,24 +21,50 @@ export const FormCompany = ({
 }: FormCompanyProps) => {
   const [company, setCompany] = useState(companyData || {})
   const [preview, setPreview] = useState<File[]>([])
+  const states: string[] = Object.values(States);
+  const cities = Cities
 
   const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
 
     if(files && files.length){
       setPreview(Array.from(files))
-      setCompany({ ...company, image: [...Array.from(files)] })
+      setCompany({ ...company, images: [...Array.from(files)] })
     }
   }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setCompany({ ...company, [name]: value });
+
+    if (name.startsWith('address.')) {
+      const addressField = name.split('.')[1];
+      setCompany({
+        ...company,
+        address: {
+          ...company.address,
+          [addressField]: value,
+        },
+      });
+    } else {
+      setCompany({ ...company, [name]: value });
+    }
   }
 
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const name = e.target.name;
-    setCompany({ ...company, [name]: e.target.options[e.target.selectedIndex].text as string });
+
+    if (name.startsWith('address.')) {
+      const addressField = name.split('.')[1];
+      setCompany({
+        ...company,
+        address: {
+          ...company.address,
+          [addressField]: e.target.options[e.target.selectedIndex].text as string,
+        },
+      });
+    } else {
+      setCompany({ ...company, [name]: e.target.options[e.target.selectedIndex].text as string });
+    }
   }
 
   const submit = (e: FormEvent<HTMLFormElement>) => {
@@ -53,9 +80,9 @@ export const FormCompany = ({
             <S.Image src={URL.createObjectURL(image)} alt={company.name} key={`${company.name}+${index}`} />
           ))
           :
-          company.image &&
-          company.image.map((image, index) => (
-            <S.Image src={`${process.env.REACT_APP_API}/images/companys/${image}`} alt={company.name} key={`${company.name}+${index}`} />
+          company.images &&
+          company.images.map((image, index) => (
+            <S.Image src={`${process.env.REACT_APP_API}/images/companies/${image}`} alt={company.name} key={`${company.name}+${index}`} />
           ))
         }
       </S.PreviewContainer>
@@ -84,6 +111,16 @@ export const FormCompany = ({
         required={true}
         mask="(99)99999-9999"
       />
+      <InputMask
+        text="CNPJ"
+        type="text"
+        name="cnpj"
+        placeholder="Digite o cnpj"
+        handleOnChange={handleChange}
+        value={company.cnpj || ""}
+        required={true}
+        mask="99.999.999/9999-99"
+      />
       <Input
         text="Email"
         type="email"
@@ -91,6 +128,37 @@ export const FormCompany = ({
         placeholder="Digite o email"
         handleOnChange={handleChange}
         value={company.email || ""}
+      />
+      <Input
+        text="Rua"
+        type="text"
+        name="address.street"
+        placeholder="Nome da rua"
+        handleOnChange={handleChange}
+        value={company?.address?.street || ""}
+      />
+      <InputMask
+        text="CEP"
+        type="text"
+        name="address.zipCode"
+        placeholder="Digite o CEP"
+        handleOnChange={handleChange}
+        value={company?.address?.zipCode || ""}
+        mask="99999-999"
+      />
+      <Select
+        name="address.city"
+        text="Cidade"
+        options={cities}
+        handleOnChange={handleSelect}
+        value={company.address?.city || ""}
+      />
+      <Select
+        name="address.state"
+        text="Estado (UF)"
+        options={states}
+        handleOnChange={handleSelect}
+        value={company.address?.state || ""}
       />
       <S.SubmitButton>
         {btnText}&nbsp;

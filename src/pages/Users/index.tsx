@@ -10,7 +10,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import GroupsIcon from '@mui/icons-material/Groups';
 import NoPicture from '../../assets/no-picture.png'
 import { InputFilter } from '../../components/InputFilter'
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import PersonIcon from '@mui/icons-material/Person';
 
 export const Users = () => {
   const [users, setUsers] = useState<IUser[] | undefined>()
@@ -69,7 +69,7 @@ export const Users = () => {
       <S.ListHeader>
         <S.ListHeaderTitle>
           Usuarios&nbsp;({users?.length})&nbsp;
-          <GroupsIcon fontSize='small'/>
+          <PersonIcon fontSize='small'/>
         </S.ListHeaderTitle>
 
         <InputFilter
@@ -90,7 +90,7 @@ export const Users = () => {
             <SquareImage
               src={
                 user.image && user.image.length > 0
-                  ? `${process.env.REACT_APP_API}/images/users/${user.image[0]}`
+                  ? `${process.env.REACT_APP_API}/images/users/${user.image}`
                   : NoPicture
               }
               alt={user.name}

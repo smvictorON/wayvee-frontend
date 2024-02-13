@@ -15,7 +15,7 @@ export const Login = () => {
 
     setUser((prevUser) => {
       if (!prevUser) {
-        return { [name]: value, _id: "", name: "", email: "", phone: "", password: "", image: [] };
+        return { [name]: value, _id: "", name: "", email: "", phone: "", password: "", company: "", image: []};
       }
 
       return { ...prevUser, [name]: value };

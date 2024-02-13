@@ -7,9 +7,9 @@ import ICompany from '../../interfaces/ICompany'
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import GroupsIcon from '@mui/icons-material/Groups';
 import NoPicture from '../../assets/no-picture.png'
 import { InputFilter } from '../../components/InputFilter'
+import BusinessIcon from '@mui/icons-material/Business';
 
 export const Companies = () => {
   const [companies, setCompanies] = useState<ICompany[] | undefined>()
@@ -34,8 +34,8 @@ export const Companies = () => {
         Authorization: `Bearer ${JSON.parse(token)}`
       }
     }).then((res) => {
-      const updatedCompanys = companies?.filter((company: ICompany) => company._id !== id)
-      setCompanies(updatedCompanys)
+      const updatedCompanies = companies?.filter((company: ICompany) => company._id !== id)
+      setCompanies(updatedCompanies)
 
       return res.data
     }).catch((err) => {
@@ -57,8 +57,8 @@ export const Companies = () => {
       if (value.trim() === '') {
         setCompanies(res.data.companies)
       } else {
-        const filteredCompanys = res.data.companies?.filter((company: ICompany) => company.name.toLowerCase().includes(value.toLowerCase()));
-        setCompanies(filteredCompanys);
+        const filteredCompanies = res.data.companies?.filter((company: ICompany) => company.name.toLowerCase().includes(value.toLowerCase()));
+        setCompanies(filteredCompanies);
       }
     })
   }
@@ -67,8 +67,8 @@ export const Companies = () => {
     <section>
       <S.ListHeader>
         <S.ListHeaderTitle>
-          Usuarios&nbsp;({companies?.length})&nbsp;
-          <GroupsIcon fontSize='small'/>
+          Empresas&nbsp;({companies?.length})&nbsp;
+          <BusinessIcon fontSize='small'/>
         </S.ListHeaderTitle>
 
         <InputFilter
@@ -78,7 +78,7 @@ export const Companies = () => {
         />
 
         <S.ListHeaderLink to='/company/add'>
-          <span>Cadastrar Usuário</span>
+          <span>Cadastrar Empresa</span>
           <AddIcon fontSize='small'/>
         </S.ListHeaderLink>
       </S.ListHeader>
@@ -88,8 +88,8 @@ export const Companies = () => {
           <S.ListRow key={company._id}>
             <SquareImage
               src={
-                company.image && company.image.length > 0
-                  ? `${process.env.REACT_APP_API}/images/companies/${company.image[0]}`
+                company.images && company.images.length > 0
+                  ? `${process.env.REACT_APP_API}/images/companies/${company.images[0]}`
                   : NoPicture
               }
               alt={company.name}
@@ -108,7 +108,7 @@ export const Companies = () => {
             </S.Actions>
           </S.ListRow>
         ))}
-        {companies?.length === 0 && (<p>Não há usuarios cadastrados!</p>)}
+        {companies?.length === 0 && (<p>Não há empresas cadastradas!</p>)}
       </S.ListContainer>
     </section>
   )

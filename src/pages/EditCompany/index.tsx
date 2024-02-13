@@ -13,7 +13,7 @@ export const EditCompany = () => {
   const { setFlashMessage } = useFlashMessage()
 
   useEffect(() => {
-    api.get(`/companys/${id}`, {
+    api.get(`/companies/${id}`, {
       headers: {
         Authorization: `Bearer ${JSON.parse(token)}`
       }
@@ -30,17 +30,19 @@ export const EditCompany = () => {
 
     const formData = new FormData()
 
-    await Object.keys(company).forEach((key) => {
-      if (key === 'image') {
+    Object.keys(company).forEach((key) => {
+      if (key === 'images') {
         for (let i = 0; i < company[key].length; i++) {
           formData.append('images', company[key][i])
         }
+      } else if (key === 'address') {
+        formData.append('address', JSON.stringify(company[key]));
       } else {
         formData.append(key, company[key])
       }
     })
 
-    const data = await api.patch(`/companys/${company._id}`, formData, {
+    const data = await api.patch(`/companies/${company._id}`, formData, {
       headers: {
         Authorization: `Bearer ${JSON.parse(token)}`,
         'Content-Type': 'multipart/form-data'

@@ -1,25 +1,16 @@
 import React, { ChangeEvent, useContext, useState } from "react"
 import * as S from './styles'
 import { Context } from '../../context/UserContext'
-import IUser from "../../interfaces/IUser"
 import SaveIcon from '@mui/icons-material/Save';
 import { Input } from '../../components/Input'
 
 export const Register = () => {
   const [user, setUser] = useState({})
   const { register } = useContext(Context)
-  const voidUser: IUser = {
-    _id: '',
-    name: '',
-    phone: '',
-    email: '',
-    password: '',
-    image: [],
-  }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if(user)
-    setUser({ ...user, [e.target.name]: e.target.value })
+      setUser({ ...user, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {

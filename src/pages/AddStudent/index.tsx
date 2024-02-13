@@ -26,7 +26,7 @@ export const AddStudent = () => {
 
     const formData = new FormData()
 
-    await Object.keys(student).forEach((key) => {
+    Object.keys(student).forEach((key) => {
       if (key === 'images') {
         for (let i = 0; i < student[key].length; i++) {
           formData.append('images', student[key][i])

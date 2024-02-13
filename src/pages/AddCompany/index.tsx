@@ -16,7 +16,7 @@ export const AddCompany = () => {
     phone: '',
     email: '',
     cnpj: '',
-    image: [],
+    images: [],
   }
 
   const registerCompany = async (company: any) => {
@@ -27,7 +27,7 @@ export const AddCompany = () => {
 
     const formData = new FormData()
 
-    await Object.keys(company).forEach((key) => {
+    Object.keys(company).forEach((key) => {
       if (key === 'images') {
         for (let i = 0; i < company[key].length; i++) {
           formData.append('images', company[key][i])

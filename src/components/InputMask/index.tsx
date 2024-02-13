@@ -8,7 +8,6 @@ interface InputMaskProps {
   placeholder?: string;
   handleOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string | undefined;
-  multiple?: boolean
   required?: boolean
   mask: string
 }
@@ -20,7 +19,6 @@ export const InputMask = ({
   placeholder,
   handleOnChange,
   value,
-  multiple,
   required,
   mask
 }: InputMaskProps) => {
@@ -39,6 +37,7 @@ export const InputMask = ({
           placeholder={placeholder}
           onChange={handleOnChange}
           value={value}
+          required={required}
           >
         </S.MaskInput>
     </S.FormControl>
