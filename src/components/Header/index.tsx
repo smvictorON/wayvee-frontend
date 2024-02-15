@@ -14,7 +14,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import BusinessIcon from '@mui/icons-material/Business';
 
 export const Header = () => {
-  const { authenticated, logout }: { authenticated: boolean; logout: () => void } = useContext(Context)
+  const { authenticated, logout, isSuper }: { authenticated: boolean; logout: () => void, isSuper: boolean } = useContext(Context)
 
   return (
     <S.Navbar>
@@ -24,20 +24,22 @@ export const Header = () => {
         </Link>
       </S.NavbarLogo>
       <S.List>
+        {isSuper && <>
+          <S.ListItem>
+            <Link to="/companies">
+              <span>Empresas</span>
+              <BusinessIcon fontSize='small'/>
+            </Link>
+          </S.ListItem>
+          <S.ListItem>
+            <Link to="/users">
+              <span>Usuários</span>
+              <PersonIcon fontSize='small'/>
+            </Link>
+          </S.ListItem>
+        </>}
         {authenticated ?
           <>
-            <S.ListItem>
-              <Link to="/companies">
-                <span>Empresas</span>
-                <BusinessIcon fontSize='small'/>
-              </Link>
-            </S.ListItem>
-            <S.ListItem>
-              <Link to="/users">
-                <span>Usuários</span>
-                <PersonIcon fontSize='small'/>
-              </Link>
-            </S.ListItem>
             <S.ListItem>
               <Link to="/payments">
                 <span>Contas</span>

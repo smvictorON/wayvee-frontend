@@ -8,6 +8,7 @@ interface UserContextProps {
   login: (user: any) => Promise<void>;
   loading: boolean;
   setLoading: (loading: boolean) => void;
+  isSuper: boolean;
 
 }
 
@@ -18,6 +19,7 @@ const Context = createContext<UserContextProps>({
   login: async () => {},
   loading: false,
   setLoading: () => {},
+  isSuper: false,
 });
 
 interface UserProviderProps {
@@ -25,11 +27,11 @@ interface UserProviderProps {
 }
 
 const UserProvider = ({ children }: UserProviderProps) => {
-  const { authenticated, register, logout, login } = useAuth();
+  const { authenticated, register, logout, login, isSuper } = useAuth();
   const [loading, setLoading] = useState(false);
 
   return (
-    <Context.Provider value={{ authenticated, register, logout, login, loading, setLoading }}>
+    <Context.Provider value={{ authenticated, register, logout, login, loading, setLoading, isSuper }}>
       {children}
     </Context.Provider>
   );

@@ -6,6 +6,7 @@ import IUser from '../interfaces/IUser'
 
 export default function useAuth() {
   const [authenticated, setAuthenticated] = useState(false)
+  const [isSuper, setIsSuper] = useState(false)
   const { setFlashMessage } = useFlashMessage()
   const navigate = useNavigate()
 
@@ -38,6 +39,7 @@ export default function useAuth() {
 
   const authUser = async (data: any) => {
     setAuthenticated(true)
+    setIsSuper(data.isSuper)
     localStorage.setItem('token', JSON.stringify(data.token))
     navigate('/')
   }
@@ -70,5 +72,5 @@ export default function useAuth() {
     setFlashMessage(msgText, msgType)
   }
 
-  return { authenticated, register, logout, login }
+  return { authenticated, register, logout, login, isSuper }
 }
