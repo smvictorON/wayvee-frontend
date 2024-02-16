@@ -8,6 +8,7 @@ interface SelectProps {
   handleOnChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   value: any;
   required?: boolean;
+	disabled?: boolean
 }
 
 export const Select = ({
@@ -16,7 +17,8 @@ export const Select = ({
 	options,
 	handleOnChange,
 	value,
-  required
+  required,
+	disabled
 }:SelectProps) => {
 	return (
 		<S.FormControl>
@@ -30,7 +32,8 @@ export const Select = ({
 				value={value || ''}
 				onChange={handleOnChange}
 				id={name}
-				required={true}
+				required={required}
+				disabled={disabled}
 			>
 				<option>Selecione uma opção</option>
 				{options.map((opt) => (

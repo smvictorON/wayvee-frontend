@@ -1,12 +1,13 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useState, useCallback } from 'react'
 import * as S from './styles'
 import { Input } from '../Input'
 import { InputFile } from '../InputFile'
 import { InputMask } from '../InputMask'
-import { Select } from '../Select'
 import ICompany from '../../interfaces/ICompany'
 import SaveIcon from '@mui/icons-material/Save';
-import { States, Cities } from '../../interfaces/IAddress'
+import { CitiesObj } from '../../interfaces/IAddress'
+import { AddressFragment } from '../../components/AddressFragment'
+import { PreviewFragment } from '../../components/PreviewFragment'
 
 interface FormCompanyProps {
   handleSubmit: (event: any) => void;
@@ -21,71 +22,65 @@ export const FormCompany = ({
 }: FormCompanyProps) => {
   const [company, setCompany] = useState(companyData || {})
   const [preview, setPreview] = useState<File[]>([])
-  const states: string[] = Object.values(States);
-  const cities = Cities
+  const [telMask, setTelMask] = useState("(99)9999-9999")
 
-  const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onFileChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
 
-    if(files && files.length){
+    if (files && files.length) {
       setPreview(Array.from(files))
-      setCompany({ ...company, images: [...Array.from(files)] })
+      setCompany(prevCompany => ({ ...prevCompany, images: [...Array.from(files)] }))
     }
-  }
+  }, [])
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
+    setTelMask(name === 'phone' && value.substring(4, 5) === "9" ? "(99)99999-9999" : "(99)9999-9999")
+
     if (name.startsWith('address.')) {
       const addressField = name.split('.')[1];
-      setCompany({
-        ...company,
+      setCompany(prevCompany => ({
+        ...prevCompany,
         address: {
-          ...company.address,
+          ...prevCompany.address,
           [addressField]: value,
         },
-      });
+      }));
     } else {
-      setCompany({ ...company, [name]: value });
+      setCompany(prevCompany => ({ ...prevCompany, [name]: value }));
     }
-  }
+  }, [])
 
-  const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+  const handleSelect = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
     const name = e.target.name;
+    const value = e.target.options[e.target.selectedIndex].text;
 
     if (name.startsWith('address.')) {
       const addressField = name.split('.')[1];
-      setCompany({
-        ...company,
+      setCompany(prevCompany => ({
+        ...prevCompany,
         address: {
-          ...company.address,
-          [addressField]: e.target.options[e.target.selectedIndex].text as string,
+          ...prevCompany.address,
+          [addressField]: value,
+          state: addressField === "city"
+            ? CitiesObj.find(item => item.city === value)?.state
+            : prevCompany?.address?.state
         },
-      });
+      }));
     } else {
-      setCompany({ ...company, [name]: e.target.options[e.target.selectedIndex].text as string });
+      setCompany(prevCompany => ({ ...prevCompany, [name]: value }));
     }
-  }
+  }, [])
 
-  const submit = (e: FormEvent<HTMLFormElement>) => {
+  const submit = useCallback((e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     handleSubmit(company)
-  }
+  }, [handleSubmit, company])
 
   return (
     <S.FormContainer onSubmit={submit}>
-      <S.PreviewContainer>
-        {preview.length > 0 ?
-          preview.map((image, index) => (
-            <S.Image src={URL.createObjectURL(image)} alt={company.name} key={`${company.name}+${index}`} />
-          ))
-          :
-          company.images &&
-          company.images.map((image, index) => (
-            <S.Image src={`${process.env.REACT_APP_API}/images/companies/${image}`} alt={company.name} key={`${company.name}+${index}`} />
-          ))
-        }
-      </S.PreviewContainer>
+      <PreviewFragment preview={preview} data={company} />
       <InputFile
         text="Imagens"
         name="images"
@@ -102,14 +97,14 @@ export const FormCompany = ({
         required={true}
       />
       <InputMask
-        text="Telefone"
+        text="Telefone ou Celular"
         type="text"
         name="phone"
-        placeholder="Digite o telefone"
+        placeholder="Digite o telefone ou celular"
         handleOnChange={handleChange}
         value={company.phone || ""}
         required={true}
-        mask="(99)99999-9999"
+        mask={telMask}
       />
       <InputMask
         text="CNPJ"
@@ -129,40 +124,14 @@ export const FormCompany = ({
         handleOnChange={handleChange}
         value={company.email || ""}
       />
-      <Input
-        text="Rua"
-        type="text"
-        name="address.street"
-        placeholder="Nome da rua"
-        handleOnChange={handleChange}
-        value={company?.address?.street || ""}
-      />
-      <InputMask
-        text="CEP"
-        type="text"
-        name="address.zipCode"
-        placeholder="Digite o CEP"
-        handleOnChange={handleChange}
-        value={company?.address?.zipCode || ""}
-        mask="99999-999"
-      />
-      <Select
-        name="address.city"
-        text="Cidade"
-        options={cities}
-        handleOnChange={handleSelect}
-        value={company.address?.city || ""}
-      />
-      <Select
-        name="address.state"
-        text="Estado (UF)"
-        options={states}
-        handleOnChange={handleSelect}
-        value={company.address?.state || ""}
+      <AddressFragment
+        handleChange={handleChange}
+        handleSelect={handleSelect}
+        address={company?.address || {}}
       />
       <S.SubmitButton>
         {btnText}&nbsp;
-        <SaveIcon/>
+        <SaveIcon />
       </S.SubmitButton>
     </S.FormContainer>
   )

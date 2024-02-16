@@ -2,7 +2,7 @@ import styled from "styled-components";
 import "../../styles/variables.css"
 
 export const FormContainer = styled.form`
-  max-width: 500px;
+  max-width: 600px;
   margin: 2rem auto;
   background-color: var(--light-gray);
   border-radius: 5px;
@@ -48,7 +48,6 @@ export const PreviewContainer = styled.div`
   margin: 1rem;
 `
 export const Image = styled.img`
-  // width: 100px;
   height: 200px;
   margin-left: 1rem;
   border-radius: 5px;

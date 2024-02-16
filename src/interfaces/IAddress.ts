@@ -1,9 +1,26 @@
 export default interface Address {
   street?: string;
+  number?: number
   city?: string;
   state?: string;
   zipCode?: string;
 }
+
+export const CitiesObj: any[] = [
+  { city: "Arco-íris", state: "SP" },
+  { city: "Bastos", state: "SP" },
+  { city: "Herculândia", state: "SP" },
+  { city: "Iacri", state: "SP" },
+  { city: "Osvaldo Cruz", state: "SP" },
+  { city: "Pompéia", state: "SP" },
+  { city: "Parapuã", state: "SP" },
+  { city: "Quatá", state: "SP" },
+  { city: "Queiroz", state: "SP" },
+  { city: "Quintana", state: "SP" },
+  { city: "Rinópolis", state: "SP" },
+  { city: "Tupã", state: "SP" },
+  { city: "Universo", state: "SP" },
+]
 
 export const Cities: string[] = [
   "Arco-íris",
@@ -21,32 +38,32 @@ export const Cities: string[] = [
   "Universo",
 ]
 
-export enum States {
-  AC = 'AC',
-  AL = 'AL',
-  AP = 'AP',
-  AM = 'AM',
-  BA = 'BA',
-  CE = 'CE',
-  DF = 'DF',
-  ES = 'ES',
-  GO = 'GO',
-  MA = 'MA',
-  MT = 'MT',
-  MS = 'MS',
-  MG = 'MG',
-  PA = 'PA',
-  PB = 'PB',
-  PR = 'PR',
-  PE = 'PE',
-  PI = 'PI',
-  RJ = 'RJ',
-  RN = 'RN',
-  RS = 'RS',
-  RO = 'RO',
-  RR = 'RR',
-  SC = 'SC',
-  SP = 'SP',
-  SE = 'SE',
-  TO = 'TO',
-}
+export const States: string[] = [
+  'AC',
+  'AL',
+  'AP',
+  'AM',
+  'BA',
+  'CE',
+  'DF',
+  'ES',
+  'GO',
+  'MA',
+  'MT',
+  'MS',
+  'MG',
+  'PA',
+  'PB',
+  'PR',
+  'PE',
+  'PI',
+  'RJ',
+  'RN',
+  'RS',
+  'RO',
+  'RR',
+  'SC',
+  'SP',
+  'SE',
+  'TO',
+]

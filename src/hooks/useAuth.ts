@@ -12,11 +12,15 @@ export default function useAuth() {
 
   useEffect(() => {
     const token = localStorage.getItem('token')
+    const isSuper = localStorage.getItem('isSuper')
 
     if (token) {
       api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`
       setAuthenticated(true)
     }
+
+    if(isSuper)
+      setIsSuper(true)
   }, [])
 
   const register = async (user: IUser) => {
@@ -41,6 +45,7 @@ export default function useAuth() {
     setAuthenticated(true)
     setIsSuper(data.isSuper)
     localStorage.setItem('token', JSON.stringify(data.token))
+    localStorage.setItem('isSuper', JSON.stringify(data.isSuper))
     navigate('/')
   }
 
@@ -49,6 +54,7 @@ export default function useAuth() {
     let msgType = "success"
     setAuthenticated(false)
     localStorage.removeItem('token')
+    localStorage.removeItem('isSuper')
     delete api.defaults.headers.Authorization
     navigate('/login')
     setFlashMessage(msgText, msgType)

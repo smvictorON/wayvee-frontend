@@ -1,30 +1,8 @@
-import styled, { css, CSSObject } from "styled-components";
+import styled from "styled-components";
 import "../../styles/variables.css"
 
-const breakpoints = {
-  small: "576px",
-  medium: "768px",
-  large: "992px",
-  extraLarge: "1200px",
-} as const;
-
-type Breakpoints = keyof typeof breakpoints;
-
-const media = (Object.keys(breakpoints) as Breakpoints[]).reduce(
-  (acc, label) => {
-    acc[label] = (styles: CSSObject) => css`
-      @media (max-width: ${breakpoints[label]}) {
-        ${css(styles)}
-      }
-    `;
-
-    return acc;
-  },
-  {} as Record<Breakpoints, (styles: CSSObject) => ReturnType<typeof css>>
-);
-
 export const LoginContainer = styled.section`
-  max-width: 500px;
+  max-width: 600px;
   margin: 2rem auto;
   background-color: var(--light-gray);
   border-radius: 5px;
