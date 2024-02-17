@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ChangeEvent } from 'react'
-import { SquareImage } from '../../components/SquareImage'
+import { SquareImage } from '../../components/Image'
 import useFlashMessage from '../../hooks/useFlashMessage'
 import api from '../../utils/api'
 import * as S from './styles'
@@ -7,7 +7,6 @@ import IUser from '../../interfaces/IUser'
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import GroupsIcon from '@mui/icons-material/Groups';
 import NoPicture from '../../assets/no-picture.png'
 import { InputFilter } from '../../components/InputFilter'
 import PersonIcon from '@mui/icons-material/Person';

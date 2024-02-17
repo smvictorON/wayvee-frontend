@@ -4,7 +4,7 @@ import api from '../../utils/api'
 import { Input } from '../../components/Input'
 import { InputFile } from '../../components/InputFile'
 import useFlashMessage from '../../hooks/useFlashMessage'
-import { SquareImage } from '../../components/SquareImage'
+import { SquareImage } from '../../components/Image'
 import IUser from '../../interfaces/IUser'
 import SaveIcon from '@mui/icons-material/Save';
 import PortraitIcon from '@mui/icons-material/Portrait';
@@ -94,7 +94,8 @@ export const Profile = () => {
             src={preview
               ? URL.createObjectURL(preview)
               : `${process.env.REACT_APP_API}/images/users/${user?.image}`}
-            alt={user?.name} />
+            alt={user?.name}
+          />
         )}
         </S.PreviewContainer>
         <InputFile

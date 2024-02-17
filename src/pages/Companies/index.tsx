@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ChangeEvent } from 'react'
-import { SquareImage } from '../../components/SquareImage'
+import { SquareImage } from '../../components/Image'
 import useFlashMessage from '../../hooks/useFlashMessage'
 import api from '../../utils/api'
 import * as S from './styles'

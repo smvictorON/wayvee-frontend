@@ -13,4 +13,5 @@ export default interface ITeacher {
   certificates?: File[];
   createdAt?: Date;
   updatedAt?: Date;
+  gender?: string;
 }

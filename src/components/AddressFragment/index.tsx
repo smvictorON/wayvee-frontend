@@ -10,7 +10,7 @@ interface AddressFragmentProps {
   handleSelect: (event: any) => void;
   address?: {
     street?: string;
-    number?: number;
+    number?: string;
     zipCode?: string;
     city?: string;
     state?: string;
@@ -29,15 +29,15 @@ export const AddressFragment = ({
         text="Rua"
         type="text"
         name="address.street"
-        placeholder="Nome da rua"
+        placeholder="Digite o nome da rua"
         handleOnChange={handleChange}
         value={address?.street || ""}
       />
       <Input
         text="Número"
-        type="number"
+        type="text"
         name="address.number"
-        placeholder="Numero do imóvel"
+        placeholder="Digite o numero do imóvel"
         handleOnChange={handleChange}
         value={address?.number || ""}
       />
@@ -49,6 +49,7 @@ export const AddressFragment = ({
         handleOnChange={handleChange}
         value={address?.zipCode || ""}
         mask="99999-999"
+        tooltipText='Código de Endereçamento Postal'
       />
       <Select
         name="address.city"
@@ -64,6 +65,7 @@ export const AddressFragment = ({
         handleOnChange={handleSelect}
         value={address?.state || ""}
         disabled={true}
+        tooltipText='Unidade Federativa'
       />
     </S.FormContainer>
   )

@@ -8,6 +8,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import { CitiesObj } from '../../interfaces/IAddress'
 import { AddressFragment } from '../../components/AddressFragment'
 import { PreviewFragment } from '../../components/PreviewFragment'
+import { checkTelMask } from '../../utils/utils'
 
 interface FormCompanyProps {
   handleSubmit: (event: any) => void;
@@ -22,7 +23,7 @@ export const FormCompany = ({
 }: FormCompanyProps) => {
   const [company, setCompany] = useState(companyData || {})
   const [preview, setPreview] = useState<File[]>([])
-  const [telMask, setTelMask] = useState("(99)9999-9999")
+  const [telMask, setTelMask] = useState(checkTelMask(company.phone))
 
   const onFileChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
@@ -36,7 +37,8 @@ export const FormCompany = ({
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    setTelMask(name === 'phone' && value.substring(4, 5) === "9" ? "(99)99999-9999" : "(99)9999-9999")
+    if(name === 'phone')
+      setTelMask(checkTelMask(value))
 
     if (name.startsWith('address.')) {
       const addressField = name.split('.')[1];
@@ -80,7 +82,7 @@ export const FormCompany = ({
 
   return (
     <S.FormContainer onSubmit={submit}>
-      <PreviewFragment preview={preview} data={company} />
+      <PreviewFragment preview={preview} data={company} folder={"companies"}/>
       <InputFile
         text="Imagens"
         name="images"
@@ -88,7 +90,7 @@ export const FormCompany = ({
         multiple={false}
       />
       <Input
-        text="Nome"
+        text="Nome Fantasia ou Razão Social"
         type="text"
         name="name"
         placeholder="Digite o nome"
@@ -100,7 +102,7 @@ export const FormCompany = ({
         text="Telefone ou Celular"
         type="text"
         name="phone"
-        placeholder="Digite o telefone ou celular"
+        placeholder="Digite o numero"
         handleOnChange={handleChange}
         value={company.phone || ""}
         required={true}
@@ -115,6 +117,7 @@ export const FormCompany = ({
         value={company.cnpj || ""}
         required={true}
         mask="99.999.999/9999-99"
+        tooltipText='Cadastro Nacional de Pessoas Jurídicas'
       />
       <Input
         text="Email"

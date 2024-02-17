@@ -1,8 +1,5 @@
 import styled, { css } from "styled-components";
-
-interface SquareImageProps {
-    width?: string;
-  }
+import { SquareImageProps } from './index'
 
 export const SquareImage = styled.img<SquareImageProps>`
   width: 200px;
@@ -14,5 +11,9 @@ export const SquareImage = styled.img<SquareImageProps>`
   ${({ width }) => width === "px75" && css`
     width: 75px;
     height: 75px;
+  `}
+
+  ${({ shape }) => shape === "round" && css`
+    border-radius: 50%;
   `}
 `;

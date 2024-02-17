@@ -1,6 +1,7 @@
 import React from 'react'
-import * as S from './styles'
+import * as S from '../styles-inputs'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import Tooltip from '@mui/material/Tooltip';
 
 interface InputFileProps {
   text: string;
@@ -9,6 +10,7 @@ interface InputFileProps {
   value?: string | undefined;
   multiple?: boolean
   required?: boolean
+  tooltipText?: string
 }
 
 export const InputFile = ({
@@ -17,15 +19,23 @@ export const InputFile = ({
   handleOnChange,
   value,
   multiple,
-  required
+  required,
+  tooltipText
 }: InputFileProps) => {
   return (
     <S.FormControl>
-      <S.Label htmlFor={name}>
-        {text}
-        {required && <S.Required>*</S.Required>}
-        :
-      </S.Label>
+      <S.Row>
+        <S.Label htmlFor={name}>
+          {text}
+          {required && <S.Required>*</S.Required>}
+          :
+        </S.Label>
+        {tooltipText &&
+          <Tooltip title={tooltipText}>
+            <S.IconInfo fontSize='small'/>
+          </Tooltip>
+        }
+      </S.Row>
       <S.InputFile
         type='file'
         name={name}

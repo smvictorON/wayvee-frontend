@@ -1,5 +1,6 @@
 import React from 'react'
-import * as S from './styles'
+import * as S from '../styles-inputs'
+import Tooltip from '@mui/material/Tooltip';
 
 interface MultiSelectProps {
   text: string;
@@ -7,7 +8,9 @@ interface MultiSelectProps {
   options: any[];
   handleOnChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   value: any;
-  required?: boolean | undefined;
+  required?: boolean
+  disabled?: boolean
+  tooltipText?: string
 }
 
 export const MultiSelect = ({
@@ -16,15 +19,24 @@ export const MultiSelect = ({
 	options,
 	handleOnChange,
 	value,
-  required
+  required,
+  disabled,
+  tooltipText
 }:MultiSelectProps) => {
 	return (
 		<S.FormControl>
-			<S.Label htmlFor={name}>
-				{text}
-        {required && <S.Required>*</S.Required>}
-				:
-			</S.Label>
+			<S.Row>
+				<S.Label htmlFor={name}>
+					{text}
+					{required && <S.Required>*</S.Required>}
+					:
+				</S.Label>
+				{tooltipText &&
+					<Tooltip title={tooltipText}>
+						<S.IconInfo fontSize='small'/>
+					</Tooltip>
+				}
+			</S.Row>
 			<S.Select
 				name={name}
 				value={value || []}
@@ -32,6 +44,7 @@ export const MultiSelect = ({
 				id={name}
 				multiple={true}
 				required={required}
+				disabled={disabled}
 			>
 				{options.map((opt) => (
 					<option value={opt._id} key={opt._id}>{opt.name}</option>

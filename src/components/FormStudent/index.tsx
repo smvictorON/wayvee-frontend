@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useState, useCallback } from 'react'
 import * as S from './styles'
 import { Input } from '../Input'
 import { InputFile } from '../InputFile'
@@ -6,8 +6,12 @@ import { InputDate } from '../InputDate'
 import { InputMask } from '../InputMask'
 import { Select } from '../Select'
 import IStudent from '../../interfaces/IStudent'
+import { Genders } from '../../interfaces/Common'
 import SaveIcon from '@mui/icons-material/Save';
-import { States, Cities } from '../../interfaces/IAddress'
+import { CitiesObj } from '../../interfaces/IAddress'
+import { AddressFragment } from '../../components/AddressFragment'
+import { PreviewFragment } from '../../components/PreviewFragment'
+import { checkTelMask } from '../../utils/utils'
 
 interface FormStudentProps {
   handleSubmit: (event: any) => void;
@@ -22,71 +26,71 @@ export const FormStudent = ({
 }: FormStudentProps) => {
   const [student, setStudent] = useState(studentData || {})
   const [preview, setPreview] = useState<File[]>([])
-  const states: string[] = Object.values(States);
-  const cities = Cities
+  const [telMask, setTelMask] = useState(checkTelMask(student.phone))
 
-  const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onFileChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
 
     if(files && files.length){
       setPreview(Array.from(files))
-      setStudent({ ...student, images: [...Array.from(files)] })
+      setStudent(prevStudent => ({ ...prevStudent, images: [...Array.from(files)] }))
     }
-  }
+  }, [])
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
+    if(name === 'phone')
+      setTelMask(checkTelMask(value))
+
     if (name.startsWith('address.')) {
       const addressField = name.split('.')[1];
-      setStudent({
-        ...student,
+      setStudent(prevStudent => ({
+        ...prevStudent,
         address: {
-          ...student.address,
+          ...prevStudent.address,
           [addressField]: value,
         },
-      });
+      }));
     } else {
-      setStudent({ ...student, [name]: value });
+      setStudent(prevStudent => ({ ...prevStudent, [name]: value }));
     }
-  }
+  }, [])
 
-  const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+  const handleSelect = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
     const name = e.target.name;
+    let value:any;
+
+    if(name === "gender")
+      value = e.target.options[e.target.selectedIndex].value;
+    else
+      value = e.target.options[e.target.selectedIndex].text;
 
     if (name.startsWith('address.')) {
       const addressField = name.split('.')[1];
-      setStudent({
-        ...student,
+      setStudent(prevStudent => ({
+        ...prevStudent,
         address: {
-          ...student.address,
-          [addressField]: e.target.options[e.target.selectedIndex].text as string,
+          ...prevStudent.address,
+          [addressField]: value,
+          state: addressField === "city"
+            ? CitiesObj.find(item => item.city === value)?.state
+            : prevStudent?.address?.state
         },
-      });
+      }));
     } else {
-      setStudent({ ...student, [name]: e.target.options[e.target.selectedIndex].text as string });
+      setStudent(prevStudent => ({ ...prevStudent, [name]: value }));
     }
-  }
+  }, [])
 
-  const submit = (e: FormEvent<HTMLFormElement>) => {
+  const submit = useCallback((e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     handleSubmit(student)
-  }
+  }, [handleSubmit, student])
 
   return (
     <S.FormContainer onSubmit={submit}>
-      <S.PreviewContainer>
-        {preview.length > 0 ?
-          preview.map((image, index) => (
-            <S.Image src={URL.createObjectURL(image)} alt={student.name} key={`${student.name}+${index}`} />
-          ))
-          :
-          student.images &&
-          student.images.map((image, index) => (
-            <S.Image src={`${process.env.REACT_APP_API}/images/students/${image}`} alt={student.name} key={`${student.name}+${index}`} />
-          ))
-        }
-      </S.PreviewContainer>
+      <PreviewFragment preview={preview} data={student} folder={"students"} />
       <InputFile
         text="Imagens"
         name="images"
@@ -94,7 +98,7 @@ export const FormStudent = ({
         multiple={false}
       />
       <Input
-        text="Nome"
+        text="Nome Completo"
         type="text"
         name="name"
         placeholder="Digite o nome"
@@ -103,14 +107,14 @@ export const FormStudent = ({
         required={true}
       />
       <InputMask
-        text="Telefone"
+        text="Telefone ou Celular"
         type="text"
         name="phone"
-        placeholder="Digite o telefone"
+        placeholder="Digite o numero"
         handleOnChange={handleChange}
         value={student.phone || ""}
         required={true}
-        mask="(99)99999-9999"
+        mask={telMask}
       />
       <InputMask
         text="CPF"
@@ -121,6 +125,7 @@ export const FormStudent = ({
         value={student.cpf || ""}
         required={true}
         mask="999.999.999-99"
+        tooltipText='Cadastro de Pessoas Físicas'
       />
       <Input
         text="Email"
@@ -136,6 +141,13 @@ export const FormStudent = ({
         handleOnChange={handleChange}
         value={student.birthdate ? new Date(student.birthdate).toISOString().split('T')[0] : ""}
       />
+      <Select
+        text="Sexo"
+        name="gender"
+        options={Genders}
+        handleOnChange={handleSelect}
+        value={student?.gender || ""}
+      />
       <InputMask
         text="RG"
         type="text"
@@ -144,37 +156,12 @@ export const FormStudent = ({
         handleOnChange={handleChange}
         value={student.rg || ""}
         mask="99.999.999-*"
+        tooltipText='Registro Geral'
       />
-      <Input
-        text="Rua"
-        type="text"
-        name="address.street"
-        placeholder="Nome da rua"
-        handleOnChange={handleChange}
-        value={student?.address?.street || ""}
-      />
-      <InputMask
-        text="CEP"
-        type="text"
-        name="address.zipCode"
-        placeholder="Digite o CEP"
-        handleOnChange={handleChange}
-        value={student?.address?.zipCode || ""}
-        mask="99999-999"
-      />
-      <Select
-        name="address.city"
-        text="Cidade"
-        options={cities}
-        handleOnChange={handleSelect}
-        value={student.address?.city || ""}
-      />
-      <Select
-        name="address.state"
-        text="Estado (UF)"
-        options={states}
-        handleOnChange={handleSelect}
-        value={student.address?.state || ""}
+      <AddressFragment
+        handleChange={handleChange}
+        handleSelect={handleSelect}
+        address={student?.address || {}}
       />
       <S.SubmitButton>
         {btnText}&nbsp;

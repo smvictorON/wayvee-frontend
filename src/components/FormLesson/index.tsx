@@ -2,7 +2,6 @@ import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import * as S from './styles'
 import { Input } from '../Input'
 import { InputDate } from '../InputDate'
-import { InputHour } from '../InputHour'
 import { Select } from '../Select'
 import { MultiSelect } from '../MultiSelect'
 import ILesson from '../../interfaces/ILesson'
@@ -77,14 +76,16 @@ export const FormLesson = ({
         required={true}
         todayIsMin
       />
-      <InputHour
+      <Input
+        type="time"
         text="Inicio"
         name="hour_start"
         handleOnChange={handleChange}
         value={lesson.hour_start}
         required={true}
       />
-      <InputHour
+      <Input
+        type="time"
         text="Fim"
         name="hour_end"
         handleOnChange={handleChange}

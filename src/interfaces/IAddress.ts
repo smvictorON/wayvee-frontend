@@ -1,6 +1,6 @@
 export default interface Address {
   street?: string;
-  number?: number
+  number?: string;
   city?: string;
   state?: string;
   zipCode?: string;

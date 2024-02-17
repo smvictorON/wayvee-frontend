@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import "../../styles/variables.css"
+import "../styles/variables.css"
+import InfoIcon from '@mui/icons-material/Info';
+import InputMask from 'react-input-mask';
 
 export const FormControl = styled.div`
   display: flex;
@@ -9,7 +11,6 @@ export const FormControl = styled.div`
 `
 
 export const Label = styled.label`
-  margin-bottom: 0.5rem;
   font-size: 0.8rem;
 `
 
@@ -22,6 +23,23 @@ export const Input = styled.input`
   ::placeholder {
     color: #777
   }
+`
+
+export const Required = styled.span`
+  color: red;
+`
+
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 0.2rem;
+`
+export const IconInfo = styled(InfoIcon)`
+  color: lightgray;
+  font-size: 10px;
 `
 
 export const InputFile = styled.input`
@@ -49,6 +67,21 @@ export const StyledFileButton = styled.label`
   }
 `
 
-export const Required = styled.span`
-  color: red;
+export const MaskInput = styled(InputMask)`
+  padding: 0.7rem;
+  border: 0;
+  border-radius: 5px;
+  width: 100%;
+
+  ::placeholder {
+    color: #777
+  }
+`
+
+export const Select = styled.select`
+  padding: 0.7rem;
+  border: 0;
+  border-radius: 5px;
+  width: 100%;
+  max-height: 200px
 `

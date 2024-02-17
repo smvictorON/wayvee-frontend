@@ -13,5 +13,5 @@ export default interface IStudent {
   exams?: File[];
   createdAt?: Date;
   updatedAt?: Date;
+  gender?: string;
 }
-

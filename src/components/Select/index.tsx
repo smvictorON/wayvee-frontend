@@ -1,5 +1,6 @@
 import React from 'react'
-import * as S from './styles'
+import * as S from '../styles-inputs'
+import Tooltip from '@mui/material/Tooltip';
 
 interface SelectProps {
   text: string;
@@ -9,6 +10,7 @@ interface SelectProps {
   value: any;
   required?: boolean;
 	disabled?: boolean
+  tooltipText?: string
 }
 
 export const Select = ({
@@ -18,15 +20,23 @@ export const Select = ({
 	handleOnChange,
 	value,
   required,
-	disabled
+	disabled,
+  tooltipText
 }:SelectProps) => {
 	return (
 		<S.FormControl>
-			<S.Label htmlFor={name}>
-				{text}
-        {required && <S.Required>*</S.Required>}
-				:
-			</S.Label>
+			<S.Row>
+				<S.Label htmlFor={name}>
+					{text}
+					{required && <S.Required>*</S.Required>}
+					:
+				</S.Label>
+				{tooltipText &&
+					<Tooltip title={tooltipText}>
+						<S.IconInfo fontSize='small'/>
+					</Tooltip>
+				}
+			</S.Row>
 			<S.Select
 				name={name}
 				value={value || ''}

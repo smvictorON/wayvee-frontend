@@ -1,16 +1,17 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import * as S from './styles'
 
 interface PreviewFragmentProps {
   preview: File[],
-  data: any
+  data: any;
+  folder: string;
 }
 
-const getPreviewImageSrc = (preview: File[], data: any) => {
+const getPreviewImageSrc = (preview: File[], data: any, folder: string) => {
   if (preview.length > 0) {
     return URL.createObjectURL(preview[0]);
   } else if (data.images?.length) {
-    return `${process.env.REACT_APP_API}/images/companies/${data.images[0]}`;
+    return `${process.env.REACT_APP_API}/images/${folder}/${data.images[0]}`;
   } else {
     return null;
   }
@@ -18,13 +19,16 @@ const getPreviewImageSrc = (preview: File[], data: any) => {
 
 export const PreviewFragment = ({
   preview,
-  data
+  data,
+  folder
 }: PreviewFragmentProps) => {
-  const previewImageSrc = getPreviewImageSrc(preview, data);
+  const previewImageSrc = useMemo(() => {
+    return getPreviewImageSrc(preview, data, folder);
+  }, [preview]);
 
   return (
     <S.PreviewContainer>
-      {previewImageSrc && <S.Image src={previewImageSrc} alt={data.name} />}
+      {previewImageSrc && <S.Image src={previewImageSrc} alt={'image'} />}
     </S.PreviewContainer>
   )
 }
