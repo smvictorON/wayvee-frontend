@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import "../../styles/variables.css"
+import "../styles/variables.css"
 
 export const Section = styled.section`
   text-align: center;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ChangeEvent } from 'react'
 import useFlashMessage from '../../hooks/useFlashMessage'
 import api from '../../utils/api'
-import * as S from './styles'
+import * as S from '../styles-lists'
 import ILesson from '../../interfaces/ILesson'
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';

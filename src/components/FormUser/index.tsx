@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FormEvent, useState, useEffect } from 'react'
-import * as S from './styles'
+import * as S from '../styles-forms'
 import { Input } from '../Input'
 import { InputFile } from '../InputFile'
 import { InputMask } from '../InputMask'
@@ -94,7 +94,7 @@ export const FormUser = ({
         name="password"
         placeholder="Digite a sua senha"
         handleOnChange={handleChange}
-        required={true}
+        required={userData._id ? false : true}
       />
       <Input
         text="Confirmação de senha"
@@ -102,7 +102,7 @@ export const FormUser = ({
         name="confirmpassword"
         placeholder="Confirme a sua senha"
         handleOnChange={handleChange}
-        required={true}
+        required={userData._id ? false : true}
       />
       <S.SubmitButton>
         {btnText}&nbsp;

@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
-import * as S from './styles'
+import * as S from '../styles-forms'
 import { Input } from '../Input'
 import { InputDate } from '../InputDate'
 import { Select } from '../Select'

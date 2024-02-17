@@ -1,5 +1,5 @@
 import styled, { css, CSSObject } from "styled-components";
-import "../../styles/variables.css"
+import "../styles/variables.css"
 import { Link } from 'react-router-dom'
 
 const breakpoints = {
@@ -46,7 +46,7 @@ export const ListHeaderLink = styled(Link)`
   font-weight: bold;
   cursor: pointer;
   transition: 0.2s;
-  padding: 0.5em 0.8rem;
+  padding: 0.5rem 0.8rem;
   border: 2px solid var(--blue);
   border-radius: 5px;
   display: flex;
@@ -163,4 +163,38 @@ export const ActionsLink = styled(Link)<{ color?: string }>`
   ${media.medium({
     width: "auto"
   })}
+`
+
+export const Data = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 7;
+`
+
+export const DataInfo = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+
+  div{
+    display: flex;
+    align-items: center;
+    padding-right: 1rem;
+
+    span{
+      padding-left: 0.2rem;
+    }
+  }
+`
+
+export const DataDate = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding-right: 1rem;
+  color: gray;
+
+  span{
+    padding-left: 0.2rem;
+  }
 `

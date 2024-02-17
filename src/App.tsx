@@ -5,27 +5,27 @@ import { Home } from './pages/Home';
 import { Profile } from './pages/Profile';
 
 //students
-import { Students } from './pages/Students';
+import { Students } from './pages/ListStudents';
 import { AddStudent } from './pages/AddStudent';
 import { EditStudent } from './pages/EditStudent';
 
 //teachers
-import { Teachers } from './pages/Teachers';
+import { Teachers } from './pages/ListTeachers';
 import { AddTeacher } from './pages/AddTeacher';
 import { EditTeacher } from './pages/EditTeacher';
 
 //lessons
-import { Lessons } from './pages/Lessons';
+import { Lessons } from './pages/ListLessons';
 import { AddLesson } from './pages/AddLesson';
 import { EditLesson } from './pages/EditLesson';
 
 //users
-import { Users } from './pages/Users';
+import { Users } from './pages/ListUsers';
 import { AddUser } from './pages/AddUser';
 import { EditUser } from './pages/EditUser';
 
 //companies
-import { Companies } from './pages/Companies';
+import { Companies } from './pages/ListCompanies';
 import { AddCompany } from './pages/AddCompany';
 import { EditCompany } from './pages/EditCompany';
 
@@ -35,7 +35,7 @@ import { Register } from './pages/Register';
 
 //payment
 import { AddPayment } from './pages/AddPayment';
-import { Payments } from './pages/Payments';
+import { Payments } from './pages/ListPayments';
 
 import { Message } from './components/Message';
 import { Header } from './components/Header';

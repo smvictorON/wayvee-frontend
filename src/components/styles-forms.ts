@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import "../../styles/variables.css"
+import "../styles/variables.css"
 
 export const FormContainer = styled.form`
   max-width: 600px;
@@ -31,26 +31,4 @@ export const SubmitButton = styled.button`
   &:hover{
     background-color: var(--light-blue-2);
   }
-`
-
-export const Paragraph = styled.p`
-  margin-top: 1rem;
-`
-
-export const Link = styled.a`
-  color: var(--blue);
-  font-weight: bold;
-`
-
-export const PreviewContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 1rem;
-`
-export const Image = styled.img`
-  // width: 100px;
-  height: 200px;
-  margin-left: 1rem;
-  border-radius: 5px;
-}
 `

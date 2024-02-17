@@ -2,8 +2,8 @@ import React, { useState, useEffect, ChangeEvent } from 'react'
 import { SquareImage } from '../../components/Image'
 import useFlashMessage from '../../hooks/useFlashMessage'
 import api from '../../utils/api'
-import * as S from './styles'
-import IStudent from '../../interfaces/IStudent'
+import * as S from '../styles-lists'
+import ITeacher from '../../interfaces/ITeacher'
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -12,31 +12,31 @@ import NoPicture from '../../assets/no-picture.png'
 import { InputFilter } from '../../components/InputFilter'
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
-export const Students = () => {
-  const [students, setStudents] = useState<IStudent[] | undefined>()
+export const Teachers = () => {
+  const [teachers, setTeachers] = useState<ITeacher[] | undefined>()
   const [token] = useState(localStorage.getItem('token') || '')
   const { setFlashMessage } = useFlashMessage()
 
   useEffect(() => {
-    api.get('/students', {
+    api.get('/teachers', {
       headers: {
         Authorization: `Bearer ${JSON.parse(token)}`
       }
     }).then((res) => {
-      setStudents(res.data.students)
+      setTeachers(res.data.teachers)
     })
   }, [token])
 
-  const removeStudent = async (id: string) => {
+  const removeTeacher = async (id: string) => {
     let msgType = "success"
 
-    const data = await api.delete(`/students/${id}`, {
+    const data = await api.delete(`/teachers/${id}`, {
       headers: {
         Authorization: `Bearer ${JSON.parse(token)}`
       }
     }).then((res) => {
-      const updatedStudents = students?.filter((student: IStudent) => student._id !== id)
-      setStudents(updatedStudents)
+      const updatedTeachers = teachers?.filter((teacher: ITeacher) => teacher._id !== id)
+      setTeachers(updatedTeachers)
 
       return res.data
     }).catch((err) => {
@@ -50,16 +50,16 @@ export const Students = () => {
   const handleFilter = async (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
-    api.get('/students', {
+    api.get('/teachers', {
       headers: {
         Authorization: `Bearer ${JSON.parse(token)}`
       }
     }).then((res) => {
       if (value.trim() === '') {
-        setStudents(res.data.students)
+        setTeachers(res.data.teachers)
       } else {
-        const filteredStudents = res.data.students?.filter((student: IStudent) => student.name.toLowerCase().includes(value.toLowerCase()));
-        setStudents(filteredStudents);
+        const filteredTeachers = res.data.teachers?.filter((teacher: ITeacher) => teacher.name.toLowerCase().includes(value.toLowerCase()));
+        setTeachers(filteredTeachers);
       }
     })
   }
@@ -68,7 +68,7 @@ export const Students = () => {
     <section>
       <S.ListHeader>
         <S.ListHeaderTitle>
-          Alunos&nbsp;({students?.length})&nbsp;
+          Professores&nbsp;({teachers?.length})&nbsp;
           <GroupsIcon fontSize='small'/>
         </S.ListHeaderTitle>
 
@@ -78,42 +78,42 @@ export const Students = () => {
           handleOnChange={handleFilter}
         />
 
-        <S.ListHeaderLink to='/student/add'>
-          <span>Cadastrar Aluno</span>
+        <S.ListHeaderLink to='/teacher/add'>
+          <span>Cadastrar Professor</span>
           <AddIcon fontSize='small'/>
         </S.ListHeaderLink>
       </S.ListHeader>
 
       <S.ListContainer>
-        {students && students.length > 0 && students.map((student) => (
-          <S.ListRow key={student._id}>
+        {teachers && teachers.length > 0 && teachers.map((teacher) => (
+          <S.ListRow key={teacher._id}>
             <SquareImage
               src={
-                student.images && student.images.length > 0
-                  ? `${process.env.REACT_APP_API}/images/students/${student.images[0]}`
+                teacher.images && teacher.images.length > 0
+                  ? `${process.env.REACT_APP_API}/images/teachers/${teacher.images[0]}`
                   : NoPicture
               }
-              alt={student.name}
+              alt={teacher.name}
               width="px75"
             />
-            <S.ListRowSpan>{student.name}</S.ListRowSpan>
+            <S.ListRowSpan>{teacher.name}</S.ListRowSpan>
             <S.Actions>
-              <S.ActionsLink to={`/student/edit/${student._id}`}>
+              <S.ActionsLink to={`/teacher/edit/${teacher._id}`}>
                 <span>Editar</span>
                 <EditIcon fontSize={'small'}/>
               </S.ActionsLink>
-              <S.ActionsButton onClick={() => removeStudent(student._id || "")}>
+              <S.ActionsButton onClick={() => removeTeacher(teacher._id || "")}>
                 <span>Excluir</span>
                 <DeleteIcon fontSize={'small'}/>
               </S.ActionsButton>
-              <S.ActionsLink to={`/payment/${student._id}`} color={"green"}>
+              <S.ActionsLink to={`/payment/${teacher._id}`} color={"green"}>
                 <span>Pagamento</span>
                 <AttachMoneyIcon fontSize={'small'}/>
               </S.ActionsLink>
             </S.Actions>
           </S.ListRow>
         ))}
-        {students?.length === 0 && (<p>Não há alunos cadastrados!</p>)}
+        {teachers?.length === 0 && (<p>Não há professores cadastrados!</p>)}
       </S.ListContainer>
     </section>
   )

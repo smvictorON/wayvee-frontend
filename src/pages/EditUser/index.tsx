@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import * as S from './styles'
+import * as S from "../styles-pages"
 import api from '../../utils/api'
 import { useParams } from 'react-router-dom'
 import useFlashMessage from '../../hooks/useFlashMessage'
@@ -40,7 +40,7 @@ export const EditUser = () => {
       }
     })
 
-    const data = await api.patch(`/users/${user._id}`, formData, {
+    const data = await api.patch(`/users/edit/${user._id}`, formData, {
       headers: {
         Authorization: `Bearer ${JSON.parse(token)}`,
         'Content-Type': 'multipart/form-data'

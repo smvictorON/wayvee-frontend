@@ -2,40 +2,41 @@ import React, { useState, useEffect, ChangeEvent } from 'react'
 import { SquareImage } from '../../components/Image'
 import useFlashMessage from '../../hooks/useFlashMessage'
 import api from '../../utils/api'
-import * as S from './styles'
-import ICompany from '../../interfaces/ICompany'
+import * as S from '../styles-lists'
+import IStudent from '../../interfaces/IStudent'
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import GroupsIcon from '@mui/icons-material/Groups';
 import NoPicture from '../../assets/no-picture.png'
 import { InputFilter } from '../../components/InputFilter'
-import BusinessIcon from '@mui/icons-material/Business';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
-export const Companies = () => {
-  const [companies, setCompanies] = useState<ICompany[] | undefined>()
+export const Students = () => {
+  const [students, setStudents] = useState<IStudent[] | undefined>()
   const [token] = useState(localStorage.getItem('token') || '')
   const { setFlashMessage } = useFlashMessage()
 
   useEffect(() => {
-    api.get('/companies', {
+    api.get('/students', {
       headers: {
         Authorization: `Bearer ${JSON.parse(token)}`
       }
     }).then((res) => {
-      setCompanies(res.data.companies)
+      setStudents(res.data.students)
     })
   }, [token])
 
-  const removeCompany = async (id: string) => {
+  const removeStudent = async (id: string) => {
     let msgType = "success"
 
-    const data = await api.delete(`/companies/${id}`, {
+    const data = await api.delete(`/students/${id}`, {
       headers: {
         Authorization: `Bearer ${JSON.parse(token)}`
       }
     }).then((res) => {
-      const updatedCompanies = companies?.filter((company: ICompany) => company._id !== id)
-      setCompanies(updatedCompanies)
+      const updatedStudents = students?.filter((student: IStudent) => student._id !== id)
+      setStudents(updatedStudents)
 
       return res.data
     }).catch((err) => {
@@ -49,16 +50,16 @@ export const Companies = () => {
   const handleFilter = async (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
-    api.get('/companies', {
+    api.get('/students', {
       headers: {
         Authorization: `Bearer ${JSON.parse(token)}`
       }
     }).then((res) => {
       if (value.trim() === '') {
-        setCompanies(res.data.companies)
+        setStudents(res.data.students)
       } else {
-        const filteredCompanies = res.data.companies?.filter((company: ICompany) => company.name.toLowerCase().includes(value.toLowerCase()));
-        setCompanies(filteredCompanies);
+        const filteredStudents = res.data.students?.filter((student: IStudent) => student.name.toLowerCase().includes(value.toLowerCase()));
+        setStudents(filteredStudents);
       }
     })
   }
@@ -67,8 +68,8 @@ export const Companies = () => {
     <section>
       <S.ListHeader>
         <S.ListHeaderTitle>
-          Empresas&nbsp;({companies?.length})&nbsp;
-          <BusinessIcon fontSize='small'/>
+          Alunos&nbsp;({students?.length})&nbsp;
+          <GroupsIcon fontSize='small'/>
         </S.ListHeaderTitle>
 
         <InputFilter
@@ -77,38 +78,42 @@ export const Companies = () => {
           handleOnChange={handleFilter}
         />
 
-        <S.ListHeaderLink to='/company/add'>
-          <span>Cadastrar Empresa</span>
+        <S.ListHeaderLink to='/student/add'>
+          <span>Cadastrar Aluno</span>
           <AddIcon fontSize='small'/>
         </S.ListHeaderLink>
       </S.ListHeader>
 
       <S.ListContainer>
-        {companies && companies.length > 0 && companies.map((company) => (
-          <S.ListRow key={company._id}>
+        {students && students.length > 0 && students.map((student) => (
+          <S.ListRow key={student._id}>
             <SquareImage
               src={
-                company.images && company.images.length > 0
-                  ? `${process.env.REACT_APP_API}/images/companies/${company.images[0]}`
+                student.images && student.images.length > 0
+                  ? `${process.env.REACT_APP_API}/images/students/${student.images[0]}`
                   : NoPicture
               }
-              alt={company.name}
+              alt={student.name}
               width="px75"
             />
-            <S.ListRowSpan>{company.name}</S.ListRowSpan>
+            <S.ListRowSpan>{student.name}</S.ListRowSpan>
             <S.Actions>
-              <S.ActionsLink to={`/company/edit/${company._id}`}>
+              <S.ActionsLink to={`/student/edit/${student._id}`}>
                 <span>Editar</span>
                 <EditIcon fontSize={'small'}/>
               </S.ActionsLink>
-              <S.ActionsButton onClick={() => removeCompany(company._id || "")}>
+              <S.ActionsButton onClick={() => removeStudent(student._id || "")}>
                 <span>Excluir</span>
                 <DeleteIcon fontSize={'small'}/>
               </S.ActionsButton>
+              <S.ActionsLink to={`/payment/${student._id}`} color={"green"}>
+                <span>Pagamento</span>
+                <AttachMoneyIcon fontSize={'small'}/>
+              </S.ActionsLink>
             </S.Actions>
           </S.ListRow>
         ))}
-        {companies?.length === 0 && (<p>Não há empresas cadastradas!</p>)}
+        {students?.length === 0 && (<p>Não há alunos cadastrados!</p>)}
       </S.ListContainer>
     </section>
   )

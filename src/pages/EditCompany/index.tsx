@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import * as S from './styles'
+import * as S from "../styles-pages"
 import api from '../../utils/api'
 import { useParams } from 'react-router-dom'
 import useFlashMessage from '../../hooks/useFlashMessage'
