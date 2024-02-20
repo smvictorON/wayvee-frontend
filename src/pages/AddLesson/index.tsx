@@ -59,7 +59,7 @@ export const AddLesson = () => {
         <S.Header>Agende uma Aula</S.Header>
         <p>Depois ela ficará disponível para edição!</p>
       </div>
-      <FormLesson btnText="Agendar" handleSubmit={registerLesson} lessonData={voidLesson}/>
+      <FormLesson buttonText="Agendar" handleSubmit={registerLesson} lessonData={voidLesson}/>
     </S.Section>
   )
 }

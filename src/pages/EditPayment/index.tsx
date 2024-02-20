@@ -3,46 +3,38 @@ import * as S from "../styles-pages"
 import api from '../../utils/api'
 import { useParams } from 'react-router-dom'
 import useFlashMessage from '../../hooks/useFlashMessage'
-import { FormCompany } from '../../components/FormCompany'
-import ICompany from '../../interfaces/ICompany'
+import { FormPayment } from '../../components/FormPayment'
+import IPayment from '../../interfaces/IPayment'
 
-export const EditCompany = () => {
-  const [company, setCompany] = useState<ICompany | undefined>()
+export const EditPayment = () => {
+  const [payment, setPayment] = useState<IPayment | undefined>()
   const [token] = useState(localStorage.getItem('token') || '')
   const { id } = useParams()
   const { setFlashMessage } = useFlashMessage()
 
   useEffect(() => {
-    api.get(`/companies/${id}`, {
+    api.get(`/payments/${id}`, {
       headers: {
         Authorization: `Bearer ${JSON.parse(token)}`
       }
     }).then((res) => {
-      setCompany(res.data.company)
+      setPayment(res.data.payment)
     })
   }, [token, id])
 
-  const updateCompany = async (company: any) => {
+  const updatePayment = async (payment: any) => {
     let msgType = "success"
 
-    if(!company.address)
-      company.address = {}
+    if(!payment.address)
+      payment.address = {}
 
     const formData = new FormData()
 
-    Object.keys(company).forEach((key) => {
-      if (key === 'images') {
-        for (let i = 0; i < company[key].length; i++) {
-          formData.append('images', company[key][i])
-        }
-      } else if (key === 'address') {
-        formData.append('address', JSON.stringify(company[key]));
-      } else {
-        formData.append(key, company[key])
-      }
+    Object.keys(payment).forEach((key) => {
+      formData.append(key, payment[key])
     })
 
-    const data = await api.patch(`/companies/${company._id}`, formData, {
+    const data = await api.patch(`/payments/${payment._id}`, formData, {
       headers: {
         Authorization: `Bearer ${JSON.parse(token)}`,
         'Content-Type': 'multipart/form-data'
@@ -60,10 +52,10 @@ export const EditCompany = () => {
   return (
     <S.Section>
       <div>
-        <S.Header>Editando a Empresa: {company?.name}</S.Header>
+        <S.Header>Editando o pagamento</S.Header>
         <p>Depois da edição os dados ficarão atualizados no sistema.</p>
       </div>
-      {company?.name && <FormCompany buttonText="Atualizar" handleSubmit={updateCompany} companyData={company} />}
+      {payment?._id && <FormPayment buttonText="Atualizar" handleSubmit={updatePayment} paymentData={payment} />}
     </S.Section>
   )
 }

@@ -12,6 +12,7 @@ import CastForEducationIcon from '@mui/icons-material/CastForEducation';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import PersonIcon from '@mui/icons-material/Person';
 import BusinessIcon from '@mui/icons-material/Business';
+import ApartmentIcon from '@mui/icons-material/Apartment';
 
 export const Header = () => {
   const { authenticated, logout, isSuper }: { authenticated: boolean; logout: () => void, isSuper: boolean } = useContext(Context)
@@ -70,8 +71,14 @@ export const Header = () => {
                 <PortraitIcon fontSize='small'/>
               </Link>
             </S.ListItem>
+            <S.ListItem>
+              <Link to="/company/profile">
+                <span>Empresa</span>
+                <ApartmentIcon fontSize='small'/>
+              </Link>
+            </S.ListItem>
             <S.ListItem onClick={logout}>
-              <Link to="/user/profile">
+              <Link to="/login">
                 <span>Sair</span>
                 <LogoutIcon fontSize='small'/>
               </Link>

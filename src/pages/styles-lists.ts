@@ -97,26 +97,26 @@ export const Actions = styled.div`
   max-height: 100px;
 `
 
-export const ActionsButton = styled.button`
+export const ActionsButton = styled.button<{ color?: string }>`
   text-decoration: none;
   background-color: transparent;
-  color: var(--red);
+  color: ${({ color }) => color ? `var(--${color})` : 'var(--blue)'};
   font-weight: bold;
   cursor: pointer;
   transition: 0.2s;
   padding: 7px 12px;
-  border: 1px solid var(--red);
+  border: 1px solid ${({ color }) => color ? `var(--${color})` : 'var(--blue)'};
   border-radius: 5px;
   font-size: 12px;
   margin-left: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  width: 100px;
+  width: 120px;
   margin: 0.1rem;
 
   &:hover{
-    background-color: var(--red);
+    background-color: ${({ color }) => color ? `var(--${color})` : 'var(--blue)'};
     color: white;
   }
 
@@ -146,7 +146,7 @@ export const ActionsLink = styled(Link)<{ color?: string }>`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  width: 100px;
+  width: 120px;
   margin: 0.1rem;
 
   &:hover{

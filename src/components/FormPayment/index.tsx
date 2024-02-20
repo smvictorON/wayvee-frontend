@@ -4,20 +4,39 @@ import { Input } from '../Input'
 import { InputDate } from '../InputDate'
 import { Select } from '../Select'
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import api from '../../utils/api'
 import IPayment, {PaymentMethods, PaymentTypes} from '../../interfaces/IPayment'
-
+import { useLocation } from 'react-router-dom';
 
 interface FormPaymentProps {
   handleSubmit: (event: any) => void;
   paymentData: IPayment;
+  buttonText: string
 }
 
 export const FormPayment = ({
   handleSubmit,
-  paymentData
+  paymentData,
+  buttonText
 }: FormPaymentProps) => {
-  const [payment, setPayment] = useState<IPayment>(paymentData || {})
+  const [payment, setPayment] = useState(paymentData || {})
+  const location = useLocation();
+  const { state } = location
+
+  useEffect(() => {
+    if(!state)
+      return
+
+    const { data = {}, model = '', date = '' } = state;
+
+    setPayment({...payment,
+      person: data._id,
+      date: date,
+      type: model === "Student" ? "Receipt" : "Payment",
+      description: model === "Student"
+        ? `Recebimento de ${data.name}`
+        : `Pagamento para ${data.name}`,
+    })
+  },[])
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -43,6 +62,7 @@ export const FormPayment = ({
         handleOnChange={handleChange}
         value={payment.date ? new Date(payment.date).toISOString().split('T')[0] : ""}
         required={true}
+        disabled={state}
       />
       <Input
         text="Valor"
@@ -68,9 +88,20 @@ export const FormPayment = ({
         handleOnChange={handleSelect}
         value={payment.type}
         required={true}
+        disabled={state}
+      />
+      <Input
+        text="Descrição"
+        type="text"
+        name="description"
+        placeholder="Digite a descrição"
+        handleOnChange={handleChange}
+        value={payment.description || ""}
+        required={true}
+        disabled={state}
       />
       <S.SubmitButton>
-        Concluir&nbsp;
+        {buttonText}&nbsp;
         <AttachMoneyIcon/>
       </S.SubmitButton>
     </S.FormContainer>

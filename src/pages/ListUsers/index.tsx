@@ -101,7 +101,7 @@ export const Users = () => {
                 <span>Editar</span>
                 <EditIcon fontSize={'small'}/>
               </S.ActionsLink>
-              <S.ActionsButton onClick={() => removeUser(user._id || "")}>
+              <S.ActionsButton color={"red"} onClick={() => removeUser(user._id || "")}>
                 <span>Excluir</span>
                 <DeleteIcon fontSize={'small'}/>
               </S.ActionsButton>

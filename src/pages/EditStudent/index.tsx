@@ -63,7 +63,7 @@ export const EditStudent = () => {
         <S.Header>Editando o Aluno: {student?.name}</S.Header>
         <p>Depois da edição os dados ficarão atualizados no sistema.</p>
       </div>
-      {student?.name && <FormStudent btnText="Atualizar" handleSubmit={updateStudent} studentData={student} />}
+      {student?.name && <FormStudent buttonText="Atualizar" handleSubmit={updateStudent} studentData={student} />}
     </S.Section>
   )
 }

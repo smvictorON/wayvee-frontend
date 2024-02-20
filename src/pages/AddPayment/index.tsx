@@ -15,9 +15,9 @@ export const AddPayment = () => {
     value: 0,
     type: "",
     method: "",
-    payer: "",
-    receiver: "",
+    person: "",
     date: "",
+    description: ""
   }
 
   const handlePayment = async (payment: any) => {
@@ -50,10 +50,10 @@ export const AddPayment = () => {
   return (
     <S.Section>
       <div>
-        <S.Header>Pagamento</S.Header>
-        <p>Preencha as opções de pagamento!</p>
+        <S.Header>Conta</S.Header>
+        <p>Preencha as informações desta conta!</p>
       </div>
-      <FormPayment handleSubmit={handlePayment} paymentData={voidPayment}/>
+      <FormPayment buttonText="Adicionar" handleSubmit={handlePayment} paymentData={voidPayment}/>
     </S.Section>
   )
 }

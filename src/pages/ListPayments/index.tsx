@@ -6,8 +6,10 @@ import IPayment from '../../interfaces/IPayment'
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import GroupsIcon from '@mui/icons-material/Groups';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import DescriptionIcon from '@mui/icons-material/Description';
+import { InputFilter } from '../../components/InputFilter'
 
 export const Payments = () => {
   const [payments, setPayments] = useState<IPayment[] | undefined>()
@@ -44,13 +46,41 @@ export const Payments = () => {
     setFlashMessage(data.message, msgType)
   }
 
+  const handleFilter = async (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+
+    api.get('/payments', {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(token)}`
+      }
+    }).then((res) => {
+      if (value.trim() === '') {
+        setPayments(res.data.payments)
+      } else {
+        const filteredStudents = res.data.payments?.filter((payment: IPayment) => payment.description.toLowerCase().includes(value.toLowerCase()));
+        setPayments(filteredStudents);
+      }
+    })
+  }
+
+  const formatter = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  });
+
   return (
     <section>
       <S.ListHeader>
         <S.ListHeaderTitle>
           Contas&nbsp;({payments?.length})&nbsp;
-          <GroupsIcon fontSize='small'/>
+          <AttachMoneyIcon fontSize='small'/>
         </S.ListHeaderTitle>
+
+        <InputFilter
+          name='search'
+          placeholder='Buscar por descrição'
+          handleOnChange={handleFilter}
+        />
 
         <S.ListHeaderLink to='/payment/add'>
           <span>Lançar Conta</span>
@@ -61,20 +91,31 @@ export const Payments = () => {
       <S.ListContainer>
         {payments && payments.length > 0 && payments.map((payment) => (
           <S.ListRow key={payment._id}>
-            <S.ListRowSpan>{payment.date}{payment.value}</S.ListRowSpan>
+            <S.Data>
+            <S.DataInfo>
+                <div>
+                  <DescriptionIcon fontSize={'small'}/>
+                  <span>{payment.description}</span>
+                </div>
+              </S.DataInfo>
+              <S.DataDate>
+                <CalendarTodayIcon fontSize={'small'}/>
+                <span>{new Date(payment.date.substring(0, 10)).toLocaleDateString('pt-BR')}</span>
+              </S.DataDate>
+              <S.DataDate style={{ color: payment.type === "Payment" ? 'red' : 'green' }}>
+                <span>{formatter.format(payment.value)}</span>
+              </S.DataDate>
+            </S.Data>
+
             <S.Actions>
               <S.ActionsLink to={`/payment/edit/${payment._id}`}>
                 <span>Editar</span>
                 <EditIcon fontSize={'small'}/>
               </S.ActionsLink>
-              <S.ActionsButton onClick={() => removePayment(payment._id || "")}>
+              <S.ActionsButton color={"red"} onClick={() => removePayment(payment._id || "")}>
                 <span>Excluir</span>
                 <DeleteIcon fontSize={'small'}/>
               </S.ActionsButton>
-              <S.ActionsLink to={`/payment/${payment._id}`} color={"green"}>
-                <span>Pagamento</span>
-                <AttachMoneyIcon fontSize={'small'}/>
-              </S.ActionsLink>
             </S.Actions>
           </S.ListRow>
         ))}

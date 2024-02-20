@@ -12,13 +12,13 @@ import ICompany from '../../interfaces/ICompany'
 interface FormUserProps {
   handleSubmit: (event: any) => void;
   userData: IUser;
-  btnText: string
+  buttonText: string
 }
 
 export const FormUser = ({
   handleSubmit,
   userData,
-  btnText
+  buttonText
 }: FormUserProps) => {
   const [user, setUser] = useState(userData || {})
   const [companies, setCompanies] = useState<ICompany[]>([])
@@ -87,6 +87,7 @@ export const FormUser = ({
         handleOnChange={handleSelect}
         value={user.company}
         required={true}
+        disabled={userData._id ? true : false}
       />
       <Input
         text="Senha"
@@ -105,7 +106,7 @@ export const FormUser = ({
         required={userData._id ? false : true}
       />
       <S.SubmitButton>
-        {btnText}&nbsp;
+        {buttonText}&nbsp;
         <SaveIcon/>
       </S.SubmitButton>
     </S.FormContainer>

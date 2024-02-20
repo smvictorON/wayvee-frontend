@@ -16,13 +16,13 @@ import { checkTelMask } from '../../utils/utils'
 interface FormStudentProps {
   handleSubmit: (event: any) => void;
   studentData: IStudent;
-  btnText: string
+  buttonText: string
 }
 
 export const FormStudent = ({
   handleSubmit,
   studentData,
-  btnText
+  buttonText
 }: FormStudentProps) => {
   const [student, setStudent] = useState(studentData || {})
   const [preview, setPreview] = useState<File[]>([])
@@ -164,7 +164,7 @@ export const FormStudent = ({
         address={student?.address || {}}
       />
       <S.SubmitButton>
-        {btnText}&nbsp;
+        {buttonText}&nbsp;
         <SaveIcon/>
       </S.SubmitButton>
     </S.FormContainer>

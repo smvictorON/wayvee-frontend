@@ -64,7 +64,7 @@ export const AddUser = () => {
         <S.Header>Cadastre um Usuário</S.Header>
         <p>Depois ele ficará disponível para edição!</p>
       </div>
-      <FormUser btnText="Cadastrar" handleSubmit={registerUser} userData={voidUser}/>
+      <FormUser buttonText="Cadastrar" handleSubmit={registerUser} userData={voidUser}/>
     </S.Section>
   )
 }

@@ -11,6 +11,8 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import NoPicture from '../../assets/no-picture.png'
 import { InputFilter } from '../../components/InputFilter'
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import { useNavigate } from 'react-router-dom';
+import InfoIcon from '@mui/icons-material/Info';
 
 export const Teachers = () => {
   const [teachers, setTeachers] = useState<ITeacher[] | undefined>()
@@ -26,6 +28,17 @@ export const Teachers = () => {
       setTeachers(res.data.teachers)
     })
   }, [token])
+
+  const navigate = useNavigate();
+  const handleClick = (student: any) => {
+    navigate(`/payment/add`, {
+      state: {
+        data: student,
+        model: "Teacher",
+        date: new Date(),
+      }
+    });
+  };
 
   const removeTeacher = async (id: string) => {
     let msgType = "success"
@@ -102,13 +115,17 @@ export const Teachers = () => {
                 <span>Editar</span>
                 <EditIcon fontSize={'small'}/>
               </S.ActionsLink>
-              <S.ActionsButton onClick={() => removeTeacher(teacher._id || "")}>
+              <S.ActionsButton color={"red"} onClick={() => removeTeacher(teacher._id || "")}>
                 <span>Excluir</span>
                 <DeleteIcon fontSize={'small'}/>
               </S.ActionsButton>
-              <S.ActionsLink to={`/payment/${teacher._id}`} color={"green"}>
+              <S.ActionsButton onClick={() => handleClick(teacher)} color={"green"}>
                 <span>Pagamento</span>
                 <AttachMoneyIcon fontSize={'small'}/>
+              </S.ActionsButton>
+              <S.ActionsLink to={`/teacher/edit/${teacher._id}`}>
+                <span>Informações</span>
+                <InfoIcon fontSize={'small'}/>
               </S.ActionsLink>
             </S.Actions>
           </S.ListRow>

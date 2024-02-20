@@ -12,7 +12,6 @@ import CastForEducationIcon from '@mui/icons-material/CastForEducation';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import AlarmIcon from '@mui/icons-material/Alarm';
 import { InputFilter } from '../../components/InputFilter'
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 export const Lessons = () => {
   const [lessons, setLessons] = useState<ILesson[] | undefined>()
@@ -119,7 +118,7 @@ export const Lessons = () => {
                 <span>Editar</span>
                 <EditIcon fontSize={'small'}/>
               </S.ActionsLink>
-              <S.ActionsButton onClick={() => removeLesson(lesson._id || "")}>
+              <S.ActionsButton color={"red"} onClick={() => removeLesson(lesson._id || "")}>
                 <span>Cancelar</span>
                 <DeleteIcon fontSize={'small'}/>
               </S.ActionsButton>

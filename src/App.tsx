@@ -2,7 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { Home } from './pages/Home';
-import { Profile } from './pages/Profile';
+
+//profiles
+import { ProfileUser } from './pages/ProfileUser';
+import { ProfileCompany } from './pages/ProfileCompany';
 
 //students
 import { Students } from './pages/ListStudents';
@@ -35,6 +38,7 @@ import { Register } from './pages/Register';
 
 //payment
 import { AddPayment } from './pages/AddPayment';
+import { EditPayment } from './pages/EditPayment';
 import { Payments } from './pages/ListPayments';
 
 import { Message } from './components/Message';
@@ -54,7 +58,8 @@ export default function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/user/profile" element={<Profile />} />
+            <Route path="/user/profile" element={<ProfileUser />} />
+            <Route path="/company/profile" element={<ProfileCompany />} />
             <Route path="/students" element={<Students />} />
             <Route path="/student/add" element={<AddStudent />} />
             <Route path="/student/edit/:id" element={<EditStudent />} />
@@ -70,8 +75,9 @@ export default function App() {
             <Route path="/lessons" element={<Lessons />} />
             <Route path="/lesson/add" element={<AddLesson />} />
             <Route path="/lesson/edit/:id" element={<EditLesson />} />
-            <Route path="/payment/:id" element={<AddPayment />} />
             <Route path="/payments" element={<Payments />} />
+            <Route path="/payment/:id" element={<AddPayment />} />
+            <Route path="/payment/edit/:id" element={<EditPayment />} />
             <Route path="/" element={<Home />} />
           </Routes>
         </Container>

@@ -13,13 +13,13 @@ import IStudent from '../../interfaces/IStudent'
 interface FormLessonProps {
   handleSubmit: (event: any) => void;
   lessonData: ILesson;
-  btnText: string
+  buttonText: string
 }
 
 export const FormLesson = ({
   handleSubmit,
   lessonData,
-  btnText
+  buttonText
 }: FormLessonProps) => {
   const [lesson, setLesson] = useState(lessonData || {})
   const [teachers, setTeachers] = useState<ITeacher[]>([])
@@ -133,7 +133,7 @@ export const FormLesson = ({
         value={lesson.observation || ""}
       />
       <S.SubmitButton>
-        {btnText}&nbsp;
+        {buttonText}&nbsp;
         <SaveIcon/>
       </S.SubmitButton>
     </S.FormContainer>

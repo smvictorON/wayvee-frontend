@@ -14,7 +14,7 @@ export const Home = () => {
         <S.Item>
           <BarChart
             xAxis={[{ scaleType: 'band', data: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'] }]}
-            series={[{ data: [4, 3, 5, 3, 5, 3, 5, 3, 5, 3, 5, 5],  label: "Total de Aulas Agendadas por Mês" }]}
+            series={[{ data: [4, 3, 5, 3, 5, 3, 5, 3, 5, 3, 5, 5],  label: "Total de Aulas Agendadas por Mês", color:"#34CFCA"  }]}
             width={500}
             height={300}
           />

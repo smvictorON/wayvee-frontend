@@ -40,7 +40,7 @@ export const EditUser = () => {
       }
     })
 
-    const data = await api.patch(`/users/edit/${user._id}`, formData, {
+    const data = await api.patch(`/users/${user._id}`, formData, {
       headers: {
         Authorization: `Bearer ${JSON.parse(token)}`,
         'Content-Type': 'multipart/form-data'
@@ -61,7 +61,7 @@ export const EditUser = () => {
         <S.Header>Editando o Aluno: {user?.name}</S.Header>
         <p>Depois da edição os dados ficarão atualizados no sistema.</p>
       </div>
-      {user?.name && <FormUser btnText="Atualizar" handleSubmit={updateUser} userData={user} />}
+      {user?.name && <FormUser buttonText="Atualizar" handleSubmit={updateUser} userData={user} />}
     </S.Section>
   )
 }

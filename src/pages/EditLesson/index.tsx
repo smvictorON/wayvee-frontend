@@ -63,7 +63,7 @@ export const EditLesson = () => {
         <S.Header>Editando a Aula</S.Header>
         <p>Depois da edição os dados ficarão atualizados no sistema.</p>
       </div>
-      {lesson?._id && <FormLesson btnText="Atualizar" handleSubmit={updateLesson} lessonData={lesson} />}
+      {lesson?._id && <FormLesson buttonText="Atualizar" handleSubmit={updateLesson} lessonData={lesson} />}
     </S.Section>
   )
 }

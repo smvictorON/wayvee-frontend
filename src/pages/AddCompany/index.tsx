@@ -63,7 +63,7 @@ export const AddCompany = () => {
         <S.Header>Cadastre uma Empresa</S.Header>
         <p>Depois ela ficará disponível para edição!</p>
       </div>
-      <FormCompany btnText="Cadastrar" handleSubmit={registerCompany} companyData={voidCompany}/>
+      <FormCompany buttonText="Cadastrar" handleSubmit={registerCompany} companyData={voidCompany}/>
     </S.Section>
   )
 }

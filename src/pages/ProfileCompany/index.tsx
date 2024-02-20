@@ -5,23 +5,23 @@ import { Input } from '../../components/Input'
 import { InputFile } from '../../components/InputFile'
 import useFlashMessage from '../../hooks/useFlashMessage'
 import { SquareImage } from '../../components/Image'
-import IUser from '../../interfaces/IUser'
+import ICompany from '../../interfaces/ICompany'
 import SaveIcon from '@mui/icons-material/Save';
 import PortraitIcon from '@mui/icons-material/Portrait';
 
-export const Profile = () => {
-  const [user, setUser] = useState<IUser | undefined>()
+export const ProfileCompany = () => {
+  const [company, setCompany] = useState<ICompany | undefined>()
   const [preview, setPreview] = useState<File>()
   const [token] = useState(localStorage.getItem('token') || '')
   const { setFlashMessage } = useFlashMessage()
 
   useEffect(() => {
-    api.get('/users/checkuser', {
+    api.get('/companys/checkcompany', {
       headers: {
         Authorization: `Bearer ${JSON.parse(token)}`
       }
     }).then((res) => {
-      setUser(res.data)
+      setCompany(res.data)
     })
   }, [token])
 
@@ -32,8 +32,8 @@ export const Profile = () => {
     if(files && files.length){
       setPreview(files[0])
 
-      if(user)
-        setUser({ ...user, [name]: files[0] })
+      if(company)
+        setCompany({ ...company, [name]: files[0] })
     }
   }
 
@@ -41,8 +41,8 @@ export const Profile = () => {
     const value = e.target.value
     const name = e.target.name
 
-    if(user)
-      setUser({ ...user, [name]: value })
+    if(company)
+      setCompany({ ...company, [name]: value })
   }
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -51,8 +51,8 @@ export const Profile = () => {
 
     const formData = new FormData()
 
-    if(user)
-      Object.entries(user).forEach(([key, value]) => {
+    if(company)
+      Object.entries(company).forEach(([key, value]) => {
         if (value instanceof FileList) {
           for (let i = 0; i < value.length; i++) {
             formData.append(`${key}_${i}`, value[i]);
@@ -62,7 +62,7 @@ export const Profile = () => {
         }
       });
 
-    const data = await api.patch(`/users/edit/${user?._id}`, formData, {
+    const data = await api.patch(`/companies/edit/${company?._id}`, formData, {
       headers: {
         Authorization: `Bearer ${JSON.parse(token)}`,
         'Content-Type': 'multipart/form-data'
@@ -81,36 +81,20 @@ export const Profile = () => {
     <S.Section>
       <S.Header>
         <S.HeaderTitle>
-          Perfil&nbsp;&nbsp;
+          Empresa&nbsp;&nbsp;
           <PortraitIcon/>
         </S.HeaderTitle>
-        <p>As mudanças ficarão disponíveis logo após a edição!</p>
+        <p>Configurações gerais da empresa!</p>
       </S.Header>
 
       <S.FormContainer>
-        <S.PreviewContainer>
-        {(user?.image || preview) && (
-          <SquareImage
-            src={preview
-              ? URL.createObjectURL(preview)
-              : `${process.env.REACT_APP_API}/images/users/${user?.image}`}
-            alt={user?.name}
-          />
-        )}
-        </S.PreviewContainer>
-        <InputFile
-          text="Imagem"
-          name="image"
-          handleOnChange={onFileChange}
-          multiple={false}
-        />
         <Input
           text="Email"
           type="email"
           name="email"
           handleOnChange={handleChange}
           placeholder="Digite seu Email"
-          value={user?.email || ''}
+          value={company?.email || ''}
         />
         <Input
           text="Nome"
@@ -118,7 +102,7 @@ export const Profile = () => {
           name="name"
           handleOnChange={handleChange}
           placeholder="Digite seu Nome"
-          value={user?.name || ''}
+          value={company?.name || ''}
         />
         <Input
           text="Telefone"
@@ -126,22 +110,7 @@ export const Profile = () => {
           name="phone"
           handleOnChange={handleChange}
           placeholder="Digite seu Telefone"
-          value={user?.phone || ''}
-        />
-        <Input
-          text="Senha"
-          type="password"
-          name="password"
-          handleOnChange={handleChange}
-          placeholder="Digite sua Senha"
-          value={user?.password || ''}
-        />
-        <Input
-          text="Senha"
-          type="password"
-          name="confirmpassword"
-          handleOnChange={handleChange}
-          placeholder="Confirme sua Senha"
+          value={company?.phone || ''}
         />
         <S.SubmitButton onClick={handleSubmit}>
           Editar&nbsp;

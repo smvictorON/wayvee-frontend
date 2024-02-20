@@ -62,7 +62,7 @@ export const AddTeacher = () => {
         <S.Header>Cadastre um Professor</S.Header>
         <p>Depois ele ficará disponível para edição!</p>
       </div>
-      <FormTeacher btnText="Cadastrar" handleSubmit={registerTeacher} teacherData={voidTeacher}/>
+      <FormTeacher buttonText="Cadastrar" handleSubmit={registerTeacher} teacherData={voidTeacher}/>
     </S.Section>
   )
 }

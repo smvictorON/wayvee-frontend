@@ -13,13 +13,13 @@ import { checkTelMask } from '../../utils/utils'
 interface FormCompanyProps {
   handleSubmit: (event: any) => void;
   companyData: ICompany;
-  btnText: string
+  buttonText: string
 }
 
 export const FormCompany = ({
   handleSubmit,
   companyData,
-  btnText
+  buttonText
 }: FormCompanyProps) => {
   const [company, setCompany] = useState(companyData || {})
   const [preview, setPreview] = useState<File[]>([])
@@ -133,7 +133,7 @@ export const FormCompany = ({
         address={company?.address || {}}
       />
       <S.SubmitButton>
-        {btnText}&nbsp;
+        {buttonText}&nbsp;
         <SaveIcon />
       </S.SubmitButton>
     </S.FormContainer>
