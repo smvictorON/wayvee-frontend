@@ -46,6 +46,8 @@ export default function useAuth() {
     setIsSuper(data.isSuper)
     localStorage.setItem('token', JSON.stringify(data.token))
     localStorage.setItem('isSuper', JSON.stringify(data.isSuper))
+    localStorage.setItem('company', JSON.stringify(data.company))
+    localStorage.setItem('user', JSON.stringify(data.userId))
     navigate('/')
   }
 

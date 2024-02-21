@@ -11,11 +11,13 @@ import { ProfileCompany } from './pages/ProfileCompany';
 import { Students } from './pages/ListStudents';
 import { AddStudent } from './pages/AddStudent';
 import { EditStudent } from './pages/EditStudent';
+import { InfoStudent } from './pages/InfoStudent';
 
 //teachers
 import { Teachers } from './pages/ListTeachers';
 import { AddTeacher } from './pages/AddTeacher';
 import { EditTeacher } from './pages/EditTeacher';
+import { InfoTeacher } from './pages/InfoTeacher';
 
 //lessons
 import { Lessons } from './pages/ListLessons';
@@ -60,24 +62,33 @@ export default function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/user/profile" element={<ProfileUser />} />
             <Route path="/company/profile" element={<ProfileCompany />} />
+
             <Route path="/students" element={<Students />} />
             <Route path="/student/add" element={<AddStudent />} />
             <Route path="/student/edit/:id" element={<EditStudent />} />
+            <Route path="/student/info/:id" element={<InfoStudent />} />
+
             <Route path="/users" element={<Users />} />
             <Route path="/user/add" element={<AddUser />} />
             <Route path="/user/edit/:id" element={<EditUser />} />
+
             <Route path="/companies" element={<Companies />} />
             <Route path="/company/add" element={<AddCompany />} />
             <Route path="/company/edit/:id" element={<EditCompany />} />
+
             <Route path="/teachers" element={<Teachers />} />
             <Route path="/teacher/add" element={<AddTeacher />} />
             <Route path="/teacher/edit/:id" element={<EditTeacher />} />
+            <Route path="/teacher/info/:id" element={<InfoTeacher />} />
+
             <Route path="/lessons" element={<Lessons />} />
             <Route path="/lesson/add" element={<AddLesson />} />
             <Route path="/lesson/edit/:id" element={<EditLesson />} />
+
             <Route path="/payments" element={<Payments />} />
             <Route path="/payment/:id" element={<AddPayment />} />
             <Route path="/payment/edit/:id" element={<EditPayment />} />
+
             <Route path="/" element={<Home />} />
           </Routes>
         </Container>

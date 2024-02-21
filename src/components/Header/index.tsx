@@ -25,7 +25,7 @@ export const Header = () => {
         </Link>
       </S.NavbarLogo>
       <S.List>
-        {isSuper && <>
+        {isSuper && authenticated && <>
           <S.ListItem>
             <Link to="/companies">
               <span>Empresas</span>

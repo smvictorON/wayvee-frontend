@@ -123,7 +123,7 @@ export const Teachers = () => {
                 <span>Pagamento</span>
                 <AttachMoneyIcon fontSize={'small'}/>
               </S.ActionsButton>
-              <S.ActionsLink to={`/teacher/edit/${teacher._id}`}>
+              <S.ActionsLink to={`/teacher/info/${teacher._id}`}>
                 <span>Informações</span>
                 <InfoIcon fontSize={'small'}/>
               </S.ActionsLink>

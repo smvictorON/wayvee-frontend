@@ -123,7 +123,7 @@ export const Students = () => {
                 <span>Recebimento</span>
                 <AttachMoneyIcon fontSize={'small'}/>
               </S.ActionsButton>
-              <S.ActionsLink to={`/student/edit/${student._id}`}>
+              <S.ActionsLink to={`/student/info/${student._id}`}>
                 <span>Informações</span>
                 <InfoIcon fontSize={'small'}/>
               </S.ActionsLink>
