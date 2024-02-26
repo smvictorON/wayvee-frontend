@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from 'react'
+import React, { useState, useEffect, ChangeEvent, useCallback } from 'react'
 import * as S from './styles'
 import api from '../../utils/api'
 import { Input } from '../../components/Input'
@@ -21,10 +21,11 @@ export const ProfileCompany = () => {
     email: '',
     cnpj: '',
     images: [],
+    address: {}
   })
   const [preview, setPreview] = useState<File[]>([])
   const [token] = useState(localStorage.getItem('token') || '')
-  const [telMask, setTelMask] = useState(checkTelMask(company?.phone ? company.phone : ""))
+  const [telMask, setTelMask] = useState(checkTelMask(company.phone))
   const { setFlashMessage } = useFlashMessage()
   const companyId = localStorage.getItem('company')?.replace(/"/g, '')
 
@@ -34,40 +35,43 @@ export const ProfileCompany = () => {
         Authorization: `Bearer ${JSON.parse(token)}`
       }
     }).then((res) => {
-      setCompany(res.data.company)
-      setTelMask(checkTelMask(company?.phone))
-      setPreview(company?.images ? company.images : [])
-    })
-  }, [token])
+      const data = res.data.company;
+      if (!data) return;
 
-  const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+      setCompany(data);
+      setTelMask(checkTelMask(data.phone));
+      setPreview([]);
+    })
+  }, [companyId, token])
+
+  const onFileChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
 
     if (files && files.length) {
       setPreview(Array.from(files))
-      setCompany({ ...company, images: [...Array.from(files)] })
+      setCompany(prevCompany => ({ ...prevCompany, images: [...Array.from(files)] }))
     }
-  }
+  }, [])
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    if(name === 'phone')
+    if (name === 'phone')
       setTelMask(checkTelMask(value))
 
     if (name.startsWith('address.')) {
       const addressField = name.split('.')[1];
-      setCompany({
-        ...company,
+      setCompany(prevCompany => ({
+        ...prevCompany,
         address: {
-          ...company.address,
+          ...prevCompany.address,
           [addressField]: value,
         },
-      });
+      }));
     } else {
-      setCompany({ ...company, [name]: value });
+      setCompany(prevCompany => ({ ...prevCompany, [name]: value }));
     }
-  }
+  }, [])
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
@@ -75,7 +79,7 @@ export const ProfileCompany = () => {
 
     const formData = new FormData()
 
-    if(company)
+    if (company)
       Object.entries(company).forEach(([key, value]) => {
         if (value instanceof FileList) {
           for (let i = 0; i < value.length; i++) {
@@ -101,92 +105,97 @@ export const ProfileCompany = () => {
     })
 
     setFlashMessage(data.message, msgType)
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
   }
 
-  const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+  const handleSelect = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
     const name = e.target.name;
     const value = e.target.options[e.target.selectedIndex].text;
 
     if (name.startsWith('address.')) {
       const addressField = name.split('.')[1];
-      setCompany({
-        ...company,
+      setCompany(prevCompany => ({
+        ...prevCompany,
         address: {
-          ...company.address,
+          ...prevCompany.address,
           [addressField]: value,
           state: addressField === "city"
             ? CitiesObj.find(item => item.city === value)?.state
-            : company?.address?.state
+            : prevCompany?.address?.state
         },
-      });
+      }));
     } else {
-      setCompany({ ...company, [name]: value });
+      setCompany(prevCompany => ({ ...prevCompany, [name]: value }));
     }
-  }
+  }, [])
 
   return (
     <S.Section>
       <S.Header>
         <S.HeaderTitle>
           Empresa&nbsp;&nbsp;
-          <PortraitIcon/>
+          <PortraitIcon />
         </S.HeaderTitle>
         <p>Configurações gerais da empresa!</p>
       </S.Header>
       <S.FormContainer>
-        <PreviewFragment preview={preview} data={company} folder={"companies"}/>
+        <PreviewFragment preview={preview} data={company} folder={"companies"} />
         <InputFile
           text="Imagem"
           name="images"
           handleOnChange={onFileChange}
           multiple={false}
         />
-      <Input
-        text="Nome Fantasia ou Razão Social"
-        type="text"
-        name="name"
-        placeholder="Digite o nome"
-        handleOnChange={handleChange}
-        value={company?.name || ""}
-        required={true}
-      />
-      <InputMask
-        text="Telefone ou Celular"
-        type="text"
-        name="phone"
-        placeholder="Digite o numero"
-        handleOnChange={handleChange}
-        value={company?.phone || ""}
-        required={true}
-        mask={telMask}
-      />
-      <InputMask
-        text="CNPJ"
-        type="text"
-        name="cnpj"
-        placeholder="Digite o cnpj"
-        handleOnChange={handleChange}
-        value={company?.cnpj || ""}
-        required={true}
-        mask="99.999.999/9999-99"
-        tooltipText='Cadastro Nacional de Pessoas Jurídicas'
-      />
-      <Input
-        text="Email"
-        type="email"
-        name="email"
-        placeholder="Digite o email"
-        handleOnChange={handleChange}
-        value={company?.email || ""}
-      />
-      <AddressFragment
-        handleChange={handleChange}
-        handleSelect={handleSelect}
-        address={company?.address || {}}
-      />
+        <Input
+          text="Nome Fantasia ou Razão Social"
+          type="text"
+          name="name"
+          placeholder="Digite o nome"
+          handleOnChange={handleChange}
+          value={company?.name || ""}
+          required={true}
+        />
+        <InputMask
+          text="Telefone ou Celular"
+          type="text"
+          name="phone"
+          placeholder="Digite o numero"
+          handleOnChange={handleChange}
+          value={company?.phone || ""}
+          required={true}
+          mask={telMask}
+        />
+        <InputMask
+          text="CNPJ"
+          type="text"
+          name="cnpj"
+          placeholder="Digite o cnpj"
+          handleOnChange={handleChange}
+          value={company?.cnpj || ""}
+          required={true}
+          mask="99.999.999/9999-99"
+          tooltipText='Cadastro Nacional de Pessoas Jurídicas'
+        />
+        <Input
+          text="Email"
+          type="email"
+          name="email"
+          placeholder="Digite o email"
+          handleOnChange={handleChange}
+          value={company?.email || ""}
+        />
+        <AddressFragment
+          handleChange={handleChange}
+          handleSelect={handleSelect}
+          address={company?.address || {}}
+        />
         <S.SubmitButton onClick={handleSubmit}>
           Editar&nbsp;
-          <SaveIcon/>
+          <SaveIcon />
         </S.SubmitButton>
       </S.FormContainer>
     </S.Section>
