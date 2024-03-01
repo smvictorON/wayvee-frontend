@@ -3,46 +3,18 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { Home } from './pages/Home';
 
-//profiles
-import { ProfileUser } from './pages/ProfileUser';
-import { ProfileCompany } from './pages/ProfileCompany';
+//pages
+import { ListStudents, AddStudent, EditStudent, InfoStudent  } from './pages/Students';
+import { ListTeachers, AddTeacher, EditTeacher, InfoTeacher  } from './pages/Teachers';
+import { ListCompanies, AddCompany, EditCompany, ProfileCompany } from './pages/Companies';
+import { ListUsers, AddUser, EditUser, ProfileUser } from './pages/Users';
+import { ListPayments, AddPayment, EditPayment } from './pages/Payments';
+import { ListLessons, AddLesson, EditLesson  } from './pages/Lessons';
 
-//students
-import { Students } from './pages/ListStudents';
-import { AddStudent } from './pages/AddStudent';
-import { EditStudent } from './pages/EditStudent';
-import { InfoStudent } from './pages/InfoStudent';
-
-//teachers
-import { Teachers } from './pages/ListTeachers';
-import { AddTeacher } from './pages/AddTeacher';
-import { EditTeacher } from './pages/EditTeacher';
-import { InfoTeacher } from './pages/InfoTeacher';
-
-//lessons
-import { Lessons } from './pages/ListLessons';
-import { AddLesson } from './pages/AddLesson';
-import { EditLesson } from './pages/EditLesson';
-
-//users
-import { Users } from './pages/ListUsers';
-import { AddUser } from './pages/AddUser';
-import { EditUser } from './pages/EditUser';
-
-//companies
-import { Companies } from './pages/ListCompanies';
-import { AddCompany } from './pages/AddCompany';
-import { EditCompany } from './pages/EditCompany';
-
-//login
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 
-//payment
-import { AddPayment } from './pages/AddPayment';
-import { EditPayment } from './pages/EditPayment';
-import { Payments } from './pages/ListPayments';
-
+//components
 import { Message } from './components/Message';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
@@ -63,29 +35,29 @@ export default function App() {
             <Route path="/user/profile" element={<ProfileUser />} />
             <Route path="/company/profile" element={<ProfileCompany />} />
 
-            <Route path="/students" element={<Students />} />
+            <Route path="/students" element={<ListStudents />} />
             <Route path="/student/add" element={<AddStudent />} />
             <Route path="/student/edit/:id" element={<EditStudent />} />
             <Route path="/student/info/:id" element={<InfoStudent />} />
 
-            <Route path="/users" element={<Users />} />
+            <Route path="/users" element={<ListUsers />} />
             <Route path="/user/add" element={<AddUser />} />
             <Route path="/user/edit/:id" element={<EditUser />} />
 
-            <Route path="/companies" element={<Companies />} />
+            <Route path="/companies" element={<ListCompanies />} />
             <Route path="/company/add" element={<AddCompany />} />
             <Route path="/company/edit/:id" element={<EditCompany />} />
 
-            <Route path="/teachers" element={<Teachers />} />
+            <Route path="/teachers" element={<ListTeachers />} />
             <Route path="/teacher/add" element={<AddTeacher />} />
             <Route path="/teacher/edit/:id" element={<EditTeacher />} />
             <Route path="/teacher/info/:id" element={<InfoTeacher />} />
 
-            <Route path="/lessons" element={<Lessons />} />
+            <Route path="/lessons" element={<ListLessons />} />
             <Route path="/lesson/add" element={<AddLesson />} />
             <Route path="/lesson/edit/:id" element={<EditLesson />} />
 
-            <Route path="/payments" element={<Payments />} />
+            <Route path="/payments" element={<ListPayments />} />
             <Route path="/payment/:id" element={<AddPayment />} />
             <Route path="/payment/edit/:id" element={<EditPayment />} />
 

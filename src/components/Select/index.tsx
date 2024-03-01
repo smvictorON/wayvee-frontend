@@ -1,5 +1,5 @@
 import React from 'react'
-import * as S from '../styles-inputs'
+import * as S from '../../styles/styles-inputs'
 import Tooltip from '@mui/material/Tooltip';
 
 interface SelectProps {

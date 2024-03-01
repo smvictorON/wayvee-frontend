@@ -1,7 +1,7 @@
 import React from 'react'
 import * as S from './styles'
-import { Input } from '../Input'
-import { InputMask } from '../InputMask'
+import { Input } from '../Inputs/text'
+import { InputMask } from '../Inputs/mask'
 import { Select } from '../Select'
 import { States, Cities } from '../../interfaces/IAddress'
 

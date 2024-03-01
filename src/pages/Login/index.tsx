@@ -1,6 +1,6 @@
 import React, { useState, useContext, ChangeEvent } from "react"
 import * as S from "./styles"
-import { Input } from "../../components/Input"
+import { Input } from "../../components/Inputs/text"
 import { Context } from "../../context/UserContext"
 import IUser from "../../interfaces/IUser"
 import LoginIcon from '@mui/icons-material/Login';

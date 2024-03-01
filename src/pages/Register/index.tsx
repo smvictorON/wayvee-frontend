@@ -2,7 +2,7 @@ import React, { ChangeEvent, useContext, useState } from "react"
 import * as S from './styles'
 import { Context } from '../../context/UserContext'
 import SaveIcon from '@mui/icons-material/Save';
-import { Input } from '../../components/Input'
+import { Input } from '../../components/Inputs/text'
 
 export const Register = () => {
   const [user, setUser] = useState({})

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import "../../styles/variables.css"
-import { Link } from 'react-router-dom'
 
 export const Header = styled.div`
   margin-bottom: 2rem;
